@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Green Party Policies</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="https://www.greenparty.org.uk/assets/images/logo-gpew.svg"
+            alt="Green Party Logo"
+            class="logo" />
+        <h1>Green Means</h1>
+        <nav>
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="policies.html" class="nav-link">Policies</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Our Manifesto: Real Hope, Real Change</h2>
+            <section class="accordion pills-container">
+                <!-- Example pill for a key policy; repeat/dropdown format for all -->
+                <div class="accordion-item pill-item">
+                    <button class="accordion-title pill-title" aria-expanded="false" aria-controls="homes-policy">Fairer, Greener Homes for All</button>
+                    <div id="homes-policy" class="accordion-content pill-content">
+                        <ul>
+                            <li>Build 150,000 new social homes every year</li>
+                            <li>Invest £33bn over 5 years to insulate homes and buildings</li>
+                            <li>Solar panels & heat pumps mandatory for new homes</li>
+                            <li>Rent controls and local powers for councils</li>
+                            <li>Ban on no-fault evictions</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Add more accordion pills for each major policy: NHS, Economy, Nature, etc. -->
+            </section>
+        </section>
+        <div style="text-align:center;margin:2em;">
+            <small>
+                Read the <a href="https://www.greenparty.org.uk/about/our-manifesto/" target="_blank">full 2024 Green Party Manifesto</a>.
+            </small>
+        </div>
+    </main>
+    <footer>
+        <small>
+            Website inspired by Green Party values and official 2024 manifesto.<br>
+            <a href="https://www.greenparty.org.uk/about/our-manifesto/" target="_blank" class="nav-link">Official Manifesto</a>
+        </small>
+    </footer>
+    <script>
+    // Accordion functionality for pills
+    document.querySelectorAll('.accordion-title').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const isActive = this.parentElement.classList.contains('active');
+            document.querySelectorAll('.accordion-item').forEach(item => {
+                item.classList.remove('active');
+                item.querySelector('.accordion-title').setAttribute('aria-expanded', 'false');
+            });
+            if (!isActive) {
+                this.parentElement.classList.add('active');
+                this.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+    </script>
+</body>
+</html>
