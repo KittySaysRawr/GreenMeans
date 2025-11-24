@@ -102,11 +102,11 @@
         }
         
         .site-title h1 {
-            font-size: 2.5rem;
-            color: var(--gp-green);
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
+    font-size: 2.5rem;
+    color: var(--gp-green); /* This is fine - keeps brand color */
+    font-weight: 700;
+    margin-bottom: 5px;
+}
         
         .site-subtitle {
             font-size: 1rem;
@@ -228,18 +228,18 @@
         }
         
         .hero h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            color: var(--gp-white);
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    color: var(--gp-white); /* Change to use variable */
+}
+ .hero p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--gp-white); /* Add this line */
+}
         
         .cta-button {
             display: inline-block;
@@ -374,13 +374,18 @@
             color: var(--gp-green);
         }
         
-        .policy-highlight {
-            background-color: var(--subpill-bg);
-            padding: 15px;
-            border-radius: 6px;
-            margin: 15px 0;
-            border-left: 4px solid var(--gp-yellow);
-        }
+      .policy-highlight {
+    background-color: var(--subpill-bg);
+    padding: 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    border-left: 4px solid var(--gp-yellow);
+    color: var(--text-color); /* Add this line */
+}
+
+.policy-highlight strong {
+    color: var(--gp-green); /* This should work fine */
+}
         
         /* Sub-pill Styles */
         .sub-pills-container {
@@ -395,21 +400,22 @@
             border-left: 3px solid var(--gp-light-green);
         }
         
-        .sub-pill-title {
-            background-color: var(--gp-light-green);
-            color: var(--gp-dark);
-            padding: 15px 20px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            text-align: left;
-            border: none;
-            font-family: 'Montserrat', sans-serif;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+       .sub-pill-title {
+    background-color: var(--gp-light-green);
+    color: var(--text-color); /* Use text color variable */
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+}
         
         .sub-pill-title::after {
             content: '+';
