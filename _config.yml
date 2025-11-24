@@ -2,7 +2,7 @@ title: "Green Means"
 subtitle: "Real Change for People and Planet"
 description: "The Green Party stands for real change—where 'Green Means' acting for nature, the climate, our communities, and the future."
 baseurl: ""
-url: ""
+url: "https://yourusername.github.io"  # Replace with your actual URL
 
 # Navigation
 navigation:
@@ -11,9 +11,32 @@ navigation:
 
 # Build settings
 markdown: kramdown
-theme: null  # No external theme
+theme: null  # Disable any theme
 permalink: pretty
+
+# Explicitly set these to avoid theme conflicts
+plugins:
+  - jekyll-feed
 
 # Exclude from processing
 exclude:
   - README.md
+  - Gemfile
+  - Gemfile.lock
+
+# Safe list - explicitly allow what we need
+safe: true
+
+# Disable theme
+remote_theme: null
+
+# Set encoding
+encoding: "utf-8"
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
