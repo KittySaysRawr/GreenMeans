@@ -1,42 +1,6 @@
-title: "Green Means"
-subtitle: "Real Change for People and Planet"
-description: "The Green Party stands for real change—where 'Green Means' acting for nature, the climate, our communities, and the future."
-baseurl: "/docs"
-url: "https://kittysaysrawr.github.io/GreenMeans/"  # Replace with your actual URL
-
-# Navigation
-navigation:
-  - name: "Home"
-    link: "/"
-
-# Build settings
+title: "Green Means – Green Party of England and Wales"
+description: "Real Change for People and Planet"
+baseurl: "/GreenMeans"
+url: "https://kittysaysrawr.github.io"
 markdown: kramdown
-theme: null  # Disable any theme
-permalink: pretty
-
-# Explicitly set these to avoid theme conflicts
-plugins:
-  - jekyll-feed
-
-# Exclude from processing
-exclude:
-  - README.md
-  - Gemfile
-  - Gemfile.lock
-
-# Safe list - explicitly allow what we need
-safe: true
-
-# Disable theme
-remote_theme: null
-
-# Set encoding
-encoding: "utf-8"
-
-# Defaults
-defaults:
-  - scope:
-      path: ""
-      type: "pages"
-    values:
-      layout: "default"
+theme: null
