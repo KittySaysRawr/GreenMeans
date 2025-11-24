@@ -1,0 +1,588 @@
+---
+---
+
+/* Official Green Party Brand Colors */
+:root {
+    --gp-green: #00A651; /* Primary Green */
+    --gp-light-green: #8DC63F; /* Secondary Green */
+    --gp-yellow: #FFF200; /* Accent Yellow */
+    --gp-dark: #2C2A29; /* Dark Gray/Black */
+    --gp-light: #F1F1F1; /* Light Gray */
+    --gp-white: #FFFFFF; /* White */
+    
+    /* Light mode variables (default) */
+    --bg-color: var(--gp-white);
+    --text-color: var(--gp-dark);
+    --header-bg: var(--gp-white);
+    --card-bg: var(--gp-white);
+    --footer-bg: var(--gp-dark);
+    --footer-text: var(--gp-white);
+    --pill-bg: var(--gp-white);
+    --pill-hover: #f8f8f8;
+    --subpill-bg: var(--gp-light);
+    --rationale-bg: rgba(141, 198, 63, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --shadow-hover: rgba(0, 0, 0, 0.12);
+}
+
+/* Dark mode variables */
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --header-bg: #1e1e1e;
+    --card-bg: #1e1e1e;
+    --footer-bg: #0a0a0a;
+    --footer-text: #e0e0e0;
+    --pill-bg: #2a2a2a;
+    --pill-hover: #333333;
+    --subpill-bg: #2a2a2a;
+    --rationale-bg: rgba(141, 198, 63, 0.15);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-hover: rgba(0, 0, 0, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+/* Header Styles */
+header {
+    background-color: var(--header-bg);
+    box-shadow: 0 2px 10px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 20px 0;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.logo {
+    height: 80px;
+}
+
+.site-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.site-title h1 {
+    font-size: 2.5rem;
+    color: var(--gp-green);
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.site-subtitle {
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+}
+
+nav li {
+    margin: 0 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s;
+    padding: 5px 0;
+    position: relative;
+}
+
+nav a:hover {
+    color: var(--gp-green);
+}
+
+nav a.active {
+    color: var(--gp-green);
+}
+
+nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--gp-yellow);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle-label {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+    background-color: var(--gp-green);
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(30px);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--gp-green) 0%, var(--gp-light-green) 100%);
+    color: var(--gp-white);
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h2 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    color: var(--gp-white);
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--gp-yellow);
+    color: var(--gp-dark);
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 10px;
+    transition: all 0.3s ease;
+    border: 2px solid var(--gp-yellow);
+}
+
+.cta-button:hover {
+    background-color: transparent;
+    color: var(--gp-yellow);
+}
+
+.cta-button.secondary {
+    background-color: transparent;
+    color: var(--gp-white);
+    border: 2px solid var(--gp-white);
+}
+
+.cta-button.secondary:hover {
+    background-color: var(--gp-white);
+    color: var(--gp-green);
+}
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.section-title h2 {
+    font-size: 2.2rem;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--gp-yellow);
+}
+
+/* Policy Pills */
+.pills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    margin-bottom: 60px;
+}
+
+.pill-item {
+    background-color: var(--pill-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-left: 5px solid var(--gp-green);
+}
+
+.pill-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--shadow-hover);
+}
+
+.pill-title {
+    background-color: var(--gp-green);
+    color: var(--gp-white);
+    padding: 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pill-title::after {
+    content: '+';
+    font-size: 1.5rem;
+    transition: transform 0.3s;
+}
+
+.pill-item.active .pill-title::after {
+    transform: rotate(45deg);
+}
+
+.pill-content {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s, padding 0.3s;
+}
+
+.pill-item.active .pill-content {
+    padding: 20px;
+    max-height: 5000px;
+}
+
+.pill-content ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.pill-content li {
+    margin-bottom: 12px;
+}
+
+.pill-content strong {
+    color: var(--gp-green);
+}
+
+.policy-highlight {
+    background-color: var(--subpill-bg);
+    padding: 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    border-left: 4px solid var(--gp-yellow);
+}
+
+/* Sub-pill Styles */
+.sub-pills-container {
+    margin: 20px 0;
+}
+
+.sub-pill-item {
+    background-color: var(--subpill-bg);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border-left: 3px solid var(--gp-light-green);
+}
+
+.sub-pill-title {
+    background-color: var(--gp-light-green);
+    color: var(--gp-dark);
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sub-pill-title::after {
+    content: '+';
+    font-size: 1.3rem;
+    transition: transform 0.3s;
+}
+
+.sub-pill-item.active .sub-pill-title::after {
+    transform: rotate(45deg);
+}
+
+.sub-pill-content {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s, padding 0.3s;
+}
+
+.sub-pill-item.active .sub-pill-content {
+    padding: 20px;
+    max-height: 4000px;
+}
+
+.sub-pill-content ul {
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.sub-pill-content li {
+    margin-bottom: 10px;
+}
+
+/* Rationale Pills (Third Level) */
+.rationale-pills-container {
+    margin: 15px 0;
+}
+
+.rationale-pill-item {
+    background-color: var(--rationale-bg);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-left: 2px solid var(--gp-yellow);
+}
+
+.rationale-pill-title {
+    background-color: rgba(255, 242, 0, 0.2);
+    color: var(--text-color);
+    padding: 12px 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rationale-pill-title::after {
+    content: '+';
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+}
+
+.rationale-pill-item.active .rationale-pill-title::after {
+    transform: rotate(45deg);
+}
+
+.rationale-pill-content {
+    padding: 0 15px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s, padding 0.3s;
+}
+
+.rationale-pill-item.active .rationale-pill-content {
+    padding: 15px;
+    max-height: 2000px;
+}
+
+.rationale-pill-content ul {
+    padding-left: 15px;
+    margin-bottom: 8px;
+}
+
+.rationale-pill-content li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.reference {
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 40px 20px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-logo {
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        padding: 0 15px;
+    }
+    
+    .logo {
+        height: 60px;
+    }
+    
+    .site-title h1 {
+        font-size: 2rem;
+    }
+    
+    nav ul {
+        flex-wrap: wrap;
+    }
+    
+    nav li {
+        margin: 0 10px 10px;
+    }
+    
+    .theme-toggle {
+        position: static;
+        margin-top: 15px;
+        justify-content: center;
+    }
+    
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+    
+    .pills-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 60px 15px;
+    }
+    
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+    
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
+}
