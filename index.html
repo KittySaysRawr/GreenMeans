@@ -550,45 +550,80 @@
         }
         
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                padding: 0 15px;
-            }
-            
-            .logo {
-                height: 60px;
-            }
-            
-            .site-title h1 {
-                font-size: 2rem;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-            }
-            
-            nav li {
-                margin: 0 10px 10px;
-            }
-            
-            .theme-toggle {
-                position: static;
-                margin-top: 15px;
-                justify-content: center;
-            }
-            
-            .hero h2 {
-                font-size: 2.2rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .pills-container {
-                grid-template-columns: 1fr;
-            }
-        }
+       @media (max-width: 768px) {
+    header {
+        padding: 12px 0;
+    }
+    
+    .header-content {
+        padding: 0 15px;
+    }
+    
+    .logo {
+        height: 45px;
+    }
+    
+    .logo-container {
+        margin-bottom: 10px;
+    }
+    
+    .site-title {
+        margin-bottom: 15px;
+    }
+    
+    .site-title h1 {
+        font-size: 1.6rem;
+        margin-bottom: 3px;
+    }
+    
+    nav ul {
+        flex-wrap: wrap;
+    }
+    
+    nav li {
+        margin: 0 8px 8px;
+    }
+    
+    nav a {
+        font-size: 0.9rem;
+    }
+    
+    .theme-toggle {
+        position: static;
+        margin-top: 12px;
+        justify-content: center;
+    }
+    
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+    
+    .pills-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-title h1 {
+        font-size: 1.4rem;
+    }
+    
+    .logo {
+        height: 40px;
+    }
+    
+    nav li {
+        margin: 0 6px 6px;
+    }
+    
+    header {
+        padding: 10px 0;
+    }
+}
         
         @media (max-width: 480px) {
             .hero {
