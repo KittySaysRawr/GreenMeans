@@ -387,7 +387,7 @@
         
         .pill-item.active .pill-content {
             padding: 20px;
-            max-height: 5000px;
+            max-height: 8000px;
         }
         
         .pill-content ul {
@@ -459,7 +459,7 @@
         
         .sub-pill-item.active .sub-pill-content {
             padding: 20px;
-            max-height: 4000px;
+            max-height: 8000px;
         }
         
         .sub-pill-content ul {
@@ -762,24 +762,32 @@
             }
         });
 
-        // Pill toggle functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add click event to all pill titles
-            document.querySelectorAll('.pill-title, .sub-pill-title, .rationale-pill-title').forEach(title => {
-                title.addEventListener('click', function() {
-                    const parentItem = this.parentElement;
-                    parentItem.classList.toggle('active');
-                    
-                    // Close other pills at the same level when opening one
-                    if (parentItem.classList.contains('active')) {
-                        const siblings = Array.from(parentItem.parentElement.children).filter(child => child !== parentItem);
-                        siblings.forEach(sibling => {
-                            sibling.classList.remove('active');
-                        });
+        // Pill toggle functionality - CORRECTED VERSION
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click event to all pill titles
+    document.querySelectorAll('.pill-title, .sub-pill-title, .rationale-pill-title').forEach(title => {
+        title.addEventListener('click', function() {
+            const parentItem = this.parentElement;
+            const content = this.nextElementSibling;
+            
+            // Toggle the active state
+            const isOpening = !parentItem.classList.contains('active');
+            
+            // Close all items at the same level when opening one
+            if (isOpening) {
+                const siblings = Array.from(parentItem.parentElement.children);
+                siblings.forEach(sibling => {
+                    if (sibling !== parentItem) {
+                        sibling.classList.remove('active');
                     }
                 });
-            });
+            }
+            
+            // Toggle the current item
+            parentItem.classList.toggle('active');
         });
+    });
+});
     </script>
 
     
@@ -3185,6 +3193,373 @@
                                             <li>Provides cultural orientation and anti-discrimination training for all staff</li>
                                         </ul>
                                         <div class="reference">Source: Green Party International Recruitment Policy, WHO Global Code of Practice, NHS Employers, The King's Fund, British Medical Journal, The Health Foundation</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <!-- Green Means: Drugs -->
+<div class="pill-item">
+    <button class="pill-title">Green Means: Drugs</button>
+    <div class="pill-content">
+        <div class="policy-highlight">
+            <strong>Evidence-Based Drug Policy for Public Health & Harm Reduction:</strong> "The Green Party advocates for a comprehensive, evidence-based approach to drug policy that prioritizes public health over criminalization. We support the legal regulation of drugs, treating addiction as a health issue rather than a criminal one, and implementing harm reduction strategies that have proven successful internationally. Our policies are grounded in scientific evidence, human rights principles, and practical solutions that reduce drug-related harm in our communities."
+        </div>
+        
+        <div class="sub-pills-container">
+            <div class="sub-pill-item">
+                <button class="sub-pill-title">Scientific Foundations & Medical Evidence</button>
+                <div class="sub-pill-content">
+                    <ul>
+                        <li>
+                            <strong>Public health approach to drug use endorsed by medical organizations</strong>
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Medical Consensus & Health Evidence</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>British Medical Association supports decriminalization of drug possession for personal use (BMA 2022)</li>
+                                            <li>Royal Society for Public Health advocates for public health approach to drugs, citing Portugal's success</li>
+                                            <li>World Health Organization recommends harm reduction as essential component of drug policy</li>
+                                            <li>Lancet Commission on Drug Policy and Health concludes criminalization increases health harms</li>
+                                            <li>UK Advisory Council on the Misuse of Drugs states enforcement should focus on serious crime, not users</li>
+                                            <li>American Public Health Association endorses decriminalization and harm reduction approaches</li>
+                                            <li>European Monitoring Centre for Drugs and Drug Addiction shows harm reduction saves lives and money</li>
+                                            <li>Global Commission on Drug Policy (including former world leaders) calls for legal regulation of drugs</li>
+                                        </ul>
+                                        <div class="reference">Source: British Medical Association, Royal Society for Public Health, World Health Organization, The Lancet, ACMD, APHA, EMCDDA, Global Commission on Drug Policy</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>Cannabis legalization backed by therapeutic evidence</strong>
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Medical Cannabis & Therapeutic Benefits</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>NICE guidelines approve cannabis-based medicines for specific conditions including epilepsy and MS</li>
+                                            <li>UK government legalized medical cannabis in 2018 following high-profile cases of therapeutic benefit</li>
+                                            <li>Over 100 peer-reviewed studies demonstrate cannabis efficacy for chronic pain management</li>
+                                            <li>Multiple sclerosis patients report significant symptom relief from cannabis-based treatments</li>
+                                            <li>Epilepsy patients experience reduced seizure frequency with CBD treatment</li>
+                                            <li>Cancer patients use cannabis to manage chemotherapy side effects including nausea</li>
+                                            <li>PTSD patients show symptom improvement with cannabis treatment in clinical studies</li>
+                                            <li>Chronic pain patients reduce opioid use when cannabis is available (JAMA research)</li>
+                                        </ul>
+                                        <div class="reference">Source: NICE, UK Government, Journal of the American Medical Association, Multiple Sclerosis Journal, Epilepsy Research, Cancer Research UK, Journal of Psychoactive Drugs</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>Harm reduction strategies with proven effectiveness</strong>
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Harm Reduction Evidence</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>Supervised consumption rooms prevent overdose deaths - zero fatalities in 100+ facilities worldwide</li>
+                                            <li>Needle exchange programs reduce HIV transmission by up to 50% (Cochrane Review)</li>
+                                            <li>Naloxone distribution to drug users and families saves lives - 27,000 reversals reported in US annually</li>
+                                            <li>Drug checking services reduce overdose risk by identifying potent substances</li>
+                                            <li>Heroin-assisted treatment reduces illicit drug use and crime among treatment-resistant users</li>
+                                            <li>Drug consumption rooms connect users with health services and treatment options</li>
+                                            <li>Portugal's decriminalization reduced drug-related deaths and HIV infection rates</li>
+                                            <li>Switzerland's heroin-assisted treatment program reduced overdose deaths by 50%</li>
+                                        </ul>
+                                        <div class="reference">Source: International Journal of Drug Policy, Cochrane Database of Systematic Reviews, Harm Reduction Journal, EMCDDA, Portuguese Ministry of Health, Swiss Federal Office of Public Health</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-pill-item">
+                <button class="sub-pill-title">International Success Stories & Proven Models</button>
+                <div class="sub-pill-content">
+                    <ul>
+                        <li>
+                            <strong>Decriminalization models</strong> successfully implemented worldwide
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Global Decriminalization Evidence</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>Portugal decriminalized all drugs in 2001 - drug-related deaths fell 80% in following years</li>
+                                            <li>Czech Republic decriminalization reduced prison population and increased treatment uptake</li>
+                                            <li>Uruguay legalized cannabis in 2013 - reduced drug trafficking and created regulated market</li>
+                                            <li>Canada's cannabis legalization eliminated illegal market share from 90% to 40% in 3 years</li>
+                                            <li>Several US states legalized cannabis with positive outcomes including tax revenue and job creation</li>
+                                            <li>Netherlands' coffee shop model reduced problematic drug use compared to neighboring countries</li>
+                                            <li>Oregon decriminalized all drugs in 2020, redirecting cannabis tax revenue to treatment services</li>
+                                            <li>Spain's cannabis social clubs provide non-commercial access while reducing illegal market</li>
+                                        </ul>
+                                        <div class="reference">Source: Portuguese Drug Policy Evaluation, Czech National Monitoring Centre, Uruguay IRCCA, Statistics Canada, US State Health Departments, EMCDDA, Oregon Health Authority, Spanish Cannabis Research</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>Legal regulation frameworks</strong> demonstrating positive outcomes
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Regulated Market Evidence</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>Colorado cannabis legalization generated $2.2 billion in tax revenue since 2014</li>
+                                            <li>Canadian legal cannabis market created 98,000 jobs in first 2 years</li>
+                                            <li>California cannabis regulation includes social equity programs for communities harmed by drug war</li>
+                                            <li>Washington state saw no increase in youth cannabis use post-legalization</li>
+                                            <li>Netherlands' regulated cannabis approach maintains lower use rates than US prohibition states</li>
+                                            <li>Uruguay's state-controlled cannabis model eliminated violent drug market competition</li>
+                                            <li>Medical cannabis programs in 36 US states demonstrate regulatory feasibility</li>
+                                            <li>Jamaica's ganja legalization for religious and medical use respected cultural traditions</li>
+                                        </ul>
+                                        <div class="reference">Source: Colorado Department of Revenue, Statistics Canada, California Cannabis Control, Washington State Health, EMCDDA, Uruguay Government, JAMA, Jamaican Cannabis Licensing Authority</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>Harm reduction programs</strong> saving lives globally
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">International Harm Reduction</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>Switzerland's heroin-assisted treatment program reduced street-based drug use by 82%</li>
+                                            <li>Vancouver's Insite supervised consumption facility prevented 3,500 overdose deaths</li>
+                                            <li>Germany's drug consumption rooms connect 70% of users with addiction treatment</li>
+                                            <li>Australia's needle exchange program prevented estimated 32,000 HIV infections</li>
+                                            <li>Norway's decriminalization proposal backed by all political parties after reviewing evidence</li>
+                                            <li>Denmark's drug consumption facilities reduced public drug use and discarded needles</li>
+                                            <li>France established first official consumption room in Paris after evaluating international evidence</li>
+                                            <li>British Columbia's safer supply program reduced overdose deaths during fentanyl crisis</li>
+                                        </ul>
+                                        <div class="reference">Source: Swiss Federal Office of Public Health, Vancouver Coastal Health, German Drug Commissioner, Australian National Council on Drugs, Norwegian Government, Danish Health Authority, French Ministry of Health, BC Centre on Substance Use</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-pill-item">
+                <button class="sub-pill-title">Green Party Policies & Positions</button>
+                <div class="sub-pill-content">
+                    <ul>
+                        <li>
+                            <strong>Cannabis legalization and regulation</strong>
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Green Party Cannabis Policy</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>Legalize and regulate cannabis for adult use through licensed premises (Green Party 2024 Manifesto)</li>
+                                            <li>Establish Cannabis Regulation Authority to oversee production, quality control and sales</li>
+                                            <li>Allow home cultivation of limited cannabis plants for personal use</li>
+                                            <li>Implement social equity programs prioritizing licenses for communities harmed by prohibition</li>
+                                            <li>Tax cannabis revenue to fund drug education, treatment and community programs</li>
+                                            <li>Expunge criminal records for previous cannabis possession offenses</li>
+                                            <li>Regulate cannabis similarly to alcohol with age restrictions and driving regulations</li>
+                                            <li>Support British farmers to transition to legal cannabis cultivation</li>
+                                        </ul>
+                                        <div class="reference">Source: Green Party of England and Wales Manifesto 2024, Green Party Drug Policy 2023, Cannabis: Green Party Policy for a Regulated Market</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>Decriminalization of drug possession</strong>
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Decriminalization Policy</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>Decriminalize possession of all drugs for personal use (Green Party Policy 2023)</li>
+                                            <li>Replace criminal penalties with health-based responses and voluntary treatment</li>
+                                            <li>Divert people who use drugs from criminal justice system to health services</li>
+                                            <li>End routine police stops and searches for drug possession</li>
+                                            <li>Establish drug safety testing services at festivals and city centers</li>
+                                            <li>Implement early warning systems about dangerous drug supplies</li>
+                                            <li>Fund peer-led harm reduction services and outreach programs</li>
+                                            <li>Protect people from discrimination in employment and housing based on drug use</li>
+                                        </ul>
+                                        <div class="reference">Source: Green Party Drug Policy 2023, Green Party Conference 2022 Resolution, Green Party Health Policy</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>Harm reduction and treatment services</strong>
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Harm Reduction Policy</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>Establish supervised drug consumption facilities across the UK</li>
+                                            <li>Expand needle and syringe exchange programs nationwide</li>
+                                            <li>Provide naloxone to drug users, families and emergency services</li>
+                                            <li>Fund evidence-based drug treatment including opioid substitution therapy</li>
+                                            <li>Create heroin-assisted treatment programs for treatment-resistant users</li>
+                                            <li>Implement drug checking services to reduce overdose risks</li>
+                                            <li>Develop integrated services addressing mental health and substance use</li>
+                                            <li>Support trauma-informed care and peer support programs</li>
+                                        </ul>
+                                        <div class="reference">Source: Green Party Health Policy, Green Party 2024 Manifesto, Green Party Conference 2021 Resolution</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-pill-item">
+                <button class="sub-pill-title">Addressing Common Misconceptions & Political Attacks</button>
+                <div class="pill-content">
+                    <ul>
+                        <li>
+                            <strong>"Legalization will increase drug use"</strong> - Evidence shows stable or reduced use
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Use Patterns After Legalization</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>Portugal's drug use rates remain below European average after decriminalization</li>
+                                            <li>Colorado youth cannabis use decreased post-legalization (Colorado Health Department)</li>
+                                            <li>Netherlands has lower cannabis use rates than neighboring prohibition countries</li>
+                                            <li>Uruguay saw no increase in cannabis use among adolescents after legalization</li>
+                                            <li>Canadian adult cannabis use increased slightly while youth use remained stable</li>
+                                            <li>Regulation allows for quality control and accurate dosage information</li>
+                                            <li>Legal markets reduce exposure to criminal elements and harder drugs</li>
+                                            <li>Education programs in regulated markets are more effective than "just say no"</li>
+                                        </ul>
+                                        <div class="reference">Source: EMCDDA, Colorado Department of Public Health, Netherlands Trimbos Institute, Uruguay IRCCA, Statistics Canada, Journal of Drug Policy</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>"Decriminalization increases crime"</strong> - Evidence shows crime reduction
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Crime & Public Safety Evidence</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>Portugal saw reduction in drug-related crime after decriminalization</li>
+                                            <li>US states with legal cannabis saw decrease in violent crime (Journal of Economic Behavior)</li>
+                                            <li>Regulated markets eliminate illegal drug market violence</li>
+                                            <li>Police resources freed to focus on serious and violent crime</li>
+                                            <li>Reduced prison populations save money and reduce criminal networks</li>
+                                            <li>Fewer criminal records improve employment prospects and reduce recidivism</li>
+                                            <li>Community relations with police improve when drug use treated as health issue</li>
+                                            <li>Property crime decreases when people can access regulated substances legally</li>
+                                        </ul>
+                                        <div class="reference">Source: Portuguese Ministry of Justice, Journal of Economic Behavior & Organization, US FBI Crime Statistics, UK Home Office, Prison Reform Trust</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>"Harm reduction encourages drug use"</strong> - Evidence shows it saves lives
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Harm Reduction Effectiveness</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>Supervised consumption facilities have never had a fatal overdose</li>
+                                            <li>Needle exchanges reduce disease transmission without increasing drug use</li>
+                                            <li>Drug checking services help people make informed decisions about substance use</li>
+                                            <li>Naloxone distribution saves lives without increasing opioid use</li>
+                                            <li>Harm reduction services connect people with treatment options</li>
+                                            <li>Portugal's decriminalization reduced drug-related deaths and HIV rates</li>
+                                            <li>Switzerland's heroin-assisted treatment reduced illegal drug use and crime</li>
+                                            <li>Vancouver's Insite facility provides healthcare to marginalized populations</li>
+                                        </ul>
+                                        <div class="reference">Source: International Journal of Drug Policy, Harm Reduction Journal, Canadian Medical Association Journal, Portuguese National Health Service, Swiss Federal Office of Public Health</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-pill-item">
+                <button class="sub-pill-title">Economic & Social Benefits</button>
+                <div class="pill-content">
+                    <ul>
+                        <li>
+                            <strong>Economic benefits of legal regulation</strong>
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Economic Evidence</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>UK illegal drug market estimated at £9.4 billion annually (Home Office)</li>
+                                            <li>Legal cannabis market could generate £3.5 billion in tax revenue (Institute for Economic Affairs)</li>
+                                            <li>Colorado collected over $2.2 billion in cannabis tax revenue since 2014</li>
+                                            <li>California cannabis market employs 83,000 people</li>
+                                            <li>Canada's legal cannabis industry contributed $43.5 billion to GDP in first 3 years</li>
+                                            <li>Cost of drug enforcement in UK estimated at £1.9 billion annually</li>
+                                            <li>Prison costs for drug offenses average £40,000 per prisoner annually</li>
+                                            <li>Medical cannabis could save NHS money on prescription drugs and pain management</li>
+                                        </ul>
+                                        <div class="reference">Source: UK Home Office, Institute for Economic Affairs, Colorado Department of Revenue, California Cannabis Control, Statistics Canada, Ministry of Justice, NHS England</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>Social justice and equity benefits</strong>
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Social Justice Evidence</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>Black people are 9 times more likely to be stopped and searched for drugs (Release)</li>
+                                            <li>Drug decriminalization reduces racial disparities in criminal justice system</li>
+                                            <li>Expungement of drug records improves employment and housing opportunities</li>
+                                            <li>Social equity programs in legal markets address historical injustices</li>
+                                            <li>Community reinvestment of cannabis taxes funds programs in affected areas</li>
+                                            <li>Reduced police contact improves community relations and trust</li>
+                                            <li>Medical cannabis access reduces health inequalities for chronic conditions</li>
+                                            <li>Harm reduction services reach marginalized populations with healthcare</li>
+                                        </ul>
+                                        <div class="reference">Source: Release, UK Government Ethnicity Facts and Figures, US Sentencing Commission, California Social Equity Program, Colorado Marijuana Tax Cash Fund, Police Foundation, Health Foundation</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>Public health and safety benefits</strong>
+                            <div class="rationale-pills-container">
+                                <div class="rationale-pill-item">
+                                    <button class="rationale-pill-title">Public Health Evidence</button>
+                                    <div class="rationale-pill-content">
+                                        <ul>
+                                            <li>Regulated products have quality control and accurate potency information</li>
+                                            <li>Legal markets reduce contamination and adulteration risks</li>
+                                            <li>Education in regulated markets focuses on responsible use and harm reduction</li>
+                                            <li>Age restrictions in legal markets reduce youth access</li>
+                                            <li>Medical supervision improves safety for people who use drugs</li>
+                                            <li>Reduced stigma encourages people to seek help for problematic use</li>
+                                            <li>Integrated services address underlying issues like mental health and trauma</li>
+                                            <li>Early intervention prevents development of more serious substance use disorders</li>
+                                        </ul>
+                                        <div class="reference">Source: Journal of Studies on Alcohol and Drugs, International Journal of Drug Policy, Public Health England, Canadian Centre on Substance Use, Drug Science</div>
                                     </div>
                                 </div>
                             </div>
