@@ -638,6 +638,50 @@
                 font-size: 1.8rem;
             }
         }
+
+       /* Dyslexic CSS code */
+.dyslexia-mode {
+    font-family: "OpenDyslexic", Arial, sans-serif !important;
+    letter-spacing: 0.05em !important;
+    line-height: 1.6 !important;
+    word-spacing: 0.1em !important;
+}
+
+.accessibility-toggle {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.toggle-btn {
+    background: #2c3e50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toggle-btn:hover {
+    background: #34495e;
+    transform: translateY(-2px);
+}
+
+.toggle-btn[aria-pressed="true"] {
+    background: #27ae60;
+}
+
+.dyslexia-mode * {
+    font-family: inherit !important;
+}
+        
+<!-- Open Dyslexic implementation -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic.css">        
+    
     </style>
 </head>
 <body>    
@@ -6497,6 +6541,16 @@
                 &copy; 2024 Green Party of England and Wales. All rights reserved. | This site is not an official Green Party website but supports their policies.
             </div>
         </div>
+        
+<!-- accessibility toggle -->
+        
+<div class="accessibility-toggle">
+    <button id="dyslexiaToggle" class="toggle-btn" aria-pressed="false">
+        <span class="toggle-icon">👁️</span>
+        Dyslexia-Friendly Font
+    </button>
+</div>
+        
     </footer>
 
     <script>
@@ -6580,6 +6634,32 @@
                 }
             });
         });
-    </script>
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dyslexiaToggle = document.getElementById('dyslexiaToggle');
+    const body = document.body;
+    
+    // Check for saved user preference
+    if (localStorage.getItem('dyslexiaMode') === 'enabled') {
+        body.classList.add('dyslexia-mode');
+        dyslexiaToggle.setAttribute('aria-pressed', 'true');
+    }
+    
+    // Toggle functionality
+    dyslexiaToggle.addEventListener('click', function() {
+        body.classList.toggle('dyslexia-mode');
+        
+        const isEnabled = body.classList.contains('dyslexia-mode');
+        this.setAttribute('aria-pressed', isEnabled.toString());
+        
+        // Save user preference
+        localStorage.setItem('dyslexiaMode', isEnabled ? 'enabled' : 'disabled');
+    });
+});
+</script>
+        
 </body>
 </html>
