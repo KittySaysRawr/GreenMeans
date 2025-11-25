@@ -242,6 +242,82 @@
         input:checked + .toggle-slider:before {
             transform: translateX(30px);
         }
+
+        /* Compact Toggle Styles */
+.compact-toggle {
+    position: absolute;
+    top: 50px; /* Position below the theme toggle */
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Compact mode variables */
+[data-compact="true"] {
+    --header-padding: 10px 0;
+    --logo-height: 50px;
+    --site-title-size: 1.8rem;
+    --nav-margin-bottom: 10px;
+    --hero-padding: 60px 20px;
+}
+
+/* Compact mode specific styles */
+[data-compact="true"] header {
+    padding: var(--header-padding, 10px 0);
+}
+
+[data-compact="true"] .logo {
+    height: var(--logo-height, 50px);
+}
+
+[data-compact="true"] .site-title h1 {
+    font-size: var(--site-title-size, 1.8rem);
+    margin-bottom: 3px;
+}
+
+[data-compact="true"] .logo-container {
+    margin-bottom: var(--nav-margin-bottom, 10px);
+}
+
+[data-compact="true"] .site-title {
+    margin-bottom: var(--nav-margin-bottom, 10px);
+}
+
+[data-compact="true"] .hero {
+    padding: var(--hero-padding, 60px 20px);
+}
+
+[data-compact="true"] .hero h2 {
+    font-size: 2.2rem;
+}
+
+[data-compact="true"] .hero p {
+    font-size: 1.1rem;
+}
+
+/* Adjust compact toggle position for mobile */
+@media (max-width: 768px) {
+    .compact-toggle {
+        position: static;
+        margin-top: 8px;
+        justify-content: center;
+    }
+    
+    [data-compact="true"] .theme-toggle {
+        margin-top: 8px;
+    }
+}
+
+/* Update theme toggle position to accommodate compact toggle */
+.theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
         
         /* Hero Section */
         .hero {
@@ -761,33 +837,40 @@
                 }
             }
         });
-
-        // Pill toggle functionality - CORRECTED VERSION
+          
+// Compact mode functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Add click event to all pill titles
-    document.querySelectorAll('.pill-title, .sub-pill-title, .rationale-pill-title').forEach(title => {
-        title.addEventListener('click', function() {
-            const parentItem = this.parentElement;
-            const content = this.nextElementSibling;
-            
-            // Toggle the active state
-            const isOpening = !parentItem.classList.contains('active');
-            
-            // Close all items at the same level when opening one
-            if (isOpening) {
-                const siblings = Array.from(parentItem.parentElement.children);
-                siblings.forEach(sibling => {
-                    if (sibling !== parentItem) {
-                        sibling.classList.remove('active');
-                    }
-                });
-            }
-            
-            // Toggle the current item
-            parentItem.classList.toggle('active');
-        });
+    const compactToggle = document.getElementById('compact-toggle');
+    const normalLabel = document.getElementById('normal-label');
+    const compactLabel = document.getElementById('compact-label');
+    
+    // Check for saved compact preference or default to normal
+    const currentCompactMode = localStorage.getItem('compactMode') || 'false';
+    
+    // Apply the saved compact mode
+    document.documentElement.setAttribute('data-compact', currentCompactMode);
+    compactToggle.checked = currentCompactMode === 'true';
+    updateCompactLabels(currentCompactMode);
+    
+    // Toggle compact mode when switch is clicked
+    compactToggle.addEventListener('change', function() {
+        const newCompactMode = this.checked ? 'true' : 'false';
+        document.documentElement.setAttribute('data-compact', newCompactMode);
+        localStorage.setItem('compactMode', newCompactMode);
+        updateCompactLabels(newCompactMode);
     });
+    
+    function updateCompactLabels(compactMode) {
+        if (compactMode === 'true') {
+            normalLabel.style.opacity = '0.5';
+            compactLabel.style.opacity = '1';
+        } else {
+            normalLabel.style.opacity = '1';
+            compactLabel.style.opacity = '0.5';
+        }
+    }
 });
+        
     </script>
 
     
@@ -803,6 +886,16 @@ document.addEventListener('DOMContentLoaded', function() {
         <span class="toggle-slider"></span>
     </label>
     <span class="toggle-label" id="dark-label">Dark</span>
+</div>
+
+            <!-- Compact mode -->
+<div class="compact-toggle">
+    <span class="toggle-label" id="normal-label">Full</span>
+    <label class="toggle-switch">
+        <input type="checkbox" id="compact-toggle">
+        <span class="toggle-slider"></span>
+    </label>
+    <span class="toggle-label" id="compact-label">Small</span>
 </div>
             
             
