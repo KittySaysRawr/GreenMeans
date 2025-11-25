@@ -242,160 +242,6 @@
         input:checked + .toggle-slider:before {
             transform: translateX(30px);
         }
-
-       /* Compact Toggle Styles */
-.compact-toggle {
-    position: absolute;
-    top: 50px; /* Position below the theme toggle */
-    right: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-/* Compact mode variables */
-[data-compact="true"] {
-    --header-padding: 10px 0;
-    --logo-height: 50px;
-    --site-title-size: 1.8rem;
-    --nav-margin-bottom: 10px;
-    --hero-padding: 60px 20px;
-    --hero-title-size: 2.2rem;
-    --hero-text-size: 1.1rem;
-}
-
-/* Compact mode specific styles - with higher specificity */
-[data-compact="true"] header {
-    padding: var(--header-padding, 10px 0) !important;
-}
-
-[data-compact="true"] .logo {
-    height: var(--logo-height, 50px) !important;
-}
-
-[data-compact="true"] .site-title h1 {
-    font-size: var(--site-title-size, 1.8rem) !important;
-    margin-bottom: 3px !important;
-}
-
-[data-compact="true"] .logo-container {
-    margin-bottom: var(--nav-margin-bottom, 10px) !important;
-}
-
-[data-compact="true"] .site-title {
-    margin-bottom: var(--nav-margin-bottom, 10px) !important;
-}
-
-[data-compact="true"] .hero {
-    padding: var(--hero-padding, 60px 20px) !important;
-}
-
-[data-compact="true"] .hero h2 {
-    font-size: var(--hero-title-size, 2.2rem) !important;
-}
-
-[data-compact="true"] .hero p {
-    font-size: var(--hero-text-size, 1.1rem) !important;
-}
-
-/* Mobile adjustments for compact mode */
-@media (max-width: 768px) {
-    /* Default mobile styles */
-    .compact-toggle {
-        position: static;
-        margin-top: 8px;
-        justify-content: center;
-    }
-    
-    [data-compact="true"] .theme-toggle {
-        margin-top: 8px;
-    }
-    
-    /* Compact mode mobile overrides */
-    [data-compact="true"] {
-        --header-padding: 8px 0;
-        --logo-height: 40px;
-        --site-title-size: 1.4rem;
-        --hero-padding: 40px 15px;
-        --hero-title-size: 1.8rem;
-        --hero-text-size: 1rem;
-    }
-    
-    /* Ensure compact mode overrides mobile styles */
-    [data-compact="true"] header {
-        padding: var(--header-padding, 8px 0) !important;
-    }
-    
-    [data-compact="true"] .logo {
-        height: var(--logo-height, 40px) !important;
-    }
-    
-    [data-compact="true"] .site-title h1 {
-        font-size: var(--site-title-size, 1.4rem) !important;
-    }
-    
-    [data-compact="true"] .hero {
-        padding: var(--hero-padding, 40px 15px) !important;
-    }
-    
-    [data-compact="true"] .hero h2 {
-        font-size: var(--hero-title-size, 1.8rem) !important;
-    }
-    
-    [data-compact="true"] .hero p {
-        font-size: var(--hero-text-size, 1rem) !important;
-    }
-    
-    /* Fix navigation spacing in compact mode */
-    [data-compact="true"] nav ul {
-        margin-top: 5px;
-    }
-}
-
-@media (max-width: 480px) {
-    /* Even more compact for very small screens */
-    [data-compact="true"] {
-        --logo-height: 35px;
-        --site-title-size: 1.2rem;
-        --hero-title-size: 1.6rem;
-        --hero-text-size: 0.95rem;
-    }
-    
-    [data-compact="true"] .logo {
-        height: var(--logo-height, 35px) !important;
-    }
-    
-    [data-compact="true"] .site-title h1 {
-        font-size: var(--site-title-size, 1.2rem) !important;
-    }
-    
-    [data-compact="true"] .hero h2 {
-        font-size: var(--hero-title-size, 1.6rem) !important;
-    }
-    
-    [data-compact="true"] .hero p {
-        font-size: var(--hero-text-size, 0.95rem) !important;
-    }
-    
-    /* Adjust navigation for very compact mode */
-    [data-compact="true"] nav li {
-        margin: 0 5px 5px;
-    }
-    
-    [data-compact="true"] nav a {
-        font-size: 0.85rem;
-    }
-}
-
-/* Update theme toggle position to accommodate compact toggle */
-.theme-toggle {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
         
         /* Hero Section */
         .hero {
@@ -915,40 +761,33 @@
                 }
             }
         });
-          
-// Compact mode functionality
+
+        // Pill toggle functionality - CORRECTED VERSION
 document.addEventListener('DOMContentLoaded', function() {
-    const compactToggle = document.getElementById('compact-toggle');
-    const normalLabel = document.getElementById('normal-label');
-    const compactLabel = document.getElementById('compact-label');
-    
-    // Check for saved compact preference or default to normal
-    const currentCompactMode = localStorage.getItem('compactMode') || 'false';
-    
-    // Apply the saved compact mode
-    document.documentElement.setAttribute('data-compact', currentCompactMode);
-    compactToggle.checked = currentCompactMode === 'true';
-    updateCompactLabels(currentCompactMode);
-    
-    // Toggle compact mode when switch is clicked
-    compactToggle.addEventListener('change', function() {
-        const newCompactMode = this.checked ? 'true' : 'false';
-        document.documentElement.setAttribute('data-compact', newCompactMode);
-        localStorage.setItem('compactMode', newCompactMode);
-        updateCompactLabels(newCompactMode);
+    // Add click event to all pill titles
+    document.querySelectorAll('.pill-title, .sub-pill-title, .rationale-pill-title').forEach(title => {
+        title.addEventListener('click', function() {
+            const parentItem = this.parentElement;
+            const content = this.nextElementSibling;
+            
+            // Toggle the active state
+            const isOpening = !parentItem.classList.contains('active');
+            
+            // Close all items at the same level when opening one
+            if (isOpening) {
+                const siblings = Array.from(parentItem.parentElement.children);
+                siblings.forEach(sibling => {
+                    if (sibling !== parentItem) {
+                        sibling.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Toggle the current item
+            parentItem.classList.toggle('active');
+        });
     });
-    
-    function updateCompactLabels(compactMode) {
-        if (compactMode === 'true') {
-            normalLabel.style.opacity = '0.5';
-            compactLabel.style.opacity = '1';
-        } else {
-            normalLabel.style.opacity = '1';
-            compactLabel.style.opacity = '0.5';
-        }
-    }
 });
-        
     </script>
 
     
@@ -964,16 +803,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <span class="toggle-slider"></span>
     </label>
     <span class="toggle-label" id="dark-label">Dark</span>
-</div>
-
-            <!-- Compact mode -->
-<div class="compact-toggle">
-    <span class="toggle-label" id="normal-label">Full</span>
-    <label class="toggle-switch">
-        <input type="checkbox" id="compact-toggle">
-        <span class="toggle-slider"></span>
-    </label>
-    <span class="toggle-label" id="compact-label">Small</span>
 </div>
             
             
