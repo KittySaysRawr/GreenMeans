@@ -243,7 +243,7 @@
             transform: translateX(30px);
         }
 
-        /* Compact Toggle Styles */
+       /* Compact Toggle Styles */
 .compact-toggle {
     position: absolute;
     top: 50px; /* Position below the theme toggle */
@@ -260,44 +260,47 @@
     --site-title-size: 1.8rem;
     --nav-margin-bottom: 10px;
     --hero-padding: 60px 20px;
+    --hero-title-size: 2.2rem;
+    --hero-text-size: 1.1rem;
 }
 
-/* Compact mode specific styles */
+/* Compact mode specific styles - with higher specificity */
 [data-compact="true"] header {
-    padding: var(--header-padding, 10px 0);
+    padding: var(--header-padding, 10px 0) !important;
 }
 
 [data-compact="true"] .logo {
-    height: var(--logo-height, 50px);
+    height: var(--logo-height, 50px) !important;
 }
 
 [data-compact="true"] .site-title h1 {
-    font-size: var(--site-title-size, 1.8rem);
-    margin-bottom: 3px;
+    font-size: var(--site-title-size, 1.8rem) !important;
+    margin-bottom: 3px !important;
 }
 
 [data-compact="true"] .logo-container {
-    margin-bottom: var(--nav-margin-bottom, 10px);
+    margin-bottom: var(--nav-margin-bottom, 10px) !important;
 }
 
 [data-compact="true"] .site-title {
-    margin-bottom: var(--nav-margin-bottom, 10px);
+    margin-bottom: var(--nav-margin-bottom, 10px) !important;
 }
 
 [data-compact="true"] .hero {
-    padding: var(--hero-padding, 60px 20px);
+    padding: var(--hero-padding, 60px 20px) !important;
 }
 
 [data-compact="true"] .hero h2 {
-    font-size: 2.2rem;
+    font-size: var(--hero-title-size, 2.2rem) !important;
 }
 
 [data-compact="true"] .hero p {
-    font-size: 1.1rem;
+    font-size: var(--hero-text-size, 1.1rem) !important;
 }
 
-/* Adjust compact toggle position for mobile */
+/* Mobile adjustments for compact mode */
 @media (max-width: 768px) {
+    /* Default mobile styles */
     .compact-toggle {
         position: static;
         margin-top: 8px;
@@ -306,6 +309,81 @@
     
     [data-compact="true"] .theme-toggle {
         margin-top: 8px;
+    }
+    
+    /* Compact mode mobile overrides */
+    [data-compact="true"] {
+        --header-padding: 8px 0;
+        --logo-height: 40px;
+        --site-title-size: 1.4rem;
+        --hero-padding: 40px 15px;
+        --hero-title-size: 1.8rem;
+        --hero-text-size: 1rem;
+    }
+    
+    /* Ensure compact mode overrides mobile styles */
+    [data-compact="true"] header {
+        padding: var(--header-padding, 8px 0) !important;
+    }
+    
+    [data-compact="true"] .logo {
+        height: var(--logo-height, 40px) !important;
+    }
+    
+    [data-compact="true"] .site-title h1 {
+        font-size: var(--site-title-size, 1.4rem) !important;
+    }
+    
+    [data-compact="true"] .hero {
+        padding: var(--hero-padding, 40px 15px) !important;
+    }
+    
+    [data-compact="true"] .hero h2 {
+        font-size: var(--hero-title-size, 1.8rem) !important;
+    }
+    
+    [data-compact="true"] .hero p {
+        font-size: var(--hero-text-size, 1rem) !important;
+    }
+    
+    /* Fix navigation spacing in compact mode */
+    [data-compact="true"] nav ul {
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Even more compact for very small screens */
+    [data-compact="true"] {
+        --logo-height: 35px;
+        --site-title-size: 1.2rem;
+        --hero-title-size: 1.6rem;
+        --hero-text-size: 0.95rem;
+    }
+    
+    [data-compact="true"] .logo {
+        height: var(--logo-height, 35px) !important;
+    }
+    
+    [data-compact="true"] .site-title h1 {
+        font-size: var(--site-title-size, 1.2rem) !important;
+    }
+    
+    [data-compact="true"] .hero h2 {
+        font-size: var(--hero-title-size, 1.6rem) !important;
+    }
+    
+    [data-compact="true"] .hero p {
+        font-size: var(--hero-text-size, 0.95rem) !important;
+    }
+    
+    /* Adjust navigation for very compact mode */
+    [data-compact="true"] nav li {
+        margin: 0 5px 5px;
+    }
+    
+    [data-compact="true"] nav a {
+        font-size: 0.85rem;
     }
 }
 
