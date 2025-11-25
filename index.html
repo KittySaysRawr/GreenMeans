@@ -656,7 +656,49 @@
             }
         }
 
-       /* Dyslexic CSS code */
+  /* Accessibility Toggle - Now in Footer */
+.accessibility-toggle {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.toggle-btn {
+    background: var(--gp-green);
+    color: var(--gp-white);
+    border: 2px solid var(--gp-white);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.toggle-btn:hover {
+    background: var(--gp-white);
+    color: var(--gp-green);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-btn[aria-pressed="true"] {
+    background: var(--gp-yellow);
+    color: var(--gp-dark);
+    border-color: var(--gp-yellow);
+}
+
+.toggle-btn[aria-pressed="true"]:hover {
+    background: var(--gp-white);
+    color: var(--gp-dark);
+    border-color: var(--gp-white);
+}
+
+/* Dyslexia CSS - Only applied when enabled */
 .dyslexia-mode {
     font-family: "OpenDyslexic", Arial, sans-serif !important;
     letter-spacing: 0.05em !important;
@@ -664,41 +706,10 @@
     word-spacing: 0.1em !important;
 }
 
-.accessibility-toggle {
-    margin: 10px 0;
-    text-align: center;
-}
-
-.toggle-btn {
-    background: #2c3e50;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.toggle-btn:hover {
-    background: #34495e;
-    transform: translateY(-2px);
-}
-
-.toggle-btn[aria-pressed="true"] {
-    background: #27ae60;
-}
-
 .dyslexia-mode * {
     font-family: inherit !important;
 }
-        
-<!-- Open Dyslexic implementation -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic.css">        
-    
+              
     </style>
 
       <script>
@@ -769,6 +780,7 @@
     </label>
     <span class="toggle-label" id="dark-label">Dark</span>
 </div>
+            
             
             <div class="logo-container">
                 <!-- Embedded Green Party Logo -->
@@ -6617,10 +6629,10 @@
         
 <!-- accessibility toggle -->
         
+<!-- Accessibility Toggle - Now in Footer -->
 <div class="accessibility-toggle">
-    <button id="dyslexiaToggle" class="toggle-btn" aria-pressed="false">
-        <span class="toggle-icon">👁️</span>
-        Dyslexia-Friendly Font
+    <button id="dyslexia-toggle" class="toggle-btn" aria-pressed="false">
+        <span>👁️ Dyslexia-Friendly Mode</span>
     </button>
 </div>
         
@@ -6724,26 +6736,71 @@
 
 
 <script>
+// Dyslexia toggle functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const dyslexiaToggle = document.getElementById('dyslexiaToggle');
-    const body = document.body;
+    const dyslexiaToggle = document.getElementById('dyslexia-toggle');
     
-    // Check for saved user preference
-    if (localStorage.getItem('dyslexiaMode') === 'enabled') {
-        body.classList.add('dyslexia-mode');
+    // Check for saved dyslexia preference
+    const dyslexiaEnabled = localStorage.getItem('dyslexiaMode') === 'true';
+    
+    // Apply the saved dyslexia mode
+    if (dyslexiaEnabled) {
+        document.body.classList.add('dyslexia-mode');
         dyslexiaToggle.setAttribute('aria-pressed', 'true');
+    } else {
+        dyslexiaToggle.setAttribute('aria-pressed', 'false');
     }
     
-    // Toggle functionality
+    // Toggle dyslexia mode when button is clicked
     dyslexiaToggle.addEventListener('click', function() {
-        body.classList.toggle('dyslexia-mode');
+        const isPressed = this.getAttribute('aria-pressed') === 'true';
         
-        const isEnabled = body.classList.contains('dyslexia-mode');
-        this.setAttribute('aria-pressed', isEnabled.toString());
-        
-        // Save user preference
-        localStorage.setItem('dyslexiaMode', isEnabled ? 'enabled' : 'disabled');
+        if (isPressed) {
+            // Turn off dyslexia mode
+            document.body.classList.remove('dyslexia-mode');
+            this.setAttribute('aria-pressed', 'false');
+            localStorage.setItem('dyslexiaMode', 'false');
+        } else {
+            // Turn on dyslexia mode
+            document.body.classList.add('dyslexia-mode');
+            this.setAttribute('aria-pressed', 'true');
+            localStorage.setItem('dyslexiaMode', 'true');
+        }
     });
+    
+    function enableDyslexiaMode() {
+        // Add OpenDyslexic font
+        dyslexiaLink.rel = 'stylesheet';
+        dyslexiaLink.href = 'https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic.css';
+        document.head.appendChild(dyslexiaLink);
+        
+        // Add dyslexia mode class
+        document.body.classList.add('dyslexia-mode');
+        
+        // Update button state
+        dyslexiaToggle.setAttribute('aria-pressed', 'true');
+        dyslexiaToggle.innerHTML = '<span>Dyslexia-Friendly Font (ON)</span>';
+        
+        // Save preference
+        localStorage.setItem('dyslexia', 'true');
+    }
+    
+    function disableDyslexiaMode() {
+        // Remove OpenDyslexic font
+        if (document.head.contains(dyslexiaLink)) {
+            document.head.removeChild(dyslexiaLink);
+        }
+        
+        // Remove dyslexia mode class
+        document.body.classList.remove('dyslexia-mode');
+        
+        // Update button state
+        dyslexiaToggle.setAttribute('aria-pressed', 'false');
+        dyslexiaToggle.innerHTML = '<span>Dyslexia-Friendly Font</span>';
+        
+        // Save preference
+        localStorage.setItem('dyslexia', 'false');
+    }
 });
 </script>
         
