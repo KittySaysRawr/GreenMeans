@@ -1189,14 +1189,14 @@
 
     <!-- Header -->
     <header class="max-w-7xl mx-auto w-full flex justify-between items-center mb-10 gap-4 flex-wrap">
-        <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-emerald-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-emerald-500/20" aria-hidden="true">
-                <i data-lucide="leaf" class="w-7 h-7 fill-current"></i>
-            </div>
-            <h1 class="text-3xl font-black tracking-tighter text-slate-900 dark:text-white font-display">
-                Green Means
-            </h1>
-        </div>
+<div class="flex items-center gap-3">
+    <div class="w-12 h-12 rounded-2xl overflow-hidden shadow-xl shadow-emerald-500/20">
+        <img src="favicon.png" alt="Green Means logo" class="w-full h-full object-cover">
+    </div>
+    <h1 class="text-3xl font-black tracking-tighter text-slate-900 dark:text-white font-display">
+        Green Means
+    </h1>
+</div>
         
         <div class="relative" @click.away="showSettings = false">
             <button 
