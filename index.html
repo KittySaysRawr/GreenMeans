@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>GreenMeans - Beta 2.2.1</title>
+    <title>GreenMeans - Beta 2.2.2</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1782,7 +1782,7 @@
                 Read our <a href="https://privacy.greenmeans.ovh/" class="text-emerald-600 font-bold hover:underline focus-visible:outline-2 focus-visible:outline-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 rounded" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
             </p>
             <div class="flex gap-6 items-center">
-                <button @click="openWarning = true; open = false;" 
+                <button @click="openWarning = true;" 
                         class="text-sm text-slate-500 hover:text-slate-800 dark:text-zinc-500 dark:hover:text-zinc-300 font-semibold transition-colors">
                     Decline
                 </button>
@@ -1806,7 +1806,7 @@
                 <p class="text-slate-600 dark:text-zinc-400 mb-6">
                     By declining non-essential cookies, some features of this website might not function as expected.
                 </p>
-                <button @click="localStorage.setItem('cookies-consent', 'declined'); openWarning = false" 
+                <button @click="localStorage.setItem('cookies-consent', 'declined'); open = false; openWarning = false" 
                         class="w-full bg-emerald-600 text-white font-bold py-3 rounded-full hover:bg-emerald-700 transition-colors">
                     Understood
                 </button>
