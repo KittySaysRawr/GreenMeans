@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>GreenMeans - beta 2.2</title>
+    <title>GreenMeans - Beta 2.2</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1517,7 +1517,7 @@
                     <div class="flex items-center justify-between group">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-lg bg-slate-50 dark:bg-zinc-800 flex items-center justify-center text-slate-500 dark:text-zinc-400">
-                                <i data-lucide="moon" class="w-4 h-4"></i>
+                                <i data-lucide="moon" class="w-4 h-4" aria-hidden="true"></i>
                             </div>
                             <span class="text-sm font-bold text-slate-700 dark:text-zinc-200">Dark Mode</span>
                         </div>
@@ -1539,7 +1539,7 @@
                     <div class="flex items-center justify-between group">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-lg bg-slate-50 dark:bg-zinc-800 flex items-center justify-center text-slate-500 dark:text-zinc-400">
-                                <i data-lucide="type" class="w-4 h-4"></i>
+                                <i data-lucide="type" class="w-4 h-4" aria-hidden="true"></i>
                             </div>
                             <div class="flex flex-col">
                                 <span class="text-sm font-bold text-slate-700 dark:text-zinc-200">Dyslexia Friendly</span>
@@ -1564,7 +1564,7 @@
                     <div class="flex items-center justify-between group">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-lg bg-slate-50 dark:bg-zinc-800 flex items-center justify-center text-slate-500 dark:text-zinc-400">
-                                <i data-lucide="zap-off" class="w-4 h-4"></i>
+                                <i data-lucide="zap-off" class="w-4 h-4" aria-hidden="true"></i>
                             </div>
                             <div class="flex flex-col">
                                 <span class="text-sm font-bold text-slate-700 dark:text-zinc-200">Reduce Motion</span>
@@ -1691,9 +1691,10 @@
                 </div>
                 <button 
                     @click="openPolicy = null"
+                    aria-label="Close modal"
                     class="p-4 bg-slate-100 dark:bg-zinc-800 rounded-full hover:bg-emerald-600 hover:text-white transition-all shadow-md group"
                 >
-                    <i data-lucide="x" class="w-6 h-6 group-hover:rotate-90 transition-transform"></i>
+                    <i data-lucide="x" class="w-6 h-6 group-hover:rotate-90 transition-transform" aria-hidden="true"></i>
                 </button>
             </div>
 
