@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>GreenMeans - Beta 2.2.2</title>
+    <title>GreenMeans - Beta 2.2.3</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1689,7 +1689,7 @@
             <!-- Header Sticky -->
             <div class="px-8 md:px-14 py-8 border-b border-slate-100 dark:border-zinc-800 flex justify-between items-center bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm">
                 <div id="policy-title">
-                    <h4 class="text-3xl md:text-5xl font-black tracking-tighter text-slate-900 dark:text-white font-display" x-text="'Green Policy: ' + policies.find(p => p.id === openPolicy)?.title"></h4>
+                    <h4 class="text-3xl md:text-5xl font-black tracking-tighter text-slate-900 dark:text-white font-display" x-show="openPolicy" x-text="'Green Policy: ' + policies.find(p => p.id === openPolicy)?.title"></h4>
                     <p class="text-emerald-600 font-black uppercase text-[10px] tracking-[0.3em] mt-2">Section // Policy Intelligence</p>
                 </div>
                 <button 
