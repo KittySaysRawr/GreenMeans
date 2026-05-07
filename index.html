@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>GreenMeans - Beta 2.2</title>
+    <title>GreenMeans - Beta 2.2.1</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Unpkg Preconnect -->
+    <link rel="preconnect" href="https://unpkg.com">
+
     <!-- Tailwind Play CDN (For easy development and single-file portability) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -18,7 +21,7 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
     <script>
         tailwind.config = {
@@ -1607,7 +1610,7 @@
                         role="tab"
                         :aria-selected="openPolicy === policy.id"
                         tabindex="0"
-                        class="policy-pill flex flex-col items-center justify-center text-center p-10 border-slate-100 dark:border-zinc-800 hover:scale-105 active:scale-95 group/btn min-h-[12rem]"
+                        class="policy-pill flex flex-col items-center justify-center text-center p-10 border-slate-100 dark:border-zinc-800 hover:scale-[1.03] hover:shadow-2xl dark:hover:shadow-emerald-900/20 active:scale-[0.98] group/btn min-h-[12rem] transition-all duration-300"
                         :class="openPolicy === policy.id ? 'policy-pill-active' : ''"
                     >
                         <div class="w-20 h-20 bg-white dark:bg-zinc-700/50 rounded-3xl flex items-center justify-center mb-5 text-emerald-600 shadow-lg group-hover/btn:bg-emerald-600 group-hover/btn:text-white transition-all duration-500">
@@ -1743,7 +1746,7 @@
                                                             :href="source.url" 
                                                             target="_blank" 
                                                             rel="noopener noreferrer"
-                                                            class="text-xs font-bold text-slate-400 dark:text-zinc-500 leading-relaxed italic hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors underline decoration-slate-200 dark:decoration-zinc-800 underline-offset-4"
+                                                            class="text-xs font-bold text-slate-400 dark:text-zinc-500 leading-relaxed italic hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors underline decoration-slate-200 dark:decoration-zinc-800 underline-offset-4 focus-visible:outline-2 focus-visible:outline-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 rounded"
                                                             x-text="source.name + (sIdx < (Array.isArray(item.sources) ? item.sources.length : 1) - 1 ? ',' : '')"
                                                         ></a>
                                                     </template>
@@ -1763,23 +1766,23 @@
     </div>
 
     <!-- GDPR Cookie Banner -->
-    <div x-data="{ open: localStorage.getItem('cookies-consent') !== 'true' }"
-         x-show="open"
+    <div x-data="{ open: localStorage.getItem('cookies-consent') !== 'true' && localStorage.getItem('cookies-consent') !== 'declined', openWarning: false }"
          x-cloak
          @keydown.escape.window="open = false"
          role="alertdialog"
          aria-labelledby="cookie-title"
          aria-describedby="cookie-desc"
          class="fixed bottom-0 left-0 w-full bg-white dark:bg-zinc-900 border-t border-slate-200 dark:border-zinc-800 p-6 shadow-2xl z-50 transition-all duration-500 ease-in-out"
+         x-show="open"
          x-transition:enter="translate-y-0"
          x-transition:leave="translate-y-full">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <p id="cookie-desc" class="text-sm font-medium text-slate-600 dark:text-zinc-400">
                 We use cookies to ensure you get the best experience on our website. 
-                Read our <a href="https://privacy.greenmeans.ovh/" class="text-emerald-600 font-bold hover:underline" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+                Read our <a href="https://privacy.greenmeans.ovh/" class="text-emerald-600 font-bold hover:underline focus-visible:outline-2 focus-visible:outline-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 rounded" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
             </p>
             <div class="flex gap-6 items-center">
-                <button @click="localStorage.setItem('cookies-consent', 'declined'); open = false" 
+                <button @click="openWarning = true; open = false;" 
                         class="text-sm text-slate-500 hover:text-slate-800 dark:text-zinc-500 dark:hover:text-zinc-300 font-semibold transition-colors">
                     Decline
                 </button>
@@ -1787,6 +1790,25 @@
                         aria-label="Accept cookies and close banner"
                         class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded-full text-sm transition-colors focus:ring-4 focus:ring-emerald-500/50">
                     Accept Cookies
+                </button>
+            </div>
+        </div>
+        
+        <!-- Decline Warning Modal -->
+        <div x-show="openWarning" 
+             class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+             x-cloak
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="warning-title">
+            <div class="bg-white dark:bg-zinc-900 p-8 rounded-3xl max-w-md w-full shadow-2xl">
+                <h3 id="warning-title" class="text-xl font-bold mb-4 text-slate-900 dark:text-white">Cookie Consent Declined</h3>
+                <p class="text-slate-600 dark:text-zinc-400 mb-6">
+                    By declining non-essential cookies, some features of this website might not function as expected.
+                </p>
+                <button @click="localStorage.setItem('cookies-consent', 'declined'); openWarning = false" 
+                        class="w-full bg-emerald-600 text-white font-bold py-3 rounded-full hover:bg-emerald-700 transition-colors">
+                    Understood
                 </button>
             </div>
         </div>
