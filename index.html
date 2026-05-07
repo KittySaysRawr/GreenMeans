@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>GreenMeans - Beta 2.2.3</title>
+    <title>GreenMeans - Beta 2.2.4</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +22,8 @@
     
     <!-- Lucide Icons -->
     <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <!-- Fuse.js -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
 
     <script>
         tailwind.config = {
@@ -1418,7 +1420,15 @@
                 reduceMotion: localStorage.getItem('reduceMotion') === 'true',
                 showSettings: false,
                 openPolicy: null,
+                searchQuery: '',
+                filteredPolicies: [],
                 policies: [],
+                highlightText(text, query) {
+                    if (!query) return text;
+                    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const regex = new RegExp(`(${escapedQuery})`, 'gi');
+                    return text.replace(regex, '<mark class="bg-yellow-200 dark:bg-yellow-800 text-slate-900 dark:text-white rounded">$1</mark>');
+                },
                 init() {
                     // Apply initial dark mode
                     if (this.darkMode) {
@@ -1430,8 +1440,22 @@
                     // Load policies from the data provider
                     this.policies = window.getManifestoData();
 
+                    // Init Fuse
+                    this.fuse = new Fuse(this.policies, {
+                        keys: ['title', 'highlight', 'subPills.title', 'subPills.content.text'],
+                        threshold: 0.3
+                    });
+
                     this.$nextTick(() => {
                         lucide.createIcons();
+                    });
+
+                    this.$watch('searchQuery', (query) => {
+                        if (!query) {
+                            this.filteredPolicies = [];
+                            return;
+                        }
+                        this.filteredPolicies = this.fuse.search(query).map(result => result.item);
                     });
 
                     this.$watch('darkMode', val => {
@@ -1490,17 +1514,62 @@
                 Green Means
             </h1>
         </div>
-        
-        <div class="relative" @click.away="showSettings = false">
-            <button 
-                @click="showSettings = !showSettings"
-                class="flex items-center gap-2.5 px-5 py-2.5 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-full shadow-lg hover:border-emerald-500 transition-all text-slate-600 dark:text-zinc-400 font-bold text-sm group"
-                aria-label="Accessibility settings"
-                :aria-expanded="showSettings"
-            >
-                <i data-lucide="accessibility" class="w-5 h-5 group-hover:text-emerald-600 transition-colors"></i>
-                <span class="hidden sm:inline">Settings</span>
-            </button>
+
+        <div class="flex items-center gap-4">
+            <div class="relative">
+                <input
+                    type="text"
+                    x-model="searchQuery"
+                    placeholder="Search policies..."
+                    class="px-5 py-2.5 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-full shadow-lg focus:border-emerald-500 outline-none text-slate-600 dark:text-zinc-400 font-bold text-sm min-w-[200px]"
+                />
+                
+                <!-- Search Results Overlay -->
+                <div 
+                    x-show="searchQuery !== ''"
+                    x-cloak
+                    class="fixed inset-0 z-[100] bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md p-4 md:p-8 overflow-y-auto custom-scrollbar"
+                >
+                    <div class="max-w-4xl mx-auto">
+                        <div class="flex justify-between items-center mb-8">
+                            <h2 class="text-3xl font-black tracking-tighter text-slate-900 dark:text-white font-display">Search Results</h2>
+                            <button @click="searchQuery = ''" class="p-2 bg-slate-100 dark:bg-zinc-800 rounded-full hover:bg-slate-200 dark:hover:bg-zinc-700 transition-colors">
+                                <i data-lucide="x" class="w-6 h-6"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="space-y-6" x-show="filteredPolicies.length > 0">
+                            <template x-for="policy in filteredPolicies" :key="policy.id">
+                                <div class="p-6 bg-slate-50 dark:bg-zinc-800 rounded-3xl border border-slate-100 dark:border-zinc-700">
+                                    <h3 class="text-xl font-bold mb-2 flex items-center gap-2">
+                                        <i :data-lucide="policy.icon" class="w-5 h-5 text-emerald-600"></i>
+                                        <span x-html="highlightText(policy.title, searchQuery)"></span>
+                                    </h3>
+                                    <p class="text-slate-600 dark:text-zinc-400 mb-4" x-html="highlightText(policy.highlight, searchQuery)"></p>
+                                    <button 
+                                        @click="openPolicy = policy.id; searchQuery = ''"
+                                        class="text-sm text-emerald-600 font-bold hover:underline"
+                                    >
+                                        View Policy Details
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                        <p x-show="filteredPolicies.length === 0" class="text-slate-500">No results found for "<span x-text="searchQuery"></span>".</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative" @click.away="showSettings = false">
+                <button 
+                    @click="showSettings = !showSettings"
+                    class="flex items-center gap-2.5 px-5 py-2.5 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-full shadow-lg hover:border-emerald-500 transition-all text-slate-600 dark:text-zinc-400 font-bold text-sm group"
+                    aria-label="Accessibility settings"
+                    :aria-expanded="showSettings"
+                >
+                    <i data-lucide="accessibility" class="w-5 h-5 group-hover:text-emerald-600 transition-colors"></i>
+                    <span class="hidden sm:inline">Settings</span>
+                </button>
             
             <div 
                 x-show="showSettings"
