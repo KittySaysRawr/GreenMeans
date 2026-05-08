@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>GreenMeans - Beta 2.2.4</title>
+    <title>GreenMeans - Beta 2.3</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -284,6 +284,36 @@
                                         { name: 'Green Party', url: 'https://greenparty.org.uk/' },
                                         { name: 'Mind', url: 'https://www.mind.org.uk/' },
                                         { name: 'Royal College of Psychiatrists', url: 'https://www.rcpsych.ac.uk/' }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Drug Policy',
+                            description: 'Treating addiction as a health issue, not a criminal matter, to reduce harm and improve public safety.',
+                            content: [
+                                {
+                                    text: 'Replace the war on drugs with a health-led approach to addiction.',
+                                    rationale: [
+                                        'Addiction is treated as a health crisis, not a criminal activity.',
+                                        'Reduces the burden on the criminal justice system and focuses resources on support.',
+                                        'Increases access to addiction services and harm reduction strategies.'
+                                    ],
+                                    sources: [
+                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
+                                        { name: 'Green Party Drug Policy', url: 'https://www.greenpartydrugpolicy.org.uk/' }
+                                    ]
+                                },
+                                {
+                                    text: 'Legalise and regulate cannabis for personal use.',
+                                    rationale: [
+                                        'Ends criminalisation of personal cannabis use.',
+                                        'Enables quality control, taxation, and reduces street crime.',
+                                        'Protects users by allowing safer, regulated supply.'
+                                    ],
+                                    sources: [
+                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
+                                        { name: 'Green Party Drug Policy', url: 'https://www.greenpartydrugpolicy.org.uk/' }
                                     ]
                                 }
                             ]
@@ -1420,6 +1450,7 @@
                 reduceMotion: localStorage.getItem('reduceMotion') === 'true',
                 showSettings: false,
                 openPolicy: null,
+                openSubPill: 0,
                 searchQuery: '',
                 filteredPolicies: [],
                 policies: [],
@@ -1443,7 +1474,12 @@
                     // Init Fuse
                     this.fuse = new Fuse(this.policies, {
                         keys: ['title', 'highlight', 'subPills.title', 'subPills.content.text'],
-                        threshold: 0.3
+                        threshold: 0.4,
+                        ignoreLocation: true
+                    });
+
+                    this.$watch('openPolicy', () => {
+                        this.openSubPill = 0;
                     });
 
                     this.$nextTick(() => {
@@ -1516,13 +1552,16 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <div class="relative">
+            <div class="relative z-[101]" x-show="searchQuery === ''">
                 <input
                     type="text"
                     x-model="searchQuery"
+                    x-ref="headerSearch"
                     placeholder="Search policies..."
+                    x-init="$watch('searchQuery', (val) => { if (val === '') $nextTick(() => $refs.headerSearch.focus()) })"
                     class="px-5 py-2.5 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-full shadow-lg focus:border-emerald-500 outline-none text-slate-600 dark:text-zinc-400 font-bold text-sm min-w-[200px]"
                 />
+            </div>
                 
                 <!-- Search Results Overlay -->
                 <div 
@@ -1532,11 +1571,26 @@
                 >
                     <div class="max-w-4xl mx-auto">
                         <div class="flex justify-between items-center mb-8">
-                            <h2 class="text-3xl font-black tracking-tighter text-slate-900 dark:text-white font-display">Search Results</h2>
-                            <button @click="searchQuery = ''" class="p-2 bg-slate-100 dark:bg-zinc-800 rounded-full hover:bg-slate-200 dark:hover:bg-zinc-700 transition-colors">
-                                <i data-lucide="x" class="w-6 h-6"></i>
-                            </button>
+                            <div class="relative w-full max-w-lg" x-data="{ showDropdown: true }">
+                                <input
+                                    type="text"
+                                    x-model="searchQuery"
+                                    x-ref="overlaySearch"
+                                    placeholder="Search policies..."
+                                    x-init="$watch('searchQuery', (val) => { if (val !== '') $nextTick(() => $refs.overlaySearch.focus()); showDropdown = true; })"
+                                    @focus="showDropdown = true"
+                                    @click.outside="showDropdown = false"
+                                    class="w-full px-5 py-3 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-full shadow-lg focus:border-emerald-500 outline-none text-slate-600 dark:text-zinc-400 font-bold text-lg focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
+                                />
+                                <button x-show="searchQuery !== ''" @click="searchQuery = ''; showDropdown = false;" class="absolute right-4 top-1/2 -translate-y-1/2 p-1 bg-slate-100 dark:bg-zinc-800 rounded-full hover:bg-slate-200 dark:hover:bg-zinc-700 transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900">
+                                    <i data-lucide="x" class="w-5 h-5"></i>
+                                </button>
+                                <!-- Auto-suggestions dropdown removed -->
+                            </div>
                         </div>
+                        <h2 class="text-3xl font-black tracking-tighter text-slate-900 dark:text-white font-display mb-8">
+                            Search Results (<span x-text="filteredPolicies.length"></span>)
+                        </h2>
                         
                         <div class="space-y-6" x-show="filteredPolicies.length > 0">
                             <template x-for="policy in filteredPolicies" :key="policy.id">
@@ -1548,7 +1602,7 @@
                                     <p class="text-slate-600 dark:text-zinc-400 mb-4" x-html="highlightText(policy.highlight, searchQuery)"></p>
                                     <button 
                                         @click="openPolicy = policy.id; searchQuery = ''"
-                                        class="text-sm text-emerald-600 font-bold hover:underline"
+                                        class="text-sm text-emerald-600 font-bold hover:underline focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-800 rounded px-1"
                                     >
                                         View Policy Details
                                     </button>
@@ -1563,7 +1617,7 @@
             <div class="relative" @click.away="showSettings = false">
                 <button 
                     @click="showSettings = !showSettings"
-                    class="flex items-center gap-2.5 px-5 py-2.5 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-full shadow-lg hover:border-emerald-500 transition-all text-slate-600 dark:text-zinc-400 font-bold text-sm group"
+                    class="flex items-center gap-2.5 px-5 py-2.5 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-full shadow-lg hover:border-emerald-500 transition-all text-slate-600 dark:text-zinc-400 font-bold text-sm group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
                     aria-label="Accessibility settings"
                     :aria-expanded="showSettings"
                 >
@@ -1595,7 +1649,7 @@
                         </div>
                         <button 
                             @click="darkMode = !darkMode"
-                            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none"
+                            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
                             :class="darkMode ? 'bg-emerald-600' : 'bg-slate-200 dark:bg-zinc-800'"
                             role="switch"
                             :aria-checked="darkMode"
@@ -1620,7 +1674,7 @@
                         </div>
                         <button 
                             @click="dyslexia = !dyslexia"
-                            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none"
+                            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
                             :class="dyslexia ? 'bg-emerald-600' : 'bg-slate-200 dark:bg-zinc-800'"
                             role="switch"
                             :aria-checked="dyslexia"
@@ -1645,7 +1699,7 @@
                         </div>
                         <button 
                             @click="reduceMotion = !reduceMotion"
-                            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none"
+                            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
                             :class="reduceMotion ? 'bg-emerald-600' : 'bg-slate-200 dark:bg-zinc-800'"
                             role="switch"
                             :aria-checked="reduceMotion"
@@ -1675,12 +1729,13 @@
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" role="tablist" aria-label="Policy Categories">
                 <template x-for="policy in policies" :key="policy.id">
                     <button 
-                        @click="openPolicy = policy.id"
+                        :id="'policy-pill-' + policy.id"
+                        @click="openPolicy = policy.id; $nextTick(() => document.getElementById('policy-pill-' + policy.id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest'}))"
                         role="tab"
                         :aria-selected="openPolicy === policy.id"
                         tabindex="0"
-                        class="policy-pill flex flex-col items-center justify-center text-center p-10 border-slate-100 dark:border-zinc-800 hover:scale-[1.03] hover:shadow-2xl dark:hover:shadow-emerald-900/20 active:scale-[0.98] group/btn min-h-[12rem] transition-all duration-300"
-                        :class="openPolicy === policy.id ? 'policy-pill-active' : ''"
+                        class="policy-pill flex flex-col items-center justify-center text-center p-10 border-slate-100 dark:border-zinc-800 dark:hover:shadow-emerald-900/20 active:scale-[0.98] group/btn min-h-[12rem] transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
+                        :class="(openPolicy === policy.id ? 'policy-pill-active scale-[1.05]' + (!reduceMotion ? ' animate-pulse transition-all duration-1000' : '') + ' border-2 border-emerald-500 bg-gradient-to-br from-emerald-50 to-white dark:border-emerald-500 dark:from-zinc-800 dark:to-zinc-900' : 'bg-white dark:bg-zinc-900 border-b border-r') + (!reduceMotion ? ' hover:scale-[1.05] hover:shadow-xl' : '')"
                     >
                         <div class="w-20 h-20 bg-white dark:bg-zinc-700/50 rounded-3xl flex items-center justify-center mb-5 text-emerald-600 shadow-lg group-hover/btn:bg-emerald-600 group-hover/btn:text-white transition-all duration-500">
                             <i :data-lucide="policy.icon" class="w-10 h-10"></i>
@@ -1732,7 +1787,7 @@
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        @click="openPolicy = null"
+        @click="const id = openPolicy; openPolicy = null; $nextTick(() => document.getElementById('policy-pill-' + id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center'}))"
         class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[100]"
         aria-hidden="true"
     ></div>
@@ -1762,69 +1817,128 @@
                     <p class="text-emerald-600 font-black uppercase text-[10px] tracking-[0.3em] mt-2">Section // Policy Intelligence</p>
                 </div>
                 <button 
-                    @click="openPolicy = null"
+                    @click="const id = openPolicy; openPolicy = null; $nextTick(() => document.getElementById('policy-pill-' + id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center'}))"
                     aria-label="Close modal"
-                    class="p-4 bg-slate-100 dark:bg-zinc-800 rounded-full hover:bg-emerald-600 hover:text-white transition-all shadow-md group"
+                    class="p-4 bg-slate-100 dark:bg-zinc-800 rounded-full hover:bg-emerald-600 hover:text-white transition-all shadow-md group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
                 >
                     <i data-lucide="x" class="w-6 h-6 group-hover:rotate-90 transition-transform" aria-hidden="true"></i>
                 </button>
             </div>
 
             <!-- Content Scrollable -->
-            <div class="flex-grow overflow-y-auto p-8 md:p-14 custom-scrollbar space-y-16">
+            <div 
+                x-data="{ showGoToTop: false }"
+                @scroll="showGoToTop = $event.target.scrollTop > 500"
+                class="flex-grow overflow-y-auto p-8 md:p-14 custom-scrollbar space-y-16"
+            >
+                <div id="modal-content-top"></div>
                 <!-- Highlight Box -->
-                <div class="bg-emerald-50 dark:bg-emerald-500/10 p-8 rounded-[2.5rem] border border-emerald-100 dark:border-emerald-500/20 italic text-emerald-800 dark:text-emerald-400 font-medium md:text-xl leading-relaxed">
+                <div class="bg-emerald-50 dark:bg-emerald-500/10 p-8 rounded-[2.5rem] border border-emerald-100 dark:border-emerald-500/20 italic text-emerald-800 dark:text-emerald-400 font-medium md:text-xl leading-relaxed"
+                     aria-live="polite">
                     <span x-text="policies.find(p => p.id === openPolicy)?.highlight"></span>
                 </div>
 
+                <!-- Go to Top Button -->
+                <button 
+                    x-show="showGoToTop"
+                    x-transition:enter="!reduceMotion ? 'transition-opacity duration-300' : ''"
+                    x-transition:leave="!reduceMotion ? 'transition-opacity duration-300' : ''"
+                    @click="document.getElementById('modal-content-top')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' })"
+                    class="fixed bottom-12 right-12 p-4 bg-emerald-600 text-white rounded-full shadow-lg z-[120] hover:bg-emerald-700 transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-emerald-600"
+                    aria-label="Go to top"
+                >
+                    <i data-lucide="arrow-up" class="w-6 h-6"></i>
+                </button>
+
                 <!-- Sections -->
                 <template x-for="(sub, idx) in policies.find(p => p.id === openPolicy)?.subPills" :key="idx">
-                    <div class="space-y-10">
-                        <h3 class="text-2xl font-black flex items-center gap-5 text-slate-900 dark:text-white">
-                            <span class="w-12 h-12 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-sm shadow-xl shadow-emerald-500/20" x-text="'0' + (idx + 1)"></span> 
-                            <span x-text="sub.title"></span>
-                        </h3>
-                        <p class="text-slate-500 dark:text-zinc-400 font-medium ml-16" x-text="sub.description"></p>
-                        
-                        <div class="space-y-8">
-                            <template x-for="(item, cIdx) in sub.content" :key="cIdx">
-                                <div class="bg-slate-50 dark:bg-zinc-800/50 p-8 md:p-12 rounded-[3rem] border border-slate-100 dark:border-zinc-800 space-y-10 transition-colors hover:bg-slate-100 dark:hover:bg-zinc-800">
-                                    <p class="text-2xl md:text-3.5xl font-black leading-tight tracking-tight text-slate-900 dark:text-white" x-text="item.text"></p>
-                                    
-                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                                        <div class="md:col-span-2 space-y-6">
-                                            <h6 class="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-600 flex items-center gap-3">
-                                                <span class="w-6 h-[2px] bg-emerald-600"></span> Rationales & Impacts
-                                            </h6>
-                                            <ul class="space-y-5">
-                                                <template x-for="(rat, rIdx) in item.rationale" :key="rIdx">
-                                                    <li class="text-base md:text-lg font-medium text-slate-500 dark:text-zinc-400 flex gap-5 leading-relaxed group/li">
-                                                        <span class="text-emerald-600 font-black mt-1">→</span>
-                                                        <span class="group-hover/li:text-slate-900 dark:group-hover/li:text-white transition-colors" x-text="rat"></span>
-                                                    </li>
-                                                </template>
-                                            </ul>
+                    <div class="space-y-4 border-b border-slate-200 dark:border-zinc-700 pb-10" x-data="{ isSubExpanded: false }">
+                        <button 
+                            :id="'sub-pill-' + idx"
+                            @click="openSubPill = (openSubPill === idx ? null : idx); if (openSubPill === idx) { $nextTick(() => { const el = document.getElementById('sub-pill-content-' + idx); if (el) { setTimeout(() => { el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' }); }, reduceMotion ? 0 : 350); } }); }"
+                            class="text-2xl font-black flex items-center justify-between w-full text-left text-slate-900 dark:text-white p-4 rounded-xl border-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-800"
+                            :class="(openSubPill === idx ? 'border-emerald-600 bg-emerald-50 dark:border-emerald-600 dark:bg-zinc-800/80 shadow-lg ring-2 ring-emerald-500/50' : 'border-transparent bg-transparent') + (!reduceMotion ? ' transition-all duration-300' : '')"
+                        >
+                            <span class="flex items-center gap-5">
+                                <span class="w-12 h-12 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-sm shadow-xl shadow-emerald-500/20" x-text="'0' + (idx + 1)"></span> 
+                                <span x-text="sub.title"></span>
+                            </span>
+                            <i data-lucide="chevron-down" class="w-6 h-6 transition-transform" :class="openSubPill === idx ? 'rotate-180' : ''"></i>
+                        </button>
+
+                        <div 
+                            :id="'sub-pill-content-' + idx"
+                            x-show="openSubPill === idx" 
+                            x-cloak
+                            aria-live="polite"
+                            x-transition:enter="!reduceMotion ? 'transition ease-out duration-300' : ''"
+                            x-transition:enter-start="!reduceMotion ? 'opacity-0 -translate-y-4' : ''"
+                            x-transition:enter-end="!reduceMotion ? 'opacity-100 translate-y-0' : ''"
+                            x-transition:leave="!reduceMotion ? 'transition ease-in duration-200' : ''"
+                            x-transition:leave-start="!reduceMotion ? 'opacity-100 translate-y-0' : ''"
+                            x-transition:leave-end="!reduceMotion ? 'opacity-0 -translate-y-4' : ''"
+                            class="space-y-10 pt-6"
+                        >
+                            <p class="text-slate-500 dark:text-zinc-400 font-medium ml-16" 
+                               :class="isSubExpanded ? 'line-clamp-none' : 'line-clamp-2'"
+                               x-ref="desc"
+                               x-text="sub.description"></p>
+                            
+                            <button 
+                                x-show="isSubExpanded || ($refs.desc && $refs.desc.scrollHeight > $refs.desc.clientHeight)"
+                                @click="isSubExpanded = !isSubExpanded"
+                                class="text-emerald-600 font-bold ml-16 mt-2 hover:underline focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900 rounded px-1"
+                                x-text="isSubExpanded ? 'Read Less' : 'Read More'"
+                                aria-label="Toggle description length"
+                            ></button>
+                            
+                            <div class="space-y-8">
+                                <template x-for="(item, cIdx) in sub.content" :key="cIdx">
+                                    <div class="bg-slate-50 dark:bg-zinc-800/50 p-8 md:p-12 rounded-[3rem] border border-slate-100 dark:border-zinc-800 space-y-10 transition-colors hover:bg-slate-100 dark:hover:bg-zinc-800">
+                                        <div class="flex items-start gap-4">
+                                            <i class="w-10 h-10 text-emerald-600 mt-1 flex-shrink-0" :data-lucide="item.icon || 'check-circle'"></i>
+                                            <p class="text-2xl md:text-3.5xl font-black leading-tight tracking-tight text-slate-900 dark:text-white" x-text="item.text"></p>
                                         </div>
                                         
-                                        <div class="space-y-8 pt-8 md:pt-0">
-                                            <div class="p-8 bg-white dark:bg-zinc-900 rounded-[2rem] border border-slate-100 dark:border-zinc-800 shadow-sm">
-                                                <h6 class="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-600 mb-5">Peer Evidence</h6>
-                                                <div class="flex flex-wrap gap-x-4 gap-y-2">
-                                                    <template x-for="(source, sIdx) in (Array.isArray(item.sources) ? item.sources : [{name: item.sources, url: '#'}])" :key="sIdx">
-                                                        <a 
-                                                            :href="source.url" 
-                                                            target="_blank" 
-                                                            rel="noopener noreferrer"
-                                                            class="text-xs font-bold text-slate-400 dark:text-zinc-500 leading-relaxed italic hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors underline decoration-slate-200 dark:decoration-zinc-800 underline-offset-4 focus-visible:outline-2 focus-visible:outline-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 rounded"
-                                                            x-text="source.name + (sIdx < (Array.isArray(item.sources) ? item.sources.length : 1) - 1 ? ',' : '')"
-                                                        ></a>
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                                            <div class="md:col-span-2 space-y-6">
+                                                <h6 class="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-600 flex items-center gap-3">
+                                                    <span class="w-6 h-[2px] bg-emerald-600"></span> Rationales & Impacts
+                                                </h6>
+                                                <ul class="space-y-5">
+                                                    <template x-for="(rat, rIdx) in item.rationale" :key="rIdx">
+                                                        <li class="text-base md:text-lg font-medium text-slate-500 dark:text-zinc-400 flex gap-5 leading-relaxed group/li">
+                                                            <span class="text-emerald-600 font-black mt-1">→</span>
+                                                            <span class="group-hover/li:text-slate-900 dark:group-hover/li:text-white transition-colors" x-text="rat"></span>
+                                                        </li>
                                                     </template>
+                                                </ul>
+                                            </div>
+                                            
+                                            <div class="space-y-8 pt-8 md:pt-0">
+                                                <div class="p-8 bg-white dark:bg-zinc-900 rounded-[2rem] border border-slate-100 dark:border-zinc-800 shadow-sm">
+                                                    <h6 class="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-600 mb-5">Peer Evidence</h6>
+                                                    <div class="flex flex-wrap gap-x-4 gap-y-2">
+                                                        <template x-for="(source, sIdx) in (Array.isArray(item.sources) ? item.sources : [{name: item.sources, url: '#'}])" :key="sIdx">
+                                                            <span class="inline-flex items-center">
+                                                                <a 
+                                                                    :href="source.url" 
+                                                                    target="_blank" 
+                                                                    rel="noopener noreferrer"
+                                                                    class="text-sm font-semibold text-emerald-700 dark:text-emerald-300 hover:text-emerald-900 dark:hover:text-emerald-100 transition-colors underline decoration-emerald-200 dark:decoration-emerald-800 underline-offset-4 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900 rounded px-1"
+                                                                    :aria-label="'View source: ' + source.name"
+                                                                    x-text="source.name"
+                                                                ></a>
+                                                                <span x-show="sIdx < (Array.isArray(item.sources) ? item.sources.length : 1) - 1" class="text-slate-400 dark:text-zinc-500">,</span>
+                                                            </span>
+                                                        </template>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </template>
+                                </template>
+                            </div>
                         </div>
                     </div>
                 </template>
