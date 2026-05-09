@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>GreenMeans - Beta 2.3.1</title>
+    <title>GreenMeans - Beta 2.3.2</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1451,6 +1451,7 @@
                 openPolicy: null,
                 openedFromSearch: false,
                 isSearching: false,
+                isLoading: true,
                 openSubPill: 0,
                 searchQuery: '',
                 filteredPolicies: [],
@@ -1528,6 +1529,7 @@
 </head>
 <body 
     x-data="manifestoApp()"
+    x-init="isLoading = false"
     :class="{ 
         'dark': darkMode, 
         'dyslexia-mode': dyslexia,
@@ -1536,6 +1538,19 @@
     class="min-h-screen flex flex-col p-4 md:p-8 overflow-x-hidden selection:bg-emerald-500/30"
     @keydown.escape="showSettings = false"
 >
+    <div x-show="isLoading" class="fixed inset-0 z-[9999] bg-white dark:bg-zinc-900 flex items-center justify-center">
+        <div class="flex flex-col items-center gap-6">
+            <div class="relative flex items-center justify-center">
+                <!-- Spinner -->
+                <div class="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-emerald-500"></div>
+                <!-- Logo -->
+                <div class="absolute w-16 h-16 rounded-2xl overflow-hidden shadow-lg shadow-emerald-500/30">
+                    <img src="favicon.png" alt="GreenMeans logo" class="w-full h-full object-cover">
+                </div>
+            </div>
+            <div class="text-emerald-500 font-bold tracking-widest uppercase animate-pulse">Loading...</div>
+        </div>
+    </div>
     <!-- Skip Nav -->
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[100] bg-emerald-600 text-white px-4 py-2 rounded-full shadow-xl">
         Skip to content
@@ -2000,5 +2015,12 @@
         </div>
     </div>
 
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
 </body>
 </html>
