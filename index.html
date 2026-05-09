@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>GreenMeans - Beta 2.3.2</title>
+    <title>GreenMeans - Beta 2.3.3</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1452,10 +1452,20 @@
                 openedFromSearch: false,
                 isSearching: false,
                 isLoading: true,
+                gridScrollPosition: 0,
                 openSubPill: 0,
                 searchQuery: '',
                 filteredPolicies: [],
                 policies: [],
+                safeCreateIcons() {
+                    try {
+                        if (typeof lucide !== 'undefined') {
+                            lucide.createIcons();
+                        }
+                    } catch (e) {
+                        console.error("Error creating icons", e);
+                    }
+                },
                 highlightText(text, query) {
                     if (!query) return text;
                     const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -1485,7 +1495,7 @@
                     });
 
                     this.$nextTick(() => {
-                        lucide.createIcons();
+                        this.safeCreateIcons();
                     });
 
                     this.$watch('searchQuery', (query) => {
@@ -1503,17 +1513,17 @@
                         } else {
                             document.documentElement.classList.remove('dark');
                         }
-                        this.$nextTick(() => lucide.createIcons());
+                        this.$nextTick(() => this.safeCreateIcons());
                     });
                     this.$watch('dyslexia', val => localStorage.setItem('dyslexia', val));
                     this.$watch('reduceMotion', val => localStorage.setItem('reduceMotion', val));
 
                     this.$watch('openPolicy', () => {
-                        this.$nextTick(() => lucide.createIcons());
+                        this.$nextTick(() => this.safeCreateIcons());
                     });
                     
                     this.$watch('showSettings', val => {
-                        if (val) this.$nextTick(() => lucide.createIcons());
+                        if (val) this.$nextTick(() => this.safeCreateIcons());
                     });
                 }
             };
@@ -1538,17 +1548,17 @@
     class="min-h-screen flex flex-col p-4 md:p-8 overflow-x-hidden selection:bg-emerald-500/30"
     @keydown.escape="showSettings = false"
 >
-    <div x-show="isLoading" class="fixed inset-0 z-[9999] bg-white dark:bg-zinc-900 flex items-center justify-center">
+<div x-show="isLoading" class="fixed inset-0 z-[9999] bg-white dark:bg-zinc-900 flex items-center justify-center">
         <div class="flex flex-col items-center gap-6">
             <div class="relative flex items-center justify-center">
                 <!-- Spinner -->
-                <div class="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-emerald-500"></div>
+                <div class="rounded-full h-24 w-24 border-t-4 border-b-4 border-emerald-500" :class="{'animate-spin': !reduceMotion}"></div>
                 <!-- Logo -->
-                <div class="absolute w-16 h-16 rounded-2xl overflow-hidden shadow-lg shadow-emerald-500/30">
+                <div class="absolute w-16 h-16 rounded-2xl overflow-hidden shadow-lg shadow-emerald-500/30" :class="{'animate-pulse': !reduceMotion}">
                     <img src="favicon.png" alt="GreenMeans logo" class="w-full h-full object-cover">
                 </div>
             </div>
-            <div class="text-emerald-500 font-bold tracking-widest uppercase animate-pulse">Loading...</div>
+            <div class="text-emerald-500 font-bold tracking-widest uppercase" :class="{'animate-pulse': !reduceMotion}">Loading...</div>
         </div>
     </div>
     <!-- Skip Nav -->
@@ -1563,7 +1573,7 @@
                 <img src="favicon.png" alt="GreenMeans logo" class="w-full h-full object-cover">
             </div>
             <h1 class="text-3xl font-black tracking-tighter text-slate-900 dark:text-white font-display">
-                Green Means
+                GreenMeans
             </h1>
         </a>
 
@@ -1748,7 +1758,7 @@
                 <template x-for="policy in policies" :key="policy.id">
                     <button 
                         :id="'policy-pill-' + policy.id"
-                        @click="openPolicy = policy.id; openedFromSearch = false; $nextTick(() => document.getElementById('policy-pill-' + policy.id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest'}))"
+                        @click="gridScrollPosition = window.scrollY; openPolicy = policy.id; openedFromSearch = false; $nextTick(() => document.getElementById('policy-pill-' + policy.id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest'}))"
                         role="tab"
                         :aria-selected="openPolicy === policy.id"
                         tabindex="0"
@@ -1805,7 +1815,7 @@
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        @click="const id = openPolicy; openPolicy = null; if (openedFromSearch) { $nextTick(() => document.getElementById('search-input')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' })); openedFromSearch = false; } else if (id) { $nextTick(() => document.getElementById('policy-pill-' + id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center'})) }"
+        @click="const id = openPolicy; openPolicy = null; if (openedFromSearch) { $nextTick(() => document.getElementById('search-input')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' })); openedFromSearch = false; } else if (id) { $nextTick(() => { window.scrollTo({ top: gridScrollPosition, behavior: reduceMotion ? 'auto' : 'smooth' }); }) }"
         class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[100]"
         aria-hidden="true"
     ></div>
@@ -1835,7 +1845,7 @@
                     <p class="text-emerald-600 font-black uppercase text-[10px] tracking-[0.3em] mt-2">Section // Policy Intelligence</p>
                 </div>
                 <button 
-                    @click="const id = openPolicy; openPolicy = null; if (openedFromSearch) { $nextTick(() => document.getElementById('search-input')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' })); openedFromSearch = false; } else if (id) { $nextTick(() => document.getElementById('policy-pill-' + id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center'})) }"
+                    @click="const id = openPolicy; openPolicy = null; if (openedFromSearch) { $nextTick(() => document.getElementById('search-input')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' })); openedFromSearch = false; } else if (id) { $nextTick(() => { window.scrollTo({ top: gridScrollPosition, behavior: reduceMotion ? 'auto' : 'smooth' }); }) }"
                     aria-label="Close modal"
                     class="p-4 bg-slate-100 dark:bg-zinc-800 rounded-full hover:bg-emerald-600 hover:text-white transition-all shadow-md group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
                 >
@@ -2016,10 +2026,30 @@
     </div>
 
     <script defer>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
+        window.safeCreateIcons = function() {
+            try {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                    
+                    // Fallback for any icons that failed to load (still <i> elements)
+                    document.querySelectorAll('i[data-lucide]').forEach(icon => {
+                        if (icon.tagName === 'I') {
+                            icon.innerHTML = '<span style="display:inline-block; width:1.25em; height:1.25em; border: 1px solid currentColor; border-radius: 50%; opacity: 0.5;"></span>';
+                            icon.classList.add('lucide-fallback');
+                        }
+                    });
+                }
+            } catch (e) {
+                console.error("Error creating icons", e);
+                // Fallback for everything if library fails entirely
+                document.querySelectorAll('i[data-lucide]').forEach(icon => {
+                    icon.innerHTML = '<span style="display:inline-block; width:1.25em; height:1.25em; border: 1px solid currentColor; border-radius: 50%; opacity: 0.5;"></span>';
+                });
             }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            window.safeCreateIcons();
         });
     </script>
 </body>
