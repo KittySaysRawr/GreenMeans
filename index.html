@@ -1751,7 +1751,8 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                 <div>
                     <h2 class="font-black text-3xl md:text-5xl tracking-tighter font-display mb-2">Green Policy:</h2>
-                    <p class="text-slate-500 dark:text-zinc-400 font-medium">Explore the core commitments to a greener, fairer UK.</p>
+                    <p class="text-slate-500 dark:text-zinc-400 font-medium">The Green Party stands for real change, where Green Means</p>
+                    <p class="text-slate-500 dark:text-zinc-400 font-medium">Acting for nature, the climate, our communities, and the future.</p>
                 </div>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" role="tablist" aria-label="Policy Categories">
@@ -1769,7 +1770,7 @@
                             <i :data-lucide="policy.icon" class="w-10 h-10"></i>
                         </div>
                         <span class="text-base font-black tracking-tight group-hover/btn:text-emerald-700 dark:group-hover/btn:text-emerald-400 transition-colors" x-text="policy.title"></span>
-                        <div class="absolute bottom-4 right-6 text-xs font-black text-slate-300 dark:text-zinc-600 opacity-0 group-hover/btn:opacity-100 transition-opacity">EXPLORE Commitments →</div>
+                        <div class="absolute bottom-4 right-6 text-xs font-black text-slate-300 dark:text-zinc-600 opacity-0 group-hover/btn:opacity-100 transition-opacity">Explore Commitments →</div>
                     </button>
                 </template>
             </div>
@@ -1842,7 +1843,7 @@
             <div class="px-8 md:px-14 py-8 border-b border-slate-100 dark:border-zinc-800 flex justify-between items-center bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm">
                 <div id="policy-title">
                     <h4 class="text-3xl md:text-5xl font-black tracking-tighter text-slate-900 dark:text-white font-display" x-show="openPolicy" x-text="'Green Policy: ' + policies.find(p => p.id === openPolicy)?.title"></h4>
-                    <p class="text-emerald-600 font-black uppercase text-[10px] tracking-[0.3em] mt-2">Section // Policy Intelligence</p>
+                    <p class="text-emerald-600 font-black uppercase text-[10px] tracking-[0.3em] mt-2"></p>
                 </div>
                 <button 
                     @click="const id = openPolicy; openPolicy = null; if (openedFromSearch) { $nextTick(() => document.getElementById('search-input')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' })); openedFromSearch = false; } else if (id) { $nextTick(() => { window.scrollTo({ top: gridScrollPosition, behavior: reduceMotion ? 'auto' : 'smooth' }); }) }"
