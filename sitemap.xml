@@ -13,7 +13,7 @@
 
 <url>
   <loc>https://search.greenmeans.ovh/</loc>
-  <lastmod>2026-05-11T13:03:20+00:00</lastmod>
+  <lastmod>2026-05-12T13:03:20+00:00</lastmod>
   <changefreq>always</changefreq>
 </url>      
 
@@ -21,6 +21,12 @@
   <loc>https://privacy.greenmeans.ovh/</loc>
   <lastmod>2026-05-11T13:03:20+00:00</lastmod>
   <changefreq>always</changefreq>
-</url>         
+</url>     
+
+<url>
+  <loc>https://toolkit.greenmeans.ovh/</loc>
+  <lastmod>2026-05-12T13:03:20+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url> 
 
 </urlset>
