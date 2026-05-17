@@ -1,2067 +1,550 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-GB" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreenMeans: Policy</title>
-    <meta name="description" content="Policy Made Accessible, The Green Party stands for real change, where Green Means: Acting for nature, the climate, our communities, and the future.">
-    <link rel="canonical" href="https://greenmeans.ovh" />
-    <meta property="og:title" content="GreenMeans: Policy" />
-    <meta property="og:description" content="Policy Made Accessible, The Green Party stands for real change, where Green Means: Acting for nature, the climate, our communities, and the future." />
-    <meta property="og:image" content="https://greenmeans.ovh/favicon.png" />
-    <meta property="og:url" content="https://greenmeans.ovh" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GreenMeans</title>
+    <!-- Favicon Configuration -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+    
+    <!-- Core SEO -->
+    <meta name="description" content="GreenMeans provides sustainable, accessible, and efficient digital tools that empower individuals and communities. Discover our Green Policy hub, NVC Toolkit, and Compost Guide." />
+    <meta name="keywords" content="GreenMeans, green policy, sustainability, nonviolent communication, NVC, composting, accessible politics, environmental impact" />
+    <meta name="author" content="GreenMeans" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://greenmeans.ovh/" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+    
+    <!-- Open Graph / Meta -->
     <meta property="og:type" content="website" />
-    <meta name="author" content="GreenMeans">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Unpkg Preconnect -->
-    <link rel="preconnect" href="https://unpkg.com">
+    <meta property="og:url" content="https://greenmeans.ovh/" />
+    <meta property="og:title" content="GreenMeans" />
+    <meta property="og:description" content="GreenMeans provides sustainable, accessible, and efficient digital tools that empower individuals and communities." />
+    <meta property="og:image" content="/favicon.png" />
 
-    <!-- Tailwind Play CDN (For easy development and single-file portability) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Alpine.js for Interactivity -->
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
-    <!-- Lucide Icons -->
-    <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <!-- Fuse.js -->
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            DEFAULT: '#10b981',
-                            foreground: '#ffffff',
-                        }
-                    },
-                    fontSize: {
-                        '3.5xl': ['2rem', '2.25rem'],
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Montserrat', 'sans-serif'],
-                        dyslexic: ['Lexend', 'sans-serif'],
-                    },
-                    animation: {
-                        wobble: 'wobble 1s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        wobble: {
-                            '0%, 100%': { transform: 'scale(1) rotate(-3deg)' },
-                            '50%': { transform: 'scale(1.05) rotate(3deg)' },
-                        },
-                    },
-                }
-            }
-        }
-    </script>
-
-    <style type="text/tailwindcss">
-        @layer base {
-            body {
-                background-color: #f8fafc;
-                color: #0f172a;
-                transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-                transition-duration: 300ms;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-            }
-            .dark body {
-                background-color: #09090b;
-                color: #f4f4f5;
-            }
-            button:focus-visible {
-                outline: 2px solid transparent;
-                outline-offset: 2px;
-                box-shadow: 0 0 0 4px #10b981;
-            }
-            .dark button:focus-visible {
-                box-shadow: 0 0 0 4px #10b981, 0 0 0 6px #09090b;
-            }
-            .dyslexia-mode {
-                font-family: 'OpenDyslexic', 'Dyslexie', 'Lexend', 'Verdana', 'Arial', sans-serif !important;
-                letter-spacing: 0.05em;
-                word-spacing: 0.1em;
-            }
-            @font-face {
-                font-family: 'OpenDyslexic';
-                src: url('https://cdnjs.cloudflare.com/ajax/libs/opendyslexic/0.1/OpenDyslexic-Regular.otf') format('opentype');
-                font-weight: normal;
-                font-style: normal;
-            }
-            .reduce-motion, .reduce-motion * {
-                animation: none !important;
-                transition: none !important;
-                scroll-behavior: auto !important;
-                box-shadow: none !important;
-                backdrop-filter: none !important;
-                text-shadow: none !important;
-            }
-        }
-
-        @layer components {
-            .bento-card {
-                background-color: white;
-                border: 1px solid #e2e8f0;
-                border-radius: 2.5rem;
-                padding: 1.5rem;
-                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-                transition-property: all;
-                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-                transition-duration: 300ms;
-            }
-            @media (min-width: 768px) {
-                .bento-card {
-                    padding: 2rem;
-                }
-            }
-            .dark .bento-card {
-                background-color: #18181b;
-                border-color: #27272a;
-            }
-            .bento-card-hover:hover {
-                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-                transform: translateY(-4px);
-            }
-            .policy-pill {
-                padding: 1rem;
-                border-radius: 1.5rem;
-                background-color: #f1f5f9;
-                border: 1px solid transparent;
-                text-align: left;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                position: relative;
-                overflow: hidden;
-            }
-            .dark .policy-pill {
-                background-color: #27272a;
-            }
-            .policy-pill-active {
-                background-color: #059669;
-                border-color: #059669;
-                color: white;
-                box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.2);
-            }
-            .custom-scrollbar::-webkit-scrollbar {
-                width: 6px;
-            }
-            .custom-scrollbar::-webkit-scrollbar-track {
-                background: transparent;
-            }
-            .custom-scrollbar::-webkit-scrollbar-thumb {
-                background: #e2e8f0;
-                border-radius: 9999px;
-            }
-            .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-                background: #3f3f46;
-            }
-        }
-
-        .modal-opaque {
-            background-color: white;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-        .dark .modal-opaque {
-            background-color: #18181b;
-            border-color: #27272a;
-        }
-
-        [x-cloak] { display: none !important; }
-
-    </style>
-    <script>
-        // Manifesto Data Provider
-        window.getManifestoData = function() {
-            return [
-                {
-                    id: 'nhs',
-                    title: 'NHS',
-                    icon: 'stethoscope',
-                    highlight: 'Protecting the NHS: A fully public, properly funded health service that is there for everyone when they need it.',
-                    subPills: [
-                        {
-                            title: 'Funding & Capacity',
-                            description: 'Investing properly to ensure a world-class, public-funded health service for all.',
-                            content: [
-                                {
-                                    text: 'Increase NHS funding by £30 billion annually by 2030, plus £20bn capital investment.',
-                                    rationale: [
-                                        'Reverses a decade of real-terms funding stagnation and austerity.',
-                                        'Clears the backlog of hospital maintenance and upgrades diagnostic technology.',
-                                        'Reduces waiting lists for elective surgeries and mental health referrals.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'BMA', url: 'https://www.bma.org.uk/' },
-                                        { name: 'King\'s Fund', url: 'https://www.kingsfund.org.uk/' },
-                                        { name: 'Health Foundation', url: 'https://www.health.org.uk/' }
-                                    ]
-                                },
-                                {
-                                    text: 'NHS Community Dentistry: £5bn per year to ensure everyone can see a dentist.',
-                                    rationale: [
-                                        'Addresses the "dentistry deserts" preventing millions from accessing basic care.',
-                                        'Integrates dental health fully into the NHS as a core service.',
-                                        'Reduces long-term costs by preventing emergency dental hospital admissions.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'British Dental Association (BDA)', url: 'https://bda.org/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Free Personal Care for all adults, delivered through a National Care Service.',
-                                    rationale: [
-                                        'Ensures dignity in old age and for disabled people regardless of wealth.',
-                                        'Unblocks hospital beds by providing adequate support for patients to go home.',
-                                        'Creates a professionalised, properly paid social care workforce.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'ADASS', url: 'https://www.adass.org.uk/' },
-                                        { name: 'Age UK', url: 'https://www.ageuk.org.uk/' },
-                                        { name: 'Institute for Public Policy Research', url: 'https://www.ippr.org/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Specialist Care',
-                            description: 'Ensuring that mental health receives the same priority and funding as physical health.',
-                            content: [
-                                {
-                                    text: 'Full parity of esteem for mental health services with physical health.',
-                                    rationale: [
-                                        'Ends the Cinderella status of mental health funding.',
-                                        'Ensures quick access to therapy and crisis support in every community.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Mind', url: 'https://www.mind.org.uk/' },
-                                        { name: 'Royal College of Psychiatrists', url: 'https://www.rcpsych.ac.uk/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'economy',
-                    title: 'Economy',
-                    icon: 'trending-up',
-                    highlight: 'Fairer Economy: Investing in public services and a green transition while ensuring the wealthiest pay their fair share.',
-                    subPills: [
-                        {
-                            title: 'Wealth & Fairness',
-                            description: 'Our fair tax policies ensure that wealth is redistributed to support essential public services and a green transition.',
-                            content: [
-                                {
-                                    text: 'Wealth Tax of 1% on assets over £10m and 2% on assets over £1bn.',
-                                    rationale: [
-                                        'Raises £15–20 billion annually to fund the Green Economic Transition.',
-                                        'Targets the top 1% of the wealthiest individuals to reduce record-high inequality.',
-                                        'Provides capital for essential public infrastructure without increasing taxes on lower earners.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Wealth Tax Commission', url: 'https://www.ukwealth.tax/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Equalise Capital Gains Tax with Income Tax rates.',
-                                    rationale: [
-                                        'Corrects the distortion where passive wealth is taxed at lower rates than active work.',
-                                        'Generates approximately £12 billion to support the NHS and social care.',
-                                        'Discourages speculative investment in favour of long-term productivity.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Institute for Fiscal Studies (IFS)', url: 'https://ifs.org.uk/' },
-                                        { name: 'Tax Justice UK', url: 'https://www.taxjustice.uk/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Living Standards',
-                            description: 'Ensuring everyone can afford to live with dignity through a fair living wage.',
-                            content: [
-                                {
-                                    text: 'Increase the minimum wage to £15 an hour for all ages.',
-                                    rationale: [
-                                        'Directly addresses the cost-of-living crisis for the lowest-paid workers.',
-                                        'Removes the age discrimination that pays younger workers less for the same work.',
-                                        'Stimulates local economies by increasing the spending power of lower-income households.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Living Wage Foundation', url: 'https://www.livingwage.org.uk/' },
-                                        { name: 'New Economics Foundation', url: 'https://neweconomics.org/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'drugs',
-                    title: 'Drugs',
-                    icon: 'pill',
-                    highlight: 'Drug Law Reform: Moving towards a public health approach, treating addiction as a health issue.',
-                    subPills: [
-                        {
-                            title: 'Drug Regulation & Health',
-                            description: 'Treating addiction as a health issue, not a criminal matter.',
-                            content: [
-                                {
-                                    text: 'Replace the war on drugs with a health-led approach to addiction.',
-                                    rationale: [
-                                        'Addiction is treated as a health crisis, not a criminal activity.',
-                                        'Reduces the burden on the criminal justice system and focuses resources on support.',
-                                        'Increases access to addiction services and harm reduction strategies.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Green Party Drug Policy', url: 'https://www.greenpartydrugpolicy.org.uk/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Legalise, regulate, and tax Cannabis; decriminalise personal drug use.',
-                                    rationale: [
-                                        'Ends the criminalisation of users, moving drug use to a public health framework.',
-                                        'Generates significant tax revenue to fund addiction services and mental health.',
-                                        'Strikes a blow to organised crime by taking the market out of their hands.',
-                                        'Enables quality control, taxation, and reduces street crime.',
-                                        'Protects users by allowing safer, regulated supply.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Green Party Drug Policy', url: 'https://www.greenpartydrugpolicy.org.uk/' },
-                                        { name: 'Transform Drug Policy Foundation', url: 'https://transformdrugs.org/' },
-                                        { name: 'Release', url: 'https://www.release.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'housing',
-                    title: 'Housing',
-                    icon: 'home',
-                    highlight: 'Safe & Warm Homes: Providing 150,000 social homes a year and making every home energy efficient.',
-                    subPills: [
-                        {
-                            title: 'Supply & Rights',
-                            description: 'Solving the housing crisis by building social homes and protecting tenant rights.',
-                            content: [
-                                {
-                                    text: 'Build 150,000 new social homes per year and end the Right to Buy.',
-                                    rationale: [
-                                        'Addresses the massive social housing waiting lists.',
-                                        'Ensures public housing stock remains available for future generations.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Shelter', url: 'https://www.shelter.org.uk/' },
-                                        { name: 'National Housing Federation', url: 'https://www.housing.org.uk/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Introduction of mandatory rent controls and an end to no-fault evictions.',
-                                    rationale: [
-                                        'Protects tenants from arbitrary homelessness and skyrocketing rents.',
-                                        'Stabilises communities by allowing people to stay in their homes long-term.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Generation Rent', url: 'https://www.generationrent.org/' },
-                                        { name: 'ACORN', url: 'https://www.acorntheunion.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Energy Efficiency',
-                            description: 'Saving energy and reducing fuel poverty through a massive home insulation programme.',
-                            content: [
-                                {
-                                    text: 'A £29 billion programme to insulate every home in the UK to a high standard.',
-                                    rationale: [
-                                        'Lifts millions out of fuel poverty by permanently lowering bills.',
-                                        'Massively reduces carbon emissions from the UK\'s drafty housing stock.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Energy Saving Trust', url: 'https://energysavingtrust.org.uk/' },
-                                        { name: 'Friends of the Earth', url: 'https://friendsoftheearth.uk/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'climate',
-                    title: 'Climate',
-                    icon: 'globe',
-                    highlight: 'Climate Emergency: Reaching Net Zero by 2040 through a rapid, just transition to a 100% renewable grid.',
-                    subPills: [
-                        {
-                            title: 'Energy Transition',
-                            description: 'Reaching Net Zero with a just transition to a 100% renewable energy grid.',
-                            content: [
-                                {
-                                    text: 'Net Zero by 2040 and a total ban on new fossil fuel exploration.',
-                                    rationale: [
-                                        'Aligns with latest climate science to avoid the worst tipping points.',
-                                        'Ends the UK\'s role in driving global temperature rises.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'IPCC', url: 'https://www.ipcc.ch/' },
-                                        { name: 'CCC', url: 'https://www.theccc.org.uk/' },
-                                        { name: 'Carbon Brief', url: 'https://www.carbonbrief.org/' }
-                                    ]
-                                },
-                                {
-                                    text: '70% of the UK\'s electricity from wind and solar by 2030.',
-                                    rationale: [
-                                        'Renewables are now the cheapest form of new electricity generation.',
-                                        'Provides energy security and independence from global gas markets.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'IRENA', url: 'https://www.irena.org/' },
-                                        { name: 'National Grid ESO', url: 'https://www.neso.energy/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'System Reform',
-                            description: 'Ensuring energy systems serve the public good, not private profit.',
-                            content: [
-                                {
-                                    text: 'Bring the Big Five energy companies into public ownership.',
-                                    rationale: [
-                                        'Allows for a coordinated national effort to decarbonise the grid.',
-                                        'Ensures energy is treated as a public service, not a source of profit.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'We Own It', url: 'https://weownit.org.uk/' },
-                                        { name: 'NEF', url: 'https://neweconomics.org/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'transport',
-                    title: 'Transport',
-                    icon: 'bus',
-                    highlight: 'Integrated Transport: Nationalising railways and investing in affordable, green travel for everyone.',
-                    subPills: [
-                        {
-                            title: 'Public Transport',
-                            description: 'Rebuilding public transport focused on community needs and affordability.',
-                            content: [
-                                {
-                                    text: 'Bring railways back into public ownership and simplify ticketing.',
-                                    rationale: [
-                                        'Ends the fragmented, profit-driven model that leads to high fares.',
-                                        'Integrated planning allows for better connections between rail and bus.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Campaign for Better Transport', url: 'https://bettertransport.org.uk/' },
-                                        { name: 'ASLEF', url: 'https://www.aslef.org.uk/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Subsidy for local bus services to ensure every community has a reliable route.',
-                                    rationale: [
-                                        'Buses are the most used form of public transport but have seen massive cuts.',
-                                        'Essential for tackling rural isolation and urban congestion.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Better Buses for Free', url: 'https://www.betterbuses.org.uk/' },
-                                        { name: 'CPRE', url: 'https://www.cpre.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Active Travel',
-                            description: 'Creating safe infrastructure for walking, cycling, and healthier, cleaner communities.',
-                            content: [
-                                {
-                                    text: 'Invest £2.5 billion per year in walking, cycling and wheeling infrastructure.',
-                                    rationale: [
-                                        'Improves public health through increased physical activity.',
-                                        'Reduces local air pollution and noise in residential areas.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Sustrans', url: 'https://www.sustrans.org.uk/' },
-                                        { name: 'Cycling UK', url: 'https://www.cyclinguk.org/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'education',
-                    title: 'Education',
-                    icon: 'graduation-cap',
-                    highlight: 'Lifelong Learning: Scrap tuition fees and invest in schools to give every child a green start in life.',
-                    subPills: [
-                        {
-                            title: 'Schools & Teachers',
-                            description: 'Investing in our schools and teachers to give every child the best start in life.',
-                            content: [
-                                {
-                                    text: 'Increase school funding by £8 billion per year and abolish OFSTED.',
-                                    rationale: [
-                                        'Reverses the real-terms cuts that have led to crumbling buildings and staff shortages.',
-                                        'Replaces a high-pressure inspection regime with a supportive, collaborative model.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'NEU', url: 'https://neu.org.uk/' },
-                                        { name: 'NAHT', url: 'https://www.naht.org.uk/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Free school meals for every child in primary and secondary education.',
-                                    rationale: [
-                                        'Ensures no child goes hungry, improving focus and educational outcomes.',
-                                        'Reduces the stigma associated with means-tested free meals.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Child Poverty Action Group', url: 'https://cpag.org.uk/' },
-                                        { name: 'Food Foundation', url: 'https://foodfoundation.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Higher Education',
-                            description: 'Making education accessible to all by removing barriers like tuition fees.',
-                            content: [
-                                {
-                                    text: 'Abolish university tuition fees and restore student maintenance grants.',
-                                    rationale: [
-                                        'Removes the barrier of lifelong debt for students from all backgrounds.',
-                                        'Treats higher education as a public good that benefits society as a whole.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'NUS', url: 'https://www.nus.org.uk/' },
-                                        { name: 'Sutton Trust', url: 'https://www.suttontrust.com/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Early Years & Childcare',
-                            description: 'High-quality, affordable childcare for all parents, supporting early development and workforce participation.',
-                            content: [
-                                {
-                                    text: 'Universal free childcare for all children from pre-school age.',
-                                    rationale: [
-                                        'Reduces the massive financial burden on working parents.',
-                                        'Supports early childhood development and narrows the attainment gap before school starts.',
-                                        'Promotes workforce participation, particularly for mothers.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Pregnant Then Screwed', url: 'https://pregnantthenscrewed.com/' },
-                                        { name: 'Early Education', url: 'https://www.early-education.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'nature',
-                    title: 'Nature',
-                    icon: 'leaf',
-                    highlight: 'Nature Recovery: Putting nature at the heart of decision-making and ending the sewage crisis in our waters.',
-                    subPills: [
-                        {
-                            title: 'Water Justice',
-                            description: 'Ensuring clean water by bringing water companies into public ownership.',
-                            content: [
-                                {
-                                    text: 'Bring water companies back into public ownership to end sewage spills.',
-                                    rationale: [
-                                        'Redirects dividends and bonuses into urgent infrastructure upgrades.',
-                                        'Prioritises environmental health over shareholder returns.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Feargal Sharkey', url: 'https://twitter.com/Feargal_Sharkey' },
-                                        { name: 'Surfers Against Sewage', url: 'https://www.sas.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Biodiversity',
-                            description: 'Protecting our natural world to reverse the decline in wildlife populations.',
-                            content: [
-                                {
-                                    text: 'A Rights of Nature Act to give ecosystems legal protection from harm.',
-                                    rationale: [
-                                        'Acknowledges that nature has an intrinsic right to exist and thrive.',
-                                        'Provides communities with the legal tools to defend local habitats.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'ClientEarth', url: 'https://www.clientearth.org/' },
-                                        { name: 'Earth Law Centre', url: 'https://www.earthlawcenter.org/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Commit to protecting 30% of land and sea for nature by 2030.',
-                                    rationale: [
-                                        'Essential for reversing the decline in UK wildlife populations.',
-                                        'Provides vital carbon sinks to help meet climate goals.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'RSPB', url: 'https://www.rspb.org.uk/' },
-                                        { name: 'Wildlife Trusts', url: 'https://www.wildlifetrusts.org/' }
-                                    ]
-                                }
-                            ]
-                        },
-                    ]
-                },
-                {
-                    id: 'taxation',
-                    title: 'Taxation',
-                    icon: 'piggy-bank',
-                    highlight: 'Taxing Pollution: Using the tax system to drive the transition while supporting those on the lowest incomes.',
-                    subPills: [
-                        {
-                            title: 'Polluter Pays',
-                            description: 'Using the tax system to make those who pollute pay for the damage they cause.',
-                            content: [
-                                {
-                                    text: 'A Carbon Tax reaching £500 per tonne by 2030.',
-                                    rationale: [
-                                        'Initially set at £120/tonne, this tax makes polluters pay for their damage.',
-                                        'Incentivises rapid industry-wide shifts to clean technology and energy efficiency.',
-                                        'Revenue is used to fund green infrastructure and protect low-income households.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'London School of Economics (LSE)', url: 'https://www.lse.ac.uk/granthamine/research-theme/governance-and-legislation/pricing-carbon/' },
-                                        { name: 'Zero Carbon Campaign', url: 'https://www.zerocarbon.org.uk/' }
-                                    ]
-                                },
-                                {
-                                    text: 'National Insurance: Remove the upper earnings limit.',
-                                    rationale: [
-                                        'Currently, higher earners pay a lower percentage of NICs on salary above a threshold.',
-                                        'Ensures that high earners pay the same rate as everyone else on their total income.',
-                                        'Raises significant revenue to ensure sustainable funding for the NHS.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'IFS', url: 'https://ifs.org.uk/' },
-                                        { name: 'Tax Policy Associates', url: 'https://www.taxpolicy.org.uk/' }
-                                    ]
-                                },
-                                {
-                                    text: 'VAT on Private School Fees and end Charitable Status.',
-                                    rationale: [
-                                        'Ends a tax break that primarily benefits the wealthiest families.',
-                                        'Raises funds to invest directly in the state school system for all children.',
-                                        'Reduces the educational attainment gap driven by private sector advantages.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Institute for Fiscal Studies', url: 'https://ifs.org.uk/publications/tax-private-school-fees-and-state-school-spending' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'democracy',
-                    title: 'Democracy',
-                    icon: 'globe-2',
-                    highlight: 'Political Reform: Breaking the two-party system with a fairer voting system and votes at 16.',
-                    subPills: [
-                        {
-                            title: 'Voting & Voice',
-                            description: 'Making our democracy fairer and more representative.',
-                            content: [
-                                {
-                                    text: 'Replace First Past the Post with Proportional Representation.',
-                                    rationale: [
-                                        'Ensures every vote counts and seats match the share of the vote.',
-                                        'Ends the tactical voting trap and encourages a broader range of ideas.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Electoral Reform Society', url: 'https://www.electoral-reform.org.uk/' },
-                                        { name: 'Make Votes Matter', url: 'https://www.makevotesmatter.org.uk/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Lower the voting age to 16 for all UK elections.',
-                                    rationale: [
-                                        'Engages young people in the democratic process at a critical age.',
-                                        'Ensures those who will live with the long-term consequences of policy have a say.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'British Youth Council', url: 'https://www.byc.org.uk/' },
-                                        { name: 'NUS', url: 'https://www.nus.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Deliberative Democracy',
-                            description: 'Empowering citizens to shape policy through deliberation.',
-                            content: [
-                                {
-                                    text: 'Citizens\' Assemblies on the climate crisis and constitutional reform.',
-                                    rationale: [
-                                        'Bypasses short-termist partisan gridlock by empowering representative citizen groups.',
-                                        'Informs complex policy decisions with in-depth public deliberation and expert evidence.',
-                                        'Restores public trust in the political process.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Climate Assembly UK', url: 'https://www.climateassembly.uk/' },
-                                        { name: 'Sortition Foundation', url: 'https://www.sortitionfoundation.org/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'The Lords & Monarchy',
-                            description: 'Creating a more accountable and democratic upper house.',
-                            content: [
-                                {
-                                    text: 'Abolish the House of Lords and replace it with an elected Second Chamber.',
-                                    rationale: [
-                                        'Ends the undemocratic practice of hereditary and appointed law-makers.',
-                                        'Ensures legislative scrutiny is performed by representatives of the people.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Unlock Democracy', url: 'https://www.unlockdemocracy.org.uk/' },
-                                        { name: 'Unlock the Lords', url: 'https://www.unlockthelords.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'work',
-                    title: 'Work',
-                    icon: 'briefcase',
-                    highlight: 'Good Work: Transitioning to a four-day working week and banning zero-hours contracts.',
-                    subPills: [
-                        {
-                            title: 'Rights & Wellbeing',
-                            description: 'Building a flexible work culture that improves mental and physical health.',
-                            content: [
-                                {
-                                    text: 'Transition to a four-day working week with no loss of pay.',
-                                    rationale: [
-                                        'Improves mental health, productivity and work-life balance.',
-                                        'Reduces the carbon emissions associated with commuting.',
-                                        'Allows for a fairer distribution of caring responsibilities.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: '4 Day Week Global', url: 'https://www.4dayweek.com/' },
-                                        { name: 'Autonomy', url: 'https://autonomy.work/' },
-                                        { name: 'Wellcome Trust', url: 'https://wellcome.org/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Ban on zero-hours contracts and a right to predictable hours.',
-                                    rationale: [
-                                        'Ends the insecurity that forces millions to struggle with unpredictable incomes.',
-                                        'Gives workers the legal right to plan their lives and finances.',
-                                        'Reduces the "stress premium" of precarious employment on health services.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'TUC', url: 'https://www.tuc.org.uk/' },
-                                        { name: 'Citizens Advice', url: 'https://www.citizensadvice.org.uk/' },
-                                        { name: 'Work Foundation', url: 'https://www.lancaster.ac.uk/work-foundation/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Repeal anti-union laws and strengthen collective bargaining.',
-                                    rationale: [
-                                        'Empowers workers to negotiate better pay and conditions directly.',
-                                        'Historical evidence shows union density correlates with lower income inequality.',
-                                        'Protects the right to strike as a fundamental democratic freedom.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'OECD', url: 'https://www.oecd.org/' },
-                                        { name: 'International Labour Organization (ILO)', url: 'https://www.ilo.org/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'social-security',
-                    title: 'Benefits',
-                    icon: 'hand-heart',
-                    highlight: 'Security for All: Abolishing the cruel benefit system and moving towards a Universal Basic Income.',
-                    subPills: [
-                        {
-                            title: 'Immediate Reform',
-                            description: 'Providing immediate support to those facing the cost-of-living crisis.',
-                            content: [
-                                {
-                                    text: 'Increase Universal Credit and legacy benefits by £40/week.',
-                                    rationale: [
-                                        'Provides immediate relief for those struggling most with the cost of living.',
-                                        'Reduces the number of families relying on food banks.',
-                                        'Highly effective stimulus as low-income households spend more in local economies.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Joseph Rowntree Foundation', url: 'https://www.jrf.org.uk/' },
-                                        { name: 'Trussell Trust', url: 'https://www.trusselltrust.org/' }
-                                    ]
-                                },
-                                {
-                                    text: 'End the Two-Child Limit and the Benefit Cap.',
-                                    rationale: [
-                                        'Immediately lifts hundreds of thousands of children out of poverty.',
-                                        'Removes a punitive system that penalises larger families.',
-                                        'Reduces the long-term societal costs of child poverty (health and education).'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Child Poverty Action Group (CPAG)', url: 'https://cpag.org.uk/' },
-                                        { name: 'Save the Children', url: 'https://www.savethechildren.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Disability & Dignity',
-                            description: 'Reforming the benefits system to be supportive rather than punitive.',
-                            content: [
-                                {
-                                    text: 'End punitive PIP/ESA assessments and move to a supportive model.',
-                                    rationale: [
-                                        'Replaces a high-stress, error-prone system with one based on lived experience.',
-                                        'Reduces the number of decisions overturned on appeal, saving taxpayer money.',
-                                        'Adopts the Social Model of Disability: focusing on removing societal barriers.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Disability Rights UK', url: 'https://www.disabilityrightsuk.org/' },
-                                        { name: 'Scope', url: 'https://www.scope.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Long-term Goal',
-                            description: 'Creating a foundation of economic security through UBI.',
-                            content: [
-                                {
-                                    text: 'A plan to introduce a Universal Basic Income (UBI) for every adult.',
-                                    rationale: [
-                                        'Provides a permanent floor of security that cannot be taken away.',
-                                        'Simplifies the welfare system and removes the stigma and complexity of benefits.',
-                                        'Supports people in a future of automated work and gig-economy volatility.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'UBI Lab Network', url: 'https://www.ubilabnetwork.org/' },
-                                        { name: 'RSA', url: 'https://www.thersa.org/' },
-                                        { name: 'Basic Income Earth Network', url: 'https://basicincome.org/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Pensions',
-                            description: 'A secure, dignified retirement for everyone.',
-                            content: [
-                                {
-                                    text: 'Increase the State Pension to ensure it provides a decent standard of living.',
-                                    rationale: [
-                                        'Ensures pensioners are not forced to choose between heating and eating.',
-                                        'Pensions as a tool for economic stability and reducing poverty in old age.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Age UK', url: 'https://www.ageuk.org.uk/' },
-                                        { name: 'Pensions Policy Institute', url: 'https://www.pensionspolicyinstitute.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'inclusion',
-                    title: 'Inclusion',
-                    icon: 'users',
-                    highlight: 'Nothing About Us, Without Us: Ensuring that marginalised communities, especially disabled people, are at the heart of the decisions that affect their lives.',
-                    subPills: [
-                        {
-                            title: 'Co-Production',
-                            description: 'Centering the voices of those with lived experience in public decision-making.',
-                            content: [
-                                {
-                                    text: 'Mandate co-production in all public service design and delivery.',
-                                    rationale: [
-                                        'Ensures services are built by people with lived experience, not just for them.',
-                                        'Identifies barriers that top-down policy making often misses.',
-                                        'Shifts power back to citizens and communities.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Green Party Disability Group', url: 'https://disabilitygroup.greenparty.org.uk/' },
-                                        { name: 'Coalition for Personalised Care', url: 'https://coalitionforpersonalisedcare.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Disabled Rights',
-                            description: 'Fully upholding the rights of disabled people in all aspects of society.',
-                            content: [
-                                {
-                                    text: 'Full implementation of the UN Convention on the Rights of Persons with Disabilities.',
-                                    rationale: [
-                                        'Adopts the Social Model of Disability: society must change to accommodate people.',
-                                        'Guaranteeing independent living and removing the threat of punitive assessments.',
-                                        'Equal access to all public spaces, transport, and communication.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Disability Rights UK', url: 'https://www.disabilityrightsuk.org/' },
-                                        { name: 'UNCRPD', url: 'https://www.un.org/development/desa/disabilities/convention-on-the-rights-of-persons-with-disabilities.html' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Representation',
-                            description: 'Ensuring all levels of government reflect the diversity of the UK population.',
-                            content: [
-                                {
-                                    text: 'Support for diverse representation across all levels of government.',
-                                    rationale: [
-                                        'Decision-making bodies should reflect the diversity of the UK population.',
-                                        'Enables policies that are sensitive to the unique challenges of different groups (LGBTIQA+, BAME, etc.).'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Operation Black Vote', url: 'https://www.obv.org.uk/' },
-                                        { name: 'Stonewall', url: 'https://www.stonewall.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'global',
-                    title: 'Global',
-                    icon: 'map',
-                    highlight: 'Global Solidarity: A foreign policy based on peace, cooperation and climate reparations.',
-                    subPills: [
-                        {
-                            title: 'Aid & Climate',
-                            description: 'Acting as a global citizen by supporting climate justice and global development.',
-                            content: [
-                                {
-                                    text: 'Restore the international aid budget to 1% of GNI.',
-                                    rationale: [
-                                        'Fulfils our moral obligation to support those in the Global South.',
-                                        'Invests in global stability and climate resilience.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Oxfam', url: 'https://www.oxfam.org.uk/' },
-                                        { name: 'Bond', url: 'https://www.bond.org.uk/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Support for a Loss and Damage fund for climate-hit nations.',
-                                    rationale: [
-                                        'Acknowledges the historic responsibility of industrialised nations for climate change.',
-                                        'Provides essential funding for countries already facing catastrophic impacts.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Christian Aid', url: 'https://www.christianaid.org.uk/' },
-                                        { name: 'UN Climate Change', url: 'https://unfccc.int/loss-and-damage' }
-                                    ]
-                                }
-                            ]
-                        },
-                        
-
-                        
-
-                        {
-                            title: 'Migration',
-                            description: 'Creating safe and legal routes for those seeking refuge.',
-                            content: [
-                                {
-                                    text: 'Ending the Hostile Environment and creating safe, legal routes for refugees.',
-                                    rationale: [
-                                        'Treats people seeking safety with the compassion and dignity they deserve.',
-                                        'Undermines the business model of human traffickers.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Refugee Council', url: 'https://www.refugeecouncil.org.uk/' },
-                                        { name: 'JCWI', url: 'https://www.jcwi.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'peace',
-                    title: 'Peace',
-                    icon: 'shield',
-                    highlight: 'Peace & Disarmament: Redirecting military spending towards diplomacy and the climate crisis.',
-                    subPills: [
-                        {
-                            title: 'Nuclear Weapons',
-                            description: 'Investing in peace and diplomacy rather than expensive nuclear arsenals.',
-                            content: [
-                                {
-                                    text: 'Cancel the Trident nuclear missile programme and redirect the £200bn.',
-                                    rationale: [
-                                        'Huge savings that can be spent on the NHS, schools and local services.',
-                                        'Shows international leadership in moving towards a world without nuclear weapons.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'CND', url: 'https://cnduk.org/' },
-                                        { name: 'Rethink Priority', url: 'https://rethinkpriorities.org/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'farming',
-                    title: 'Farming',
-                    icon: 'sprout',
-                    highlight: 'Soil to Plate: Supporting farmers to transition to nature-friendly, organic methods.',
-                    subPills: [
-                        {
-                            description: 'Supporting farmers in transitioning to sustainable, nature-friendly practices that feed the nation.',
-                            content: [
-                                {
-                                    text: 'Double funding for nature-friendly farming to £4 billion annually.',
-                                    rationale: [
-                                        'Provides financial stability for farmers while restoring topsoil and biodiversity.',
-                                        'Encourages a shift away from intensive, chemical-dependent agriculture.'
-                                    ],
-                                    sources: [
-                                        { name: 'Wildlife Trusts', url: 'https://www.wildlifetrusts.org/' },
-                                        { name: 'Nature Friendly Farming Network', url: 'https://www.nffn.org.uk/' }
-                                    ]
-                                },
-                                {
-                                    text: 'End the exemption of large farms from nature-friendly regulations.',
-                                    rationale: [
-                                        'Ensures all agricultural businesses contribute to environmental restoration.',
-                                        'Creates a level playing field for smaller, sustainable enterprises.'
-                                    ],
-                                    sources: [
-                                        { name: 'Farmers Weekly', url: 'https://www.fwi.co.uk/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Protect the UK\'s agricultural land from development and soil erosion.',
-                                    rationale: [
-                                        'Crucial for long-term food security in a changing climate.',
-                                        'Maintains the viability of rural communities and their livelihoods.'
-                                    ],
-                                    sources: [
-                                        { name: 'CPRE', url: 'https://www.cpre.org.uk/' },
-                                        { name: 'Sustain', url: 'https://www.sustainweb.org/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'animals',
-                    title: 'Animals',
-                    icon: 'paw-print',
-                    highlight: 'Animal Protection: Extending legal rights to all sentient animals and ending factory farming.',
-                    subPills: [
-                        {
-                            title: 'Animal Welfare',
-                            description: 'Ensuring the highest standards of protection for all sentient animals.',
-                            content: [
-                                {
-                                    text: 'Ban blood sports, grouse shooting, and the badger cull.',
-                                    rationale: [
-                                        'Ends the cruel and unnecessary killing of animals for sport.',
-                                        'Badger culls have not been shown to be as effective as vaccination in tackling bTB.',
-                                        'Protects biodiversity and the natural balance of upland ecosystems.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'League Against Cruel Sports', url: 'https://league.org.uk/' },
-                                        { name: 'RSPCA', url: 'https://www.rspca.org.uk/' },
-                                        { name: 'Wildlife Trusts', url: 'https://www.wildlifetrusts.org/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Phasing out factory farming and shifting towards high-welfare systems.',
-                                    rationale: [
-                                        'Reduces the immense suffering of billions of farm animals each year.',
-                                        'Improves food safety and reduces the risk of antibiotic resistance from intensive systems.',
-                                        'Encourages more sustainable, less resource-intensive food production.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Compassion in World Farming', url: 'https://www.ciwf.org.uk/' },
-                                        { name: 'Animal Aid', url: 'https://www.animalaid.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'communities',
-                    title: 'Local',
-                    icon: 'map-pin',
-                    highlight: 'Empowered Communities: Returning power to local councils and restoring community services.',
-                    subPills: [
-                        {
-                            title: 'Council Powers',
-                            description: 'Returning local decision-making and resources to local communities.',
-                            content: [
-                                {
-                                    text: 'Give local councils the power to set their own business rates and taxing powers.',
-                                    rationale: [
-                                        'Reduces the dependence on central government handouts.',
-                                        'Allows councils to respond more effectively to local economic needs.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Local Government Association', url: 'https://www.local.gov.uk/' },
-                                        { name: 'Core Cities', url: 'https://www.corecities.com/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Reopen local libraries, youth centres and swimming pools.',
-                                    rationale: [
-                                        'Restores the social glue that has been lost during a decade of austerity.',
-                                        'Provides safe, welcoming spaces for young and old alike.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Unison', url: 'https://www.unison.org.uk/' },
-                                        { name: 'Save Our Libraries', url: 'https://www.cilip.org.uk/page/LibrariesMatter' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'justice',
-                    title: 'Justice',
-                    icon: 'scale',
-                    highlight: 'Compassionate Justice: Reforming the legal system to focus on rehabilitation and human rights.',
-                    subPills: [
-                        {
-                            title: 'Legal System',
-                            description: 'Restoring access to justice for everyone, regardless of wealth.',
-                            content: [
-                                {
-                                    text: 'Fully restore Legal Aid to ensure everyone has access to justice.',
-                                    rationale: [
-                                        'Ensures the courts are not just for the wealthy.',
-                                        'Allows vulnerable people to challenge unlawful evictions or benefit decisions.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Law Society', url: 'https://www.lawsociety.org.uk/' },
-                                        { name: 'Bar Council', url: 'https://www.barcouncil.org.uk/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Investment in diversion schemes and community-based sentences.',
-                                    rationale: [
-                                        'Evidence shows community sentences are more effective at reducing reoffending than short prison stays.',
-                                        'Focuses on addressing the root causes of crime like addiction and mental health.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Howard League for Penal Reform', url: 'https://howardleague.org/' },
-                                        { name: 'Prison Reform Trust', url: 'https://prisonreformtrust.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Prisons & Reform',
-                            description: 'Focusing on rehabilitation and tackling the root causes of crime.',
-                            content: [
-                                {
-                                    text: 'Halve the women\'s prison population.',
-                                    rationale: [
-                                        'The vast majority of women in prison are there for non-violent offences and have experienced trauma.',
-                                        'Replaces imprisonment with better-funded community-based support and women\'s centres.',
-                                        'Protects families and children from the intergenerational trauma of parental imprisonment.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Prison Reform Trust', url: 'https://prisonreformtrust.org.uk/' },
-                                        { name: 'Women in Prison', url: 'https://www.womeninprison.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'culture',
-                    title: 'Culture',
-                    icon: 'palette',
-                    highlight: 'Arts for Everyone: Supporting the arts and creative industries as vital for our national wellbeing.',
-                    subPills: [
-                        {
-                            title: 'Arts Funding',
-                            description: 'Celebrating and investing in the arts for national wellbeing.',
-                            content: [
-                                {
-                                    text: 'Increase core funding for the arts by £5 billion per year.',
-                                    rationale: [
-                                        'Supports a sector that contributes massively to the UK economy and social life.',
-                                        'Ensures arts education is available to all children, not just those in private schools.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Arts Council England', url: 'https://www.artscouncil.org.uk/' },
-                                        { name: 'Creative Industries Federation', url: 'https://www.creativeindustriesfederation.com/' }
-                                    ]
-                                },
-                                {
-                                    text: 'A Creative Freelancers grant scheme to provide income stability.',
-                                    rationale: [
-                                        'Recognises the precarious nature of work in the creative industries.',
-                                        'Helps maintain a diverse and vibrant pool of talent across the country.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Equity', url: 'https://www.equity.org.uk/' },
-                                        { name: 'Musicians\' Union', url: 'https://musiciansunion.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'privacy',
-                    title: 'Privacy',
-                    icon: 'cpu',
-                    highlight: 'Privacy & Digital Rights: Protecting personal data, promoting online anonymity, and ensuring universal high-speed access.',
-                    subPills: [
-                        {
-                            title: 'Data Privacy',
-                            description: 'Strict regulation to protect individual privacy in an increasingly digital world.',
-                            content: [
-                                {
-                                    text: 'Strict regulation of AI and personal data collection.',
-                                    rationale: [
-                                        'Protects citizens from invasive surveillance and data misuse by tech giants.',
-                                        'Ensures AI is developed transparently and with public interest oversight.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Open Rights Group', url: 'https://www.openrightsgroup.org/' },
-                                        { name: 'Privacy International', url: 'https://privacyinternational.org/' }
-                                    ]
-                                },
-                                {
-                                    text: 'End surveillance of citizens by state and corporate actors.',
-                                    rationale: [
-                                        'Fundamental right to privacy without arbitrary state or commercial monitoring.',
-                                        'Prevents the "chilling effect" on freedom of expression and dissent.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Liberty', url: 'https://www.libertyhumanrights.org.uk/' },
-                                        { name: 'Big Brother Watch', url: 'https://bigbrotherwatch.org.uk/' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Digital Inclusion & Security',
-                            description: 'Treating high-speed internet as a fundamental right and ensuring robust cybersecurity.',
-                            content: [
-                                {
-                                    text: 'Universal access to high-speed broadband in every UK home.',
-                                    rationale: [
-                                        'The internet is an essential utility for modern work, education, and services.',
-                                        'Reduces the "digital divide" that leaves rural and low-income communities behind.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'Ofcom', url: 'https://www.ofcom.org.uk/' },
-                                        { name: 'Good Things Foundation', url: 'https://www.goodthingsfoundation.org/' }
-                                    ]
-                                },
-                                {
-                                    text: 'Invest in cybersecurity as a national public infrastructure.',
-                                    rationale: [
-                                        'Protects critical public services and citizen data from digital attacks.',
-                                        'Ensures resilience against increasingly sophisticated cyber threats.'
-                                    ],
-                                    sources: [
-                                        { name: 'Green Party', url: 'https://greenparty.org.uk/' },
-                                        { name: 'National Cyber Security Centre', url: 'https://www.ncsc.gov.uk/' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'costed',
-                    title: 'Costed',
-                    icon: 'calculator',
-                    highlight: 'Transparency: A breakdown of our proposed investments in public services and the revenue sources to fund them.',
-                    subPills: [
-                        {
-                            title: 'Investment Breakdown',
-                            description: 'Major investments in our public services and infrastructure.',
-                            content: [
-                                {
-                                    text: 'NHS Annual Budget Increase',
-                                    rationale: ['Investing £30 billion annually by 2030 to restore capacity and reduce waiting lists.'],
-                                    sources: [{ name: 'Green Party', url: 'https://greenparty.org.uk/' }]
-                                },
-                                {
-                                    text: 'NHS Capital Investment',
-                                    rationale: ['£20 billion in capital funding for crumbling infrastructure and technology upgrades.'],
-                                    sources: [{ name: 'Green Party', url: 'https://greenparty.org.uk/' }]
-                                },
-                                {
-                                    text: 'National Home Insulation Programme',
-                                    rationale: ['£29 billion programme to lift homes out of fuel poverty and cut emissions.'],
-                                    sources: [{ name: 'Green Party', url: 'https://greenparty.org.uk/' }]
-                                },
-                                {
-                                    text: 'Renewable Energy Generation',
-                                    rationale: ['£15 billion annual investment to scale up wind and solar infrastructure to reach net-zero.'],
-                                    sources: [{ name: 'Green Party', url: 'https://greenparty.org.uk/' }]
-                                },
-                                {
-                                    text: 'Rail and Bus Infrastructure',
-                                    rationale: ['£10 billion annual investment to revitalise public transport and reduce reliance on private cars.'],
-                                    sources: [{ name: 'Green Party', url: 'https://greenparty.org.uk/' }]
-                                },
-                                {
-                                    text: 'Schools Funding Increase',
-                                    rationale: ['Investing £8 billion per year to support teachers and infrastructure.'],
-                                    sources: [{ name: 'Green Party', url: 'https://greenparty.org.uk/' }]
-                                },
-                                {
-                                    text: 'Active Travel Infrastructure',
-                                    rationale: ['£2.5 billion annually for walking, cycling, and wheeling.'],
-                                    sources: [{ name: 'Green Party', url: 'https://greenparty.org.uk/' }]
-                                },
-                                {
-                                    text: 'NHS Dentistry',
-                                    rationale: ['£5 billion annually to ensure universal access to dental care.'],
-                                    sources: [{ name: 'Green Party', url: 'https://greenparty.org.uk/' }]
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Revenue Sources',
-                            description: 'Funding these investments through fair taxation of wealth and pollution.',
-                            content: [
-                                {
-                                    text: 'Wealth Tax',
-                                    rationale: ['Projected to raise £15–20 billion annually by taxing the top 1% of assets.'],
-                                    sources: [{ name: 'Green Party', url: 'https://greenparty.org.uk/' }]
-                                },
-                                {
-                                    text: 'Capital Gains Tax Equalisation',
-                                    rationale: ['Projected to raise ~£12 billion annually by taxing passive wealth like active income.'],
-                                    sources: [{ name: 'Green Party', url: 'https://greenparty.org.uk/' }]
-                                },
-                                {
-                                    text: 'Fossil Fuel Subsidy Removal',
-                                    rationale: ['Projected to raise £10–15 billion annually by ending direct and indirect subsidies to the fossil fuel industry.'],
-                                    sources: [{ name: 'Green Party', url: 'https://greenparty.org.uk/' }]
-                                },
-                                {
-                                    text: 'Corporate Tax Loophole Closure',
-                                    rationale: ['Increasing tax revenue by £5–10 billion annually by strictly tackling corporate tax avoidance.'],
-                                    sources: [{ name: 'Green Party', url: 'https://greenparty.org.uk/' }]
-                                },
-                                {
-                                    text: 'Carbon Tax',
-                                    rationale: ['Significant revenue from carbon pricing to fund the transition and support lower-income households.'],
-                                    sources: [{ name: 'Green Party', url: 'https://greenparty.org.uk/' }]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ];
-        };
-
-        // Dark mode preference helper
-        window.manifestoApp = function() {
-            return {
-                darkMode: localStorage.getItem('darkMode') === null ? true : localStorage.getItem('darkMode') === 'true',
-                dyslexia: localStorage.getItem('dyslexia') === 'true',
-                reduceMotion: localStorage.getItem('reduceMotion') === 'true',
-                isMobileMenuOpen: false,
-                showMobileSearch: false,
-                openPolicy: null,
-                openedFromSearch: false,
-                isSearching: false,
-                isLoading: true,
-                gridScrollPosition: 0,
-                openSubPill: 0,
-                searchQuery: '',
-                filteredPolicies: [],
-                policies: [],
-                safeCreateIcons() {
-                    try {
-                        if (typeof lucide !== 'undefined') {
-                            lucide.createIcons();
-                        }
-                    } catch (e) {
-                        console.error("Error creating icons", e);
-                    }
-                },
-                highlightText(text, query) {
-                    if (!query) return text;
-                    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                    const regex = new RegExp(`(${escapedQuery})`, 'gi');
-                    return text.replace(regex, '<mark class="bg-yellow-200 dark:bg-yellow-800 text-slate-900 dark:text-white rounded">$1</mark>');
-                },
-                init() {
-                    // Apply initial dark mode
-                    if (this.darkMode) {
-                        document.documentElement.classList.add('dark');
-                    } else {
-                        document.documentElement.classList.remove('dark');
-                    }
-
-                    // Load policies from the data provider
-                    this.policies = window.getManifestoData();
-
-                    // Init Fuse
-                    this.fuse = new Fuse(this.policies, {
-                        keys: ['title', 'highlight', 'subPills.title', 'subPills.content.text'],
-                        threshold: 0.4,
-                        ignoreLocation: true
-                    });
-
-                    this.$watch('openPolicy', () => {
-                        this.openSubPill = 0;
-                    });
-
-                    this.$nextTick(() => {
-                        this.safeCreateIcons();
-                    });
-
-                    this.$watch('searchQuery', (query) => {
-                        if (!query) {
-                            this.filteredPolicies = [];
-                            return;
-                        }
-                        this.filteredPolicies = this.fuse.search(query).map(result => result.item);
-                    });
-
-                    this.$watch('darkMode', val => {
-                        localStorage.setItem('darkMode', val);
-                        if (val) {
-                            document.documentElement.classList.add('dark');
-                        } else {
-                            document.documentElement.classList.remove('dark');
-                        }
-                        this.$nextTick(() => this.safeCreateIcons());
-                    });
-                    this.$watch('dyslexia', val => localStorage.setItem('dyslexia', val));
-                    this.$watch('reduceMotion', val => localStorage.setItem('reduceMotion', val));
-
-                    this.$watch('openPolicy', () => {
-                        this.$nextTick(() => this.safeCreateIcons());
-                    });
-                }
-            };
-        };
-
-        // Critical: Prevent flash of light mode and set default to dark
-        if (localStorage.getItem('darkMode') === null || localStorage.getItem('darkMode') === 'true') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    </script>
-</head>
-<body 
-    x-data="manifestoApp()"
-    x-init="isLoading = false"
-    :class="{ 
-        'dark': darkMode, 
-        'dyslexia-mode': dyslexia,
-        'reduce-motion': reduceMotion
-    }"
-    class="min-h-screen flex flex-col p-4 md:p-8 overflow-x-hidden selection:bg-emerald-500/30"
-    @keydown.escape="showSettings = false"
->
-<div x-show="isLoading" class="fixed inset-0 z-[9999] bg-white dark:bg-zinc-900 flex items-center justify-center">
-        <div class="flex flex-col items-center gap-6">
-            <div class="relative flex items-center justify-center">
-                <!-- Spinner -->
-                <div class="rounded-full h-24 w-24 border-t-4 border-b-4 border-emerald-500" :class="{'animate-spin': !reduceMotion}"></div>
-                <!-- Logo -->
-                <div class="absolute w-16 h-16 rounded-2xl overflow-hidden shadow-lg shadow-emerald-500/30" :class="{'animate-pulse': !reduceMotion}">
-                    <img src="favicon.png" alt="GreenMeans logo" class="w-full h-full object-cover">
-                </div>
-            </div>
-            <div class="text-emerald-500 font-bold tracking-widest uppercase" :class="{'animate-pulse': !reduceMotion}">Loading...</div>
-        </div>
-    </div>
-    <!-- Skip Nav -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[100] bg-emerald-600 text-white px-4 py-2 rounded-full shadow-xl">
-        Skip to content
-    </a>
-
-    <!-- Header -->
-    <header class="max-w-7xl mx-auto w-full grid grid-cols-12 items-center mb-10 gap-4">
-        <!-- Logo/Title -->
-        <div class="col-span-10 md:col-span-4 flex items-center gap-4 justify-start">
-            <div x-bind:class="{ 'hover:animate-wobble': !reduceMotion }" class="w-12 h-12 rounded-2xl overflow-hidden shadow-xl shadow-emerald-500/30 shrink-0">
-                <img src="favicon.png" alt="GreenMeans logo" class="w-full h-full object-cover">
-            </div>
-            <h1 class="text-lg md:text-3xl font-black tracking-tighter text-slate-900 dark:text-white font-display whitespace-nowrap">
-                GreenMeans: Policy
-            </h1>
-        </div>
-
-        <!-- Mobile/Tablet Nav -->
-        <div class="col-span-2 md:col-span-8 flex items-center justify-end gap-2">
-            <button @click="isMobileMenuOpen = !isMobileMenuOpen" aria-label="Menu" class="p-3 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-950 text-emerald-600 border border-emerald-200 dark:border-emerald-800 shadow-sm ring-2 ring-emerald-500/20">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-        </div>
+    <!-- Twitter Meta -->
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:url" content="https://greenmeans.ovh/" />
+    <meta property="twitter:title" content="GreenMeans" />
+    <meta property="twitter:description" content="GreenMeans provides sustainable, accessible, and efficient digital tools that empower individuals and communities." />
+    <meta property="twitter:image" content="/favicon.png" />
 
 
-
-        <!-- Mobile Navigation Menu -->
-        <div x-show="isMobileMenuOpen" x-cloak class="col-span-12 bg-white dark:bg-zinc-900 rounded-2xl p-4 shadow-xl border border-slate-200 dark:border-zinc-800 mt-4">
-            <a href="https://greenmeans.ovh" class="flex items-center gap-3 p-3 text-slate-600 dark:text-zinc-400 font-bold hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-xl">
-                <i data-lucide="home" class="w-5 h-5"></i> Home
+    <!-- Tailwind CSS is now handled via Vite -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="text-white bg-black font-sans antialiased selection:bg-white/20">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#18852c] focus:text-white focus:rounded-md">Skip to content</a>
+    <div class="min-h-screen flex flex-col">
+      <header class="bg-black border-b border-white/5">
+        <nav aria-label="Main Navigation" class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <a href="/" class="flex items-center gap-4 focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 rounded-lg p-1 -m-1" aria-label="GreenMeans Home">
+              <img src="/favicon.png" alt="" class="w-10 h-10 rounded-full border border-white/10 shadow-lg">
+              <span class="text-2xl font-light tracking-wide text-white">GreenMeans</span>
             </a>
-            <button @click="showMobileSearch = true; isMobileMenuOpen = false;" class="flex items-center gap-3 p-3 w-full text-slate-600 dark:text-zinc-400 font-bold hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-xl">
-                <i data-lucide="search" class="w-5 h-5"></i> Search
-            </button>
-            <!-- Settings Accordion -->
-            <div class="hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-xl" x-data="{ openSettings: false }">
-                <button @click="openSettings = !openSettings" class="flex items-center justify-between p-3 w-full text-slate-600 dark:text-zinc-400 font-bold">
-                    <div class="flex items-center gap-3">
-                        <i data-lucide="accessibility" class="w-5 h-5"></i> Settings
-                    </div>
-                    <i data-lucide="chevron-down" class="w-5 h-5 transition-transform" :class="openSettings ? 'rotate-180' : ''"></i>
-                </button>
-                <div x-show="openSettings" x-cloak class="p-3 bg-slate-50 dark:bg-zinc-800/50 rounded-b-xl space-y-4">
-                    <!-- Dark Mode Toggle -->
-                    <div class="flex items-center justify-between group">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-white dark:bg-zinc-900 flex items-center justify-center text-slate-500 dark:text-zinc-400">
-                                <i data-lucide="moon" class="w-4 h-4" aria-hidden="true"></i>
-                            </div>
-                            <span class="text-sm font-bold text-slate-700 dark:text-zinc-200">Dark Mode</span>
-                        </div>
-                        <button 
-                            @click="darkMode = !darkMode"
-                            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
-                            :class="darkMode ? 'bg-emerald-600' : 'bg-slate-200 dark:bg-zinc-700'"
-                            role="switch"
-                            :aria-checked="darkMode"
-                        >
-                            <span 
-                                class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
-                                :class="darkMode ? 'translate-x-6' : 'translate-x-1'"
-                            ></span>
-                        </button>
-                    </div>
+          </div>
+          <div class="flex flex-wrap justify-center items-center gap-3 md:gap-4">
+            <a href="https://policy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="btn-outline">Green Policy <span class="sr-only">(opens in a new window)</span></a>
+            <a href="https://toolkit.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="btn-outline">Toolkit <span class="sr-only">(opens in a new window)</span></a>
+            <a href="https://compost.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="btn-outline">Compost Guide <span class="sr-only">(opens in a new window)</span></a>
+            <a href="https://search.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="btn-outline">Search <span class="sr-only">(opens in a new window)</span></a>
+          </div>
+        </nav>
+      </header>
 
-                    <!-- Dyslexia Toggle -->
-                    <div class="flex items-center justify-between group">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-white dark:bg-zinc-900 flex items-center justify-center text-slate-500 dark:text-zinc-400">
-                                <i data-lucide="type" class="w-4 h-4" aria-hidden="true"></i>
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="text-sm font-bold text-slate-700 dark:text-zinc-200">Dyslexia Friendly</span>
-                                <span class="text-[9px] text-slate-400 dark:text-zinc-500 uppercase font-black tracking-wider">Readable Font</span>
-                            </div>
-                        </div>
-                        <button 
-                            @click="dyslexia = !dyslexia"
-                            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
-                            :class="dyslexia ? 'bg-emerald-600' : 'bg-slate-200 dark:bg-zinc-700'"
-                            role="switch"
-                            :aria-checked="dyslexia"
-                        >
-                            <span 
-                                class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
-                                :class="dyslexia ? 'translate-x-6' : 'translate-x-1'"
-                            ></span>
-                        </button>
-                    </div>
-
-                    <!-- Reduce Motion Toggle -->
-                    <div class="flex items-center justify-between group">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-white dark:bg-zinc-900 flex items-center justify-center text-slate-500 dark:text-zinc-400">
-                                <i data-lucide="zap-off" class="w-4 h-4" aria-hidden="true"></i>
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="text-sm font-bold text-slate-700 dark:text-zinc-200">Reduce Motion</span>
-                                <span class="text-[9px] text-slate-400 dark:text-zinc-500 uppercase font-black tracking-wider">Disable Animations</span>
-                            </div>
-                        </div>
-                <button 
-                            @click="reduceMotion = !reduceMotion"
-                            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
-                            :class="reduceMotion ? 'bg-emerald-600' : 'bg-slate-200 dark:bg-zinc-700'"
-                            role="switch"
-                            :aria-checked="reduceMotion"
-                        >
-                            <span 
-                                class="inline-block h-4 w-4 transform rounded-full bg-white"
-                                :class="reduceMotion ? 'translate-x-6' : 'translate-x-1'"
-                            ></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Search Overlay/Pill -->
-        <div x-show="showMobileSearch" x-cloak class="col-span-12 p-4">
-            <div class="relative w-full">
-                <input x-model="searchQuery" placeholder="Search..." class="w-full px-4 py-3 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-full shadow-lg outline-none" @click.outside="showMobileSearch = false" />
-                <button @click="showMobileSearch = false" class="absolute right-4 top-1/2 -translate-y-1/2">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Global Search/Overlay -->
-    <div x-show="searchQuery !== ''" x-cloak class="fixed inset-0 z-[100] bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md p-4 md:p-8 overflow-y-auto custom-scrollbar">
-        <div class="max-w-4xl mx-auto">
-            <div class="flex justify-between items-center mb-8">
-                <div class="relative w-full max-w-lg" x-data="{ showDropdown: true }">
-                    <input type="text" id="search-input" x-model="searchQuery" x-ref="overlaySearch" placeholder="Search policies..." x-init="$watch('searchQuery', (val) => { if (val !== '') $nextTick(() => $refs.overlaySearch.focus()); showDropdown = true; })" @focus="showDropdown = true" @click.outside="showDropdown = false" class="w-full px-5 py-3 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-full shadow-lg focus:border-emerald-500 outline-none text-slate-600 dark:text-zinc-400 font-bold text-lg focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900" />
-                    <button x-show="searchQuery !== ''" @click="searchQuery = ''; showSettings = false; isSearching = false;" class="absolute right-4 top-1/2 -translate-y-1/2 p-1 bg-slate-100 dark:bg-zinc-800 rounded-full hover:bg-slate-200 dark:hover:bg-zinc-700 transition-colors">
-                        <i data-lucide="x" class="w-5 h-5"></i>
-                    </button>
-                </div>
-            </div>
-            <h2 class="text-3xl font-black tracking-tighter text-slate-900 dark:text-white font-display mb-8">
-                Search Results (<span x-text="filteredPolicies.length"></span>)
-            </h2>
-            <div class="space-y-6" x-show="filteredPolicies.length > 0">
-                <template x-for="policy in filteredPolicies" :key="policy.id">
-                    <div class="p-6 bg-slate-50 dark:bg-zinc-800 rounded-3xl border border-slate-100 dark:border-zinc-700">
-                        <h3 class="text-xl font-bold mb-2 flex items-center gap-2">
-                            <i :data-lucide="policy.icon" class="w-5 h-5 text-emerald-600"></i>
-                            <span x-html="highlightText(policy.title, searchQuery)"></span>
-                        </h3>
-                        <p class="text-slate-600 dark:text-zinc-400 mb-4" x-html="highlightText(policy.highlight, searchQuery)"></p>
-                        <button @click="openPolicy = policy.id; openedFromSearch = true;" class="text-sm text-emerald-600 font-bold">
-                            View Policy Details
-                        </button>
-                    </div>
-                </template>
-            </div>
-            <p x-show="filteredPolicies.length === 0" class="text-slate-500">No results found for "<span x-text="searchQuery"></span>".</p>
-        </div>
-    </div>
-            
-
-        </div>
-    </header>
-
-    <!-- Bento Grid -->
-    <main id="main-content" class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-4 gap-6 flex-grow auto-rows-min">
-        
-        <!-- Main Categories (PRIMARY FOCUS) -->
-        <section class="md:col-span-4 bento-card flex flex-col border-emerald-200 dark:border-emerald-800/50 shadow-xl shadow-emerald-500/5">
-            <div class="flex flex-col justify-center items-center mb-10 gap-4 text-center">
-                <div>
-                    <h2 class="font-black text-2xl md:text-4xl tracking-tighter font-display mb-2">Green Policy:</h2>
-                    <p class="text-slate-500 dark:text-zinc-400 font-medium">The Green Party stands for real change, where Green Means:</p>
-                    <p class="text-slate-500 dark:text-zinc-400 font-medium">Acting for nature, the climate, our communities, and the future.</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" role="tablist" aria-label="Policy Categories">
-                <template x-for="policy in policies" :key="policy.id">
-                    <button 
-                        :id="'policy-pill-' + policy.id"
-                        @click="gridScrollPosition = window.scrollY; openPolicy = policy.id; openedFromSearch = false; $nextTick(() => document.getElementById('policy-pill-' + policy.id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest'}))"
-                        role="tab"
-                        :aria-selected="openPolicy === policy.id"
-                        tabindex="0"
-                        class="policy-pill flex flex-col items-center justify-center text-center p-10 border-slate-100 dark:border-zinc-800 dark:hover:shadow-emerald-900/20 active:scale-[0.98] group/btn min-h-[12rem] transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
-                        :class="(openPolicy === policy.id ? 'policy-pill-active scale-[1.05]' + (!reduceMotion ? ' animate-pulse transition-all duration-1000' : '') + ' border-2 border-emerald-500 bg-gradient-to-br from-emerald-50 to-white dark:border-emerald-500 dark:from-zinc-800 dark:to-zinc-900' : 'bg-white dark:bg-zinc-900 border-b border-r') + (!reduceMotion ? ' hover:scale-[1.05] hover:shadow-xl' : '')"
-                    >
-                        <div class="w-20 h-20 bg-white dark:bg-zinc-700/50 rounded-3xl flex items-center justify-center mb-5 text-emerald-600 shadow-lg group-hover/btn:bg-emerald-600 group-hover/btn:text-white transition-all duration-500">
-                            <i :data-lucide="policy.icon" class="w-10 h-10"></i>
-                        </div>
-                        <span class="text-base font-black tracking-tight group-hover/btn:text-emerald-700 dark:group-hover/btn:text-emerald-400 transition-colors" x-text="policy.title"></span>
-                        <div class="absolute bottom-4 inset-x-0 text-center text-xs font-black text-slate-300 dark:text-zinc-600 opacity-0 group-hover/btn:opacity-100 transition-opacity whitespace-nowrap">
-                            <span class="hidden sm:inline">Explore Commitments →</span>
-                            <span class="sm:hidden">Explore →</span>
-                        </div>
-                    </button>
-                </template>
-            </div>
+      <main id="main-content" class="flex-grow max-w-7xl mx-auto px-6 pt-6 pb-2 space-y-10">
+        <!-- Hero Section -->
+        <section class="max-w-4xl pt-2 mx-auto text-center">
+          <h1 class="text-5xl md:text-7xl font-light mb-8 tracking-tighter leading-[1.1]">Sustainable tools for a <br class="hidden md:block"/><span class="italic text-[#18852c]">better tomorrow.</span></h1>
+          <p class="text-xl md:text-2xl text-white/60 mx-auto max-w-3xl leading-relaxed font-light">
+            Welcome to the official hub of the GreenMeans project. We are a collective dedicated to providing sustainable, accessible, and efficient digital tools that empower individuals and communities.
+          </p>
         </section>
 
-        <!-- Hero Section (Manifesto Highlights) -->
-        <section class="md:col-span-3 bento-card p-8 md:p-10 flex flex-col justify-center group relative overflow-hidden bg-white dark:bg-zinc-900 border-emerald-100 dark:border-emerald-900/30">
-            <div class="absolute -top-24 -right-24 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" aria-hidden="true"></div>
-            <div class="relative z-10 text-center">
-                <span class="inline-block px-4 py-1.5 bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-4">
-                    Manifesto Highlights 2024
-                </span>
-                <h2 class="text-3xl md:text-5xl font-black leading-tight mb-4 tracking-tighter font-display text-balance">
-                    Bold Politics. <span class="text-emerald-600 italic">Nature First.</span>
-                </h2>
-                <p class="text-slate-600 dark:text-zinc-400 text-sm md:text-base max-w-2xl leading-relaxed font-medium mx-auto">
-                    Evidence-based policies putting people and planet before profit.
-                </p>
-            </div>
-        </section>
-
-        <!-- Dynamic Stat Card (Target Net Zero) -->
-        <section class="md:col-span-1 bg-white dark:bg-zinc-900 text-slate-900 dark:text-white rounded-[2.5rem] p-8 relative overflow-hidden flex flex-col justify-center shadow-xl border border-slate-100 dark:border-zinc-800">
-            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-50" aria-hidden="true"></div>
-            <div class="relative z-10 text-center">
-                <h3 class="text-emerald-600 dark:text-emerald-400 font-black uppercase text-[10px] tracking-[0.3em] mb-2">Target</h3>
-                <p class="text-3xl font-black tracking-tighter">Net Zero</p>
-                <p class="text-sm font-medium text-slate-500 dark:text-slate-400">by 2040</p>
-            </div>
-            <div class="absolute right-4 bottom-4 w-12 h-12 border-4 border-emerald-500/20 rounded-full flex items-center justify-center">
-                <i data-lucide="globe" class="w-5 h-5 text-emerald-600 dark:text-emerald-500"></i>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Modal Backdrop -->
-    <div 
-        x-show="openPolicy" 
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-        @click="const id = openPolicy; openPolicy = null; if (openedFromSearch) { $nextTick(() => document.getElementById('search-input')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' })); openedFromSearch = false; } else if (id) { $nextTick(() => { window.scrollTo({ top: gridScrollPosition, behavior: reduceMotion ? 'auto' : 'smooth' }); }) }"
-        class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[100]"
-        aria-hidden="true"
-    ></div>
-
-    <!-- Modal Content -->
-    <div 
-        x-show="openPolicy" 
-        x-transition:enter="transition ease-out duration-500"
-        x-transition:enter-start="opacity-0 translate-y-24"
-        x-transition:enter-end="opacity-100 translate-y-0"
-        x-transition:leave="transition ease-in duration-300"
-        x-transition:leave-start="opacity-100 translate-y-0"
-        x-transition:leave-end="opacity-0 translate-y-24"
-        class="fixed inset-x-0 bottom-0 z-[110] p-4 md:p-8 flex justify-center items-end"
-    >
-        <div 
-            class="modal-opaque w-full max-w-5xl h-[85vh] rounded-t-[3rem] md:rounded-[3rem] flex flex-col overflow-hidden"
-            @click.stop
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="policy-title"
-        >
-            <!-- Header Sticky -->
-            <div class="px-8 md:px-14 py-8 border-b border-slate-100 dark:border-zinc-800 flex justify-between items-center bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm">
-                <div id="policy-title">
-                    <h4 class="text-3xl md:text-5xl font-black tracking-tighter text-slate-900 dark:text-white font-display" x-show="openPolicy" x-text="'Green Policy: ' + policies.find(p => p.id === openPolicy)?.title"></h4>
-                    <p class="text-emerald-600 font-black uppercase text-[10px] tracking-[0.3em] mt-2"></p>
-                </div>
-                <button 
-                    @click="const id = openPolicy; openPolicy = null; if (openedFromSearch) { $nextTick(() => document.getElementById('search-input')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' })); openedFromSearch = false; } else if (id) { $nextTick(() => { window.scrollTo({ top: gridScrollPosition, behavior: reduceMotion ? 'auto' : 'smooth' }); }) }"
-                    aria-label="Close modal"
-                    class="p-4 bg-slate-100 dark:bg-zinc-800 rounded-full hover:bg-emerald-600 hover:text-white transition-all shadow-md group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
-                >
-                    <i data-lucide="x" class="w-6 h-6 group-hover:rotate-90 transition-transform" aria-hidden="true"></i>
-                </button>
-            </div>
-
-            <!-- Content Scrollable -->
-            <div 
-                x-data="{ showGoToTop: false }"
-                @scroll="showGoToTop = $event.target.scrollTop > 500"
-                class="flex-grow overflow-y-auto p-8 md:p-14 custom-scrollbar space-y-16"
-            >
-                <div id="modal-content-top"></div>
-                <!-- Highlight Box -->
-                <div class="bg-emerald-50 dark:bg-emerald-500/10 p-8 rounded-[2.5rem] border border-emerald-100 dark:border-emerald-500/20 italic text-emerald-800 dark:text-emerald-400 font-medium md:text-xl leading-relaxed"
-                     aria-live="polite">
-                    <span x-text="policies.find(p => p.id === openPolicy)?.highlight"></span>
-                </div>
-
-                <!-- Go to Top Button -->
-                <button 
-                    x-show="showGoToTop"
-                    x-transition:enter="!reduceMotion ? 'transition-opacity duration-300' : ''"
-                    x-transition:leave="!reduceMotion ? 'transition-opacity duration-300' : ''"
-                    @click="document.getElementById('modal-content-top')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' })"
-                    class="fixed bottom-12 right-12 p-4 bg-emerald-600 text-white rounded-full shadow-lg z-[120] hover:bg-emerald-700 transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-emerald-600"
-                    aria-label="Go to top"
-                >
-                    <i data-lucide="arrow-up" class="w-6 h-6"></i>
-                </button>
-
-                <!-- Sections -->
-                <template x-for="(sub, idx) in policies.find(p => p.id === openPolicy)?.subPills" :key="idx">
-                    <div class="space-y-4 border-b border-slate-200 dark:border-zinc-700 pb-10" x-data="{ isSubExpanded: false }">
-                        <button 
-                            :id="'sub-pill-' + idx"
-                            @click="openSubPill = (openSubPill === idx ? null : idx); if (openSubPill === idx) { $nextTick(() => { const el = document.getElementById('sub-pill-content-' + idx); if (el) { setTimeout(() => { el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' }); }, reduceMotion ? 0 : 350); } }); }"
-                            class="text-2xl font-black flex items-center justify-between w-full text-left text-slate-900 dark:text-white p-4 rounded-xl border-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-800"
-                            :class="(openSubPill === idx ? 'border-emerald-600 bg-emerald-50 dark:border-emerald-600 dark:bg-zinc-800/80 shadow-lg ring-2 ring-emerald-500/50' : 'border-transparent bg-transparent') + (!reduceMotion ? ' transition-all duration-300' : '')"
-                        >
-                            <span class="flex items-center gap-5">
-                                <span class="w-12 h-12 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-sm shadow-xl shadow-emerald-500/20" x-text="'0' + (idx + 1)"></span> 
-                                <span x-text="sub.title"></span>
-                            </span>
-                            <i data-lucide="chevron-down" class="w-6 h-6 transition-transform" :class="openSubPill === idx ? 'rotate-180' : ''"></i>
-                        </button>
-
-                        <div 
-                            :id="'sub-pill-content-' + idx"
-                            x-show="openSubPill === idx" 
-                            x-cloak
-                            aria-live="polite"
-                            x-transition:enter="!reduceMotion ? 'transition ease-out duration-300' : ''"
-                            x-transition:enter-start="!reduceMotion ? 'opacity-0 -translate-y-4' : ''"
-                            x-transition:enter-end="!reduceMotion ? 'opacity-100 translate-y-0' : ''"
-                            x-transition:leave="!reduceMotion ? 'transition ease-in duration-200' : ''"
-                            x-transition:leave-start="!reduceMotion ? 'opacity-100 translate-y-0' : ''"
-                            x-transition:leave-end="!reduceMotion ? 'opacity-0 -translate-y-4' : ''"
-                            class="space-y-10 pt-6"
-                        >
-                            <p class="text-slate-500 dark:text-zinc-400 font-medium ml-16" 
-                               :class="isSubExpanded ? 'line-clamp-none' : 'line-clamp-2'"
-                               x-ref="desc"
-                               x-text="sub.description"></p>
-                            
-                            <button 
-                                x-show="isSubExpanded || ($refs.desc && $refs.desc.scrollHeight > $refs.desc.clientHeight)"
-                                @click="isSubExpanded = !isSubExpanded"
-                                class="text-emerald-600 font-bold ml-16 mt-2 hover:underline focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900 rounded px-1"
-                                x-text="isSubExpanded ? 'Read Less' : 'Read More'"
-                                aria-label="Toggle description length"
-                            ></button>
-                            
-                            <div class="space-y-8">
-                                <template x-for="(item, cIdx) in sub.content" :key="cIdx">
-                                    <div class="bg-slate-50 dark:bg-zinc-800/50 p-8 md:p-12 rounded-[3rem] border border-slate-100 dark:border-zinc-800 space-y-10 transition-colors hover:bg-slate-100 dark:hover:bg-zinc-800">
-                                        <div class="flex items-start gap-4">
-                                            <i class="w-10 h-10 text-emerald-600 mt-1 flex-shrink-0" :data-lucide="item.icon || 'check-circle'"></i>
-                                            <p class="text-2xl md:text-3.5xl font-black leading-tight tracking-tight text-slate-900 dark:text-white" x-text="item.text"></p>
-                                        </div>
-                                        
-                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                                            <div class="md:col-span-2 space-y-6">
-                                                <h6 class="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-600 flex items-center gap-3">
-                                                    <span class="w-6 h-[2px] bg-emerald-600"></span> Rationales & Impacts
-                                                </h6>
-                                                <ul class="space-y-5">
-                                                    <template x-for="(rat, rIdx) in item.rationale" :key="rIdx">
-                                                        <li class="text-base md:text-lg font-medium text-slate-500 dark:text-zinc-400 flex gap-5 leading-relaxed group/li">
-                                                            <span class="text-emerald-600 font-black mt-1">→</span>
-                                                            <span class="group-hover/li:text-slate-900 dark:group-hover/li:text-white transition-colors" x-text="rat"></span>
-                                                        </li>
-                                                    </template>
-                                                </ul>
-                                            </div>
-                                            
-                                            <div class="space-y-8 pt-8 md:pt-0">
-                                                <div class="p-8 bg-white dark:bg-zinc-900 rounded-[2rem] border border-slate-100 dark:border-zinc-800 shadow-sm">
-                                                    <h6 class="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-600 mb-5">Peer Evidence</h6>
-                                                    <div class="flex flex-wrap gap-x-4 gap-y-2">
-                                                        <template x-for="(source, sIdx) in (Array.isArray(item.sources) ? item.sources : [{name: item.sources, url: '#'}])" :key="sIdx">
-                                                            <span class="inline-flex items-center">
-                                                                <a 
-                                                                    :href="source.url" 
-                                                                    target="_blank" 
-                                                                    rel="noopener noreferrer"
-                                                                    class="text-sm font-semibold text-emerald-700 dark:text-emerald-300 hover:text-emerald-900 dark:hover:text-emerald-100 transition-colors underline decoration-emerald-200 dark:decoration-emerald-800 underline-offset-4 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900 rounded px-1"
-                                                                    :aria-label="'View source: ' + source.name"
-                                                                    x-text="source.name"
-                                                                ></a>
-                                                                <span x-show="sIdx < (Array.isArray(item.sources) ? item.sources.length : 1) - 1" class="text-slate-400 dark:text-zinc-500">,</span>
-                                                            </span>
-                                                        </template>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-
-                <div class="h-20"></div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="mt-auto py-6 text-center text-xs text-black dark:text-white flex flex-col items-center justify-center">
-        <p>&copy; 2026 GreenMeans: Policy</p>
-        <p>Policy information curated from <a href="https://greenparty.org.uk/" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600 dark:hover:text-emerald-400">
-            <span class="sm:hidden">GPEW</span>
-            <span class="hidden sm:inline">Green Party of England and Wales</span>
-        </a> policy documents.</p>
-    </footer>
-
-    <!-- GDPR Cookie Banner -->
-    <div x-data="{ open: localStorage.getItem('cookies-consent') !== 'true' && localStorage.getItem('cookies-consent') !== 'declined', openWarning: false }"
-         x-cloak
-         @keydown.escape.window="open = false"
-         role="alertdialog"
-         aria-labelledby="cookie-title"
-         aria-describedby="cookie-desc"
-         class="fixed bottom-0 left-0 w-full bg-white dark:bg-zinc-900 border-t border-slate-200 dark:border-zinc-800 p-6 shadow-2xl z-50 transition-all duration-500 ease-in-out"
-         x-show="open"
-         x-transition:enter="translate-y-0"
-         x-transition:leave="translate-y-full">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <p id="cookie-desc" class="text-sm font-medium text-slate-600 dark:text-zinc-400">
-                We use cookies to ensure you get the best experience on our website. 
-                Read our <a href="https://privacy.greenmeans.ovh/" class="text-emerald-600 font-bold hover:underline focus-visible:outline-2 focus-visible:outline-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 rounded" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+        <!-- Our Mission Section -->
+        <section class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-3xl font-light mb-6 text-white tracking-tight">A Central Hub for Change</h2>
+            <div class="w-12 h-px bg-white/20 mb-6"></div>
+            <p class="text-lg text-white/50 mb-6 font-light leading-relaxed">
+              GreenMeans serves as the foundational ecosystem for a growing family of applications. We believe that technology should be transparent, open-source, and created with deep respect for both users and the environment.
             </p>
-            <div class="flex gap-6 items-center">
-                <button @click="openWarning = true;" 
-                        class="text-sm text-slate-500 hover:text-slate-800 dark:text-zinc-500 dark:hover:text-zinc-300 font-semibold transition-colors">
-                    Decline
-                </button>
-                <button @click="localStorage.setItem('cookies-consent', 'true'); open = false" 
-                        aria-label="Accept cookies and close banner"
-                        class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded-full text-sm transition-colors focus:ring-4 focus:ring-emerald-500/50">
-                    Accept Cookies
-                </button>
+            <p class="text-lg text-white/50 font-light leading-relaxed mb-6">
+              Our initiatives range from making political structures transparent and easy to navigate, to practical guides for composting and guides to non-violent communication. Each subdomain is built on our core philosophy of minimal energy consumption, maximum utility and optimal accessibility.
+            </p>
+          </div>
+          <div class="bg-zinc-900/30 border border-white/5 p-6 md:p-10 rounded-[2rem] shadow-2xl relative overflow-hidden group text-left">
+            <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none opacity-50"></div>
+            <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-white/60 mb-8">Explore Our Core Initiatives</h3>
+            <ul class="space-y-8 relative z-10 block">
+              <li>
+                <a href="https://policy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center gap-5 group/link focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-lg p-2 -m-2">
+                  <div class="p-3 bg-white/5 border border-white/10 rounded-full text-white/70 group-hover/link:bg-[#18852c] group-hover/link:border-[#18852c] group-hover/link:text-white transition-all duration-300">
+                    <svg aria-hidden="true" focusable="false" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15"></path></svg>
+                  </div>
+                  <div>
+                    <strong class="block text-white mb-1 group-hover/link:text-[#18852c] font-light tracking-wide transition-colors">Green Party Policy Made Accessible</strong>
+                    <span class="text-white/50 text-sm font-light">Simplifying and presenting complex political policies.</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="https://compost.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center gap-5 group/link focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-lg p-2 -m-2">
+                  <div class="p-3 bg-white/5 border border-white/10 rounded-full text-white/70 group-hover/link:bg-[#18852c] group-hover/link:border-[#18852c] group-hover/link:text-white transition-all duration-300">
+                    <svg aria-hidden="true" focusable="false" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  </div>
+                  <div>
+                    <strong class="block text-white mb-1 group-hover/link:text-[#18852c] font-light tracking-wide transition-colors">Compost Guide</strong>
+                    <span class="text-white/50 text-sm font-light">Sustainable waste management at home.</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="https://toolkit.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center gap-5 group/link focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-lg p-2 -m-2">
+                  <div class="p-3 bg-white/5 border border-white/10 rounded-full text-white/70 group-hover/link:bg-[#18852c] group-hover/link:border-[#18852c] group-hover/link:text-white transition-all duration-300">
+                    <svg aria-hidden="true" focusable="false" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+                  </div>
+                  <div>
+                    <strong class="block text-white mb-1 group-hover/link:text-[#18852c] font-light tracking-wide transition-colors">NVC (Nonviolent Communication)</strong>
+                    <span class="text-white/50 text-sm font-light">Tools for empathy and constructive communication.</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="https://search.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center gap-5 group/link focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-lg p-2 -m-2">
+                  <div class="p-3 bg-white/5 border border-white/10 rounded-full text-white/70 group-hover/link:bg-[#18852c] group-hover/link:border-[#18852c] group-hover/link:text-white transition-all duration-300">
+                    <svg aria-hidden="true" focusable="false" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                  </div>
+                  <div>
+                    <strong class="block text-white mb-1 group-hover/link:text-[#18852c] font-light tracking-wide transition-colors">Search Comparison Tool</strong>
+                    <span class="text-white/50 text-sm font-light">Compare providers' environmental impact.</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Why Dark Mode First? -->
+        <section class="pt-8 pb-4 border-t border-white/10 mx-auto max-w-4xl text-center">
+          <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-light mb-6 tracking-tight flex flex-col md:flex-row items-center justify-center gap-3 px-4">
+              <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+              <span class="text-[#1db441]">Why Dark Mode First?</span>
+            </h2>
+            <p class="text-base md:text-lg text-white/50 mb-4 font-light leading-relaxed px-4">
+              Our commitment to sustainability extends to our design choices. Operating in dark mode by default isn't just an aesthetic preference, it's a conscious decision to reduce the power consumption of modern devices, directly lowering the carbon footprint of your browsing experience.
+            </p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-6 md:gap-8 mt-6 px-4 md:px-0 text-left">
+            <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <h4 class="text-lg text-[#18852c] font-medium mb-3 tracking-wide flex items-center gap-2">
+                <svg aria-hidden="true" focusable="false" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Energy Efficiency
+              </h4>
+              <p class="text-white/50 text-sm font-light leading-relaxed">
+                Black pixels on OLED displays are physically turned off. By using a primarily black background, we significantly reduce the amount of energy required to illuminate the screen.
+              </p>
             </div>
-        </div>
-        
-        <!-- Decline Warning Modal -->
-        <div x-show="openWarning" 
-             class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
-             x-cloak
-             role="dialog"
-             aria-modal="true"
-             aria-labelledby="warning-title">
-            <div class="bg-white dark:bg-zinc-900 p-8 rounded-3xl max-w-md w-full shadow-2xl">
-                <h3 id="warning-title" class="text-xl font-bold mb-4 text-slate-900 dark:text-white">Cookie Consent Declined</h3>
-                <p class="text-slate-600 dark:text-zinc-400 mb-6">
-                    By declining non-essential cookies, some features of this website might not function as expected.
+            <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <h4 class="text-lg text-[#18852c] font-medium mb-3 tracking-wide flex items-center gap-2">
+                <svg aria-hidden="true" focusable="false" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Reduced Emissions
+              </h4>
+              <p class="text-white/50 text-sm font-light leading-relaxed">
+                Less energy consumption by individual devices translates directly to fewer greenhouse gas emissions globally, aligning with our core sustainability goals.
+              </p>
+            </div>
+            <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <h4 class="text-lg text-[#18852c] font-medium mb-3 tracking-wide flex items-center gap-2">
+                <svg aria-hidden="true" focusable="false" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                Visual Comfort
+              </h4>
+              <p class="text-white/50 text-sm font-light leading-relaxed">
+                Dark mode reduces glare and blue light exposure, minimising eye strain, especially during prolonged use or in low-light environments.
+              </p>
+            </div>
+            <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <h4 class="text-lg text-[#18852c] font-medium mb-3 tracking-wide flex items-center gap-2">
+                <svg aria-hidden="true" focusable="false" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Conscious Design
+              </h4>
+              <p class="text-white/50 text-sm font-light leading-relaxed">
+                We believe digital products should reflect environmental responsibility. Using dark mode is a functional choice representing sustainable web design.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Green Party Policy Made Accessible Deep Dive -->
+        <section class="pt-8 pb-4 border-t border-white/10 mx-auto max-w-4xl text-center">
+          <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-light mb-6 tracking-tight flex flex-col md:flex-row items-center justify-center gap-3 px-4">
+              <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15"></path></svg>
+              <a href="https://policy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="text-[#1db441] hover:text-[#1db441]/80 transition-colors leading-tight">Green Party Policy Made Accessible <span class="sr-only">(opens in a new window)</span></a>
+            </h2>
+            <p class="text-base md:text-lg text-white/50 mb-4 font-light leading-relaxed px-4">
+              Political policies are often locked in lengthy manifesto documents, making it difficult for the average citizen to fully grasp the proposed changes. The Green Policy project solves this by presenting policies in a transparent, interactive, and easily digestible format.
+            </p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-6 md:gap-8 mt-6 px-4 md:px-0 text-left">
+            <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <h4 class="text-lg text-[#18852c] font-medium mb-3 tracking-wide flex items-center gap-2">
+                <svg aria-hidden="true" focusable="false" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Interactive Summaries
+              </h4>
+              <p class="text-white/50 text-sm font-light leading-relaxed">
+                Key points from complex policy documents are extracted and presented with clear, accessible language, removing the jargon barrier for everyone.
+              </p>
+            </div>
+            <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <h4 class="text-lg text-[#18852c] font-medium mb-3 tracking-wide flex items-center gap-2">
+                <svg aria-hidden="true" focusable="false" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                Accessibility First
+              </h4>
+              <p class="text-white/50 text-sm font-light leading-relaxed">
+                Designed with strict adherence to web accessibility guidelines, featuring high contrast options, screen-reader compatibility, and full keyboard navigation support.
+              </p>
+            </div>
+            <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <h4 class="text-lg text-[#18852c] font-medium mb-3 tracking-wide flex items-center gap-2">
+                <svg aria-hidden="true" focusable="false" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                Topic Categorisation
+              </h4>
+              <p class="text-white/50 text-sm font-light leading-relaxed">
+                Policies are logically categorised by topic such as environment, economy, and social justice, allowing users to find exactly what they care about quickly.
+              </p>
+            </div>
+            <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <h4 class="text-lg text-[#18852c] font-medium mb-3 tracking-wide flex items-center gap-2">
+                <svg aria-hidden="true" focusable="false" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Minimal Environmental Footprint
+              </h4>
+              <p class="text-white/50 text-sm font-light leading-relaxed">
+                Built with a lightweight architecture to ensure pages load swiftly even on slow connections, consuming minimal data and energy.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Toolkit & NVC Guide Section -->
+        <section class="pt-8 pb-4 border-t border-white/10 mx-auto max-w-4xl text-center">
+          <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-light mb-6 tracking-tight flex flex-col md:flex-row items-center justify-center gap-3 px-4">
+              <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+              <a href="https://toolkit.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="text-[#1db441] hover:text-[#1db441]/80 transition-colors leading-tight">NVC (Nonviolent Communication) Guide <span class="sr-only">(opens in a new window)</span></a>
+            </h2>
+            <p class="text-base md:text-lg text-white/50 mb-4 font-light leading-relaxed px-4">
+              Effective communication is key to building sustainable and empathetic relationships. The Toolkit provides structured resources and guides based on Nonviolent Communication (NVC) principles to help individuals and communities foster understanding and resolve conflicts constructively.
+            </p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-6 md:gap-8 mt-6 px-4 md:px-0 text-left">
+            <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <h4 class="text-lg text-[#18852c] font-medium mb-3 tracking-wide flex items-center gap-2">
+                <svg aria-hidden="true" focusable="false" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                Fostering Empathy
+              </h4>
+              <p class="text-white/50 text-sm font-light leading-relaxed">
+                Step-by-step guidance on listening with empathy and expressing needs clearly, removing blame and judgement from conversations.
+              </p>
+            </div>
+            <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <h4 class="text-lg text-[#18852c] font-medium mb-3 tracking-wide flex items-center gap-2">
+                <svg aria-hidden="true" focusable="false" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                Practical Frameworks
+              </h4>
+              <p class="text-white/50 text-sm font-light leading-relaxed">
+                Learn to use structured frameworks such as Observations, Feelings, Needs, and Requests (OFNR) to handle difficult interactions.
+              </p>
+            </div>
+            <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <h4 class="text-lg text-[#18852c] font-medium mb-3 tracking-wide flex items-center gap-2">
+                <svg aria-hidden="true" focusable="false" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                Community Building
+              </h4>
+              <p class="text-white/50 text-sm font-light leading-relaxed">
+                Empower your local communities with conflict resolution skills, building a foundation of resilience and mutual understanding.
+              </p>
+            </div>
+            <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <h4 class="text-lg text-[#18852c] font-medium mb-3 tracking-wide flex items-center gap-2">
+                <svg aria-hidden="true" focusable="false" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                Mobile Accessible
+              </h4>
+              <p class="text-white/50 text-sm font-light leading-relaxed">
+                Take the toolkit on the go with full mobile support, providing quick access to communication aides whenever you need them.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Deep Dive: The Environmental Impact of Digital Data -->
+        <section class="pt-8 pb-4 border-t border-white/10 mx-auto max-w-4xl text-center">
+          <div class="max-w-4xl mx-auto">
+             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1db441]/10 border border-[#1db441]/20 mb-10">
+               <svg aria-hidden="true" focusable="false" class="w-4 h-4 text-[#1db441]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"></path></svg>
+               <span class="text-xs font-semibold uppercase tracking-widest text-[#1db441]">Insights: Digital Sustainability</span>
+             </div>
+             
+             <!-- Topic 1 -->
+             <div class="mb-12">
+               <h3 class="text-2xl md:text-3xl font-light mb-8 tracking-tight text-white flex flex-col md:flex-row items-center justify-center gap-3 px-4">
+                 <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"></path></svg>
+                 <span>The Invisible Carbon Footprint of the Web</span>
+               </h3>
+               <div class="grid md:grid-cols-2 gap-6 px-4 md:px-0 text-left">
+                 <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                   <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#18852c] mb-6 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                   <p class="text-white/50 text-sm font-light leading-relaxed">
+                     While we often associate carbon emissions with heavy industry and transportation, the digital world is a significant and rapidly growing contributor. Every search query, every video stream, and every website load requires data centres to process and transmit information. These centres consume vast amounts of electricity, often from non-renewable sources.
+                   </p>
+                 </div>
+                 <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                   <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#18852c] mb-6 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                   <p class="text-white/50 text-sm font-light leading-relaxed">
+                     At GreenMeans, we address this through "Data Minimalism." By serving static content, utilising browser-cache and leveraging "localsense" for local data processing, we drastically reduce server-side energy consumption and prevent unnecessary online processing. This isn't just about speed; it's about reducing the total energy required for every single visit.
+                   </p>
+                 </div>
+               </div>
+             </div>
+
+             <!-- Topic 2 -->
+             <div>
+               <h3 class="text-2xl md:text-3xl font-light mb-8 tracking-tight text-white flex flex-col md:flex-row items-center justify-center gap-3 px-4">
+                 <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path></svg>
+                 <span>Empathy as a Tool for Change</span>
+               </h3>
+               <div class="grid md:grid-cols-2 gap-6 px-4 md:px-0 text-left">
+                 <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                   <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#18852c] mb-6 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                   <p class="text-white/50 text-sm font-light leading-relaxed">
+                     Sustainability isn't just about the environment, it's about sustaining healthy societies. Polarisation and aggressive communication are roadblocks to meaningful progress on climate and social issues. This is why Nonviolent Communication (NVC) is a core pillar of the GreenMeans project.
+                   </p>
+                 </div>
+                 <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                   <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#18852c] mb-6 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                   <p class="text-white/50 text-sm font-light leading-relaxed">
+                     NVC teaches us that behind every action is a human need. By identifying these needs, both in ourselves and others, we can move away from blame and towards collaborative solutions. Our NVC Toolkit provides the scaffolding for this shift, offering clear examples and exercises to help users integrate these principles into their daily lives.
+                   </p>
+                 </div>
+               </div>
+             </div>
+          </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="pt-8 pb-4 border-t border-white/10 mx-auto max-w-4xl text-center">
+          <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-light mb-8 tracking-tight text-white flex flex-col md:flex-row items-center justify-center gap-3">
+              <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"></path></svg>
+              <span>Frequently Asked Questions</span>
+            </h2>
+            <div class="space-y-6 text-left">
+              <div class="bg-zinc-900/20 border border-white/5 p-6 rounded-xl group hover:border-[#1db441]/30 transition-colors">
+                <h3 class="text-white font-medium mb-2 flex items-center gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#1db441]"></span>
+                  What is the main goal of GreenMeans?
+                </h3>
+                <p class="text-white/50 text-sm font-light leading-relaxed">GreenMeans aims to provide tools that help people navigate the overlap between environmental sustainability, political transparency, and empathetic communication. We want to make it easier for people to act in alignment with these values in mind.</p>
+              </div>
+              <div class="bg-zinc-900/20 border border-white/5 p-6 rounded-xl group hover:border-[#18852c]/30 transition-colors">
+                <h4 class="text-white font-medium mb-2 flex items-center gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#18852c]"></span>
+                  Is the code for GreenMeans open-source?
+                </h4>
+                <p class="text-white/50 text-sm font-light leading-relaxed">Yes. We believe that transparency is essential for trust. All our codebases are available for public audit and contribution, fostering a community-driven approach to digital tool building.</p>
+              </div>
+              <div class="bg-zinc-900/20 border border-white/5 p-6 rounded-xl group hover:border-[#18852c]/30 transition-colors">
+                <h4 class="text-white font-medium mb-2 flex items-center gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#18852c]"></span>
+                  Why do you use subdomains for different tools?
+                </h4>
+                <p class="text-white/50 text-sm font-light leading-relaxed">Using subdomains (like policy.greenmeans.ovh) allows us to keep each tool focused and lightweight. This modular approach makes maintenance easier and ensures that users only load the data relevant to the tool they are using.</p>
+              </div>
+              <div class="bg-zinc-900/20 border border-white/5 p-6 rounded-xl group hover:border-[#18852c]/30 transition-colors">
+                <h4 class="text-white font-medium mb-2 flex items-center gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#18852c]"></span>
+                  How can I contribute?
+                </h4>
+                <p class="text-white/50 text-sm font-light leading-relaxed">We welcome feedback and contributions. You can reach out to us via the contact details provided on this site. As an open-source project, technical contributions are also highly valued through our repository system.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Digital Ethics & Transparency -->
+        <section class="pt-8 pb-4 border-t border-white/10 mx-auto max-w-4xl text-center">
+          <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-light mb-8 tracking-tight text-white flex flex-col md:flex-row items-center justify-center gap-3 px-4">
+              <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.644l.711-1.423c.381-.762.381-1.655 0-2.417L2.036 6.415a1.012 1.012 0 01.322-1.322l1.423-.711c.762-.381 1.655-.381 2.417 0l1.423.711a1.012 1.012 0 011.322-.322l.711-1.423a1.012 1.012 0 011.322-.322l1.423.711c.762.381 1.655.381 2.417 0l1.423-.711a1.012 1.012 0 011.322.322l.711 1.423a1.012 1.012 0 01-.322 1.322l-.711 1.423c-.381.762-.381-1.655 0 2.417l.711 1.423a1.012 1.012 0 01-.322 1.322l-1.423.711c-.762.381-1.655.381-2.417 0l-1.423-.711a1.012 1.012 0 01-1.322.322l-.711 1.423a1.012 1.012 0 01-1.322.322l-1.423-.711c-.762-.381-1.655-.381-2.417 0l-1.423.711a1.012 1.012 0 01-1.322.322z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+              <span>Digital Ethics & Transparency</span>
+            </h2>
+            
+            <div class="space-y-8 px-4">
+              <!-- Ethics Pill -->
+              <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#1db441] mb-6 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                <p class="text-white/50 text-sm font-light leading-relaxed">
+                  In an era of digital complexity, GreenMeans stands for transparency and ethical engagement. Our project utilises local storage to enhance your experience and basic hosting-side analytics to ensure platform stability and performance. As we evolve, we integrate functional digital services that help sustain our mission while remaining committed to clear and honest digital relationships.
                 </p>
-                <button @click="localStorage.setItem('cookies-consent', 'declined'); open = false; openWarning = false" 
-                        class="w-full bg-emerald-600 text-white font-bold py-3 rounded-full hover:bg-emerald-700 transition-colors">
-                    Understood
-                </button>
+              </div>
+
+              <!-- Privacy Pill Section -->
+              <div>
+                <h3 class="text-2xl md:text-3xl font-light mb-8 tracking-tight text-white flex flex-col md:flex-row items-center justify-center gap-3">
+                  <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"></path></svg>
+                  <span>Our Commitment to Privacy</span>
+                </h3>
+                <div class="bg-zinc-900/40 p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                  <svg aria-hidden="true" focusable="false" class="w-8 h-8 text-[#1db441] mb-6 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                  <p class="text-white/50 text-sm font-light leading-relaxed">
+                    Most web platforms are designed to keep you clicking. At GreenMeans, our metric of success is how quickly you can find the information you need and get back to your life. This philosophy reduces your screen time, which is both a win for your mental well-being and a win for the planet's energy resources.
+                  </p>
+                </div>
+              </div>
             </div>
+          </div>
+        </section>
+
+      </main>
+
+      <footer class="border-t border-white/5 bg-black mt-4">
+        <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col items-center gap-6">
+          <div class="flex flex-wrap justify-center gap-8 text-xs font-medium uppercase tracking-widest text-white/60">
+            <button onclick="openModal('about')" class="uppercase tracking-widest hover:text-[#18852c] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1">About Us</button>
+            <button onclick="openModal('contact')" class="uppercase tracking-widest hover:text-[#18852c] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1">Contact</button>
+            <a href="https://privacy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="hover:text-[#18852c] transition-colors focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1">Privacy Policy</a>
+            <button onclick="openModal('terms')" class="uppercase tracking-widest hover:text-[#18852c] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1">Terms of Service</button>
+          </div>
+          <div class="text-white/50 text-xs font-light tracking-widest uppercase text-center mt-4">
+            &copy; <script>document.write(new Date().getFullYear())</script> GreenMeans. All rights reserved.
+          </div>
         </div>
+      </footer>
     </div>
 
-    <script defer>
-        window.safeCreateIcons = function() {
-            try {
-                if (typeof lucide !== 'undefined') {
-                    lucide.createIcons();
-                    
-                    // Fallback for any icons that failed to load (still <i> elements)
-                    document.querySelectorAll('i[data-lucide]').forEach(icon => {
-                        if (icon.tagName === 'I') {
-                            icon.innerHTML = '<span style="display:inline-block; width:1.25em; height:1.25em; border: 1px solid currentColor; border-radius: 50%; opacity: 0.5;"></span>';
-                            icon.classList.add('lucide-fallback');
-                        }
-                    });
-                }
-            } catch (e) {
-                console.error("Error creating icons", e);
-                // Fallback for everything if library fails entirely
-                document.querySelectorAll('i[data-lucide]').forEach(icon => {
-                    icon.innerHTML = '<span style="display:inline-block; width:1.25em; height:1.25em; border: 1px solid currentColor; border-radius: 50%; opacity: 0.5;"></span>';
-                });
-            }
-        };
+    <!-- Full-screen Modals Overlay -->
+    <div id="modal-container" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300" role="dialog" aria-modal="true">
+      <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()" aria-hidden="true"></div>
+      
+      <div class="absolute inset-0 md:inset-6 lg:inset-12 bg-black border border-white/10 shadow-2xl rounded-none md:rounded-[2rem] overflow-hidden flex flex-col transform scale-95 opacity-0 transition-all duration-300 ease-out" id="modal-pill">
+        
+        <!-- Header -->
+        <div class="flex justify-end p-6 md:p-8 shrink-0 relative z-10">
+          <button id="modal-close-btn" onclick="closeModal()" class="p-3 bg-zinc-900 border border-white/10 rounded-full text-white/70 hover:bg-[#18852c] hover:border-[#18852c] hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 cursor-pointer">
+            <svg aria-hidden="true" focusable="false" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <span class="sr-only">Close Modal</span>
+          </button>
+        </div>
 
-        document.addEventListener('DOMContentLoaded', () => {
-            window.safeCreateIcons();
-        });
-    </script>
-</body>
+        <!-- Scrollable Content Area -->
+        <div class="flex-grow overflow-y-auto px-6 md:px-12 lg:px-24 pb-16 relative z-0">
+          
+          <!-- About Us Content -->
+          <div id="about-content" class="hidden max-w-4xl mx-auto">
+            <div class="bg-zinc-900/40 p-8 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl text-center">
+              <svg aria-hidden="true" focusable="false" class="w-12 h-12 text-[#18852c] mb-8 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <h2 id="about-title" class="text-3xl md:text-4xl font-light tracking-tight text-[#18852c] mb-8 uppercase tracking-widest">About Us</h2>
+              <div class="prose prose-invert prose-lg text-white/70 mx-auto text-left">
+                <p class="mb-6">
+                  At GreenMeans, we believe in the power of sustainable, accessible, and efficiently designed digital tools to bring meaningful change. Our platform exists to bridge the gap between complex issues and their solutions by providing carefully curated and interactive resources.
+                </p>
+                <p class="mb-6">
+                  Our mission is to empower individuals and communities with the knowledge they need without leaving an excessive carbon footprint. We design dark-mode first applications that require minimal data processing, actively reducing the environmental impact of web interaction.
+                </p>
+                <p class="mb-6">
+                  From making political policies readable and accessible for everyone, to providing resources on nonviolent communication, we tackle today's challenges with accessible digital experiences.
+                </p>
+                <h3 class="text-2xl text-white font-medium mb-4 mt-8 flex items-center gap-3">
+                  <svg aria-hidden="true" focusable="false" class="w-6 h-6 text-[#18852c]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                  Our Vision
+                </h3>
+                <p class="mb-6">
+                  We envision a digital ecosystem where information flows freely but sustainably, reducing the noise and maximising understanding. We are committed to continued optimisation, ensuring GreenMeans remains a beacon of efficiency and purposeful design in the digital space.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Us Content -->
+          <div id="contact-content" class="hidden max-w-4xl mx-auto">
+            <div class="bg-zinc-900/40 p-8 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl text-center">
+              <svg aria-hidden="true" focusable="false" class="w-12 h-12 text-[#18852c] mb-8 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <h2 id="contact-title" class="text-3xl md:text-4xl font-light tracking-tight text-[#18852c] mb-8 uppercase tracking-widest">Contact Us</h2>
+              <div class="prose prose-invert prose-lg text-white/70 mx-auto text-left">
+                <p class="mb-6">
+                  We welcome your questions, thoughts, and feedback. As a proudly digital-first entity, we primarily operate online to minimise our environmental footprint and maximise efficiency. Please reach out to us digitally whenever possible, and we will get back to you promptly.
+                </p>
+                <div class="bg-black/40 p-8 rounded-2xl border border-white/5 mt-8">
+                  <h3 class="text-xl text-white font-medium mb-4 flex items-center gap-3">
+                    <svg aria-hidden="true" focusable="false" class="w-6 h-6 text-[#18852c]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    Email Address
+                  </h3>
+                  <p class="mb-2">For general enquiries, support, or partnership opportunities, please email us directly at:</p>
+                  <a href="mailto:admin@greenmeans.ovh" class="text-[#18852c] hover:underline">admin@greenmeans.ovh</a>
+                </div>
+                <div class="bg-black/40 p-8 rounded-2xl border border-white/5 mt-8">
+                  <h3 class="text-xl text-white font-medium mb-4 flex items-center gap-3">
+                    <svg aria-hidden="true" focusable="false" class="w-6 h-6 text-[#18852c]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Mailing Address
+                  </h3>
+                  <p class="mb-4 text-sm uppercase tracking-widest text-[#18852c] font-semibold">Digital First</p>
+                  <p class="mb-4">In alignment with our digital-first ethos, we strongly encourage all communication to be handled electronically via email. We ask that you refrain from sending physical mail unless it is absolutely necessary. Our physical registered address is provided below strictly for mandatory legal and official correspondence:</p>
+                  <p>
+                    <strong class="text-[#18852c] font-medium font-semibold tracking-wide">GreenMeans</strong><br />
+                    Amberswood Shippon<br />
+                    Manchester Road<br />
+                    Wigan<br />
+                    Greater Manchester<br />
+                    WN2 3DR
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Terms of Service Content -->
+          <div id="terms-content" class="hidden max-w-4xl mx-auto">
+            <div class="bg-zinc-900/40 p-8 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl text-center">
+              <svg aria-hidden="true" focusable="false" class="w-12 h-12 text-[#18852c] mb-8 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+              <h2 id="terms-title" class="text-3xl md:text-4xl font-light tracking-tight text-[#18852c] mb-8 uppercase tracking-widest">Terms of Service</h2>
+              <div class="prose prose-invert prose-lg text-white/70 space-y-6 mx-auto text-left">
+                <p><strong>Effective Date:</strong> May 17, 2026</p>
+                <p>
+                  Welcome to GreenMeans! These terms and conditions outline the rules and regulations for the use of GreenMeans's Website, located at greenmeans.ovh.
+                </p>
+                <p>
+                  By accessing this website we assume you accept these terms and conditions. Do not continue to use GreenMeans if you do not agree to take all of the terms and conditions stated on this page.
+                </p>
+                <h3 class="text-2xl text-white font-medium mt-8 mb-4">Licence</h3>
+                <p>
+                  GreenMeans operates as a mostly free and open-source project. Our code is available for the public to view, use, and contribute to. We believe in open knowledge and digital transparency.
+                </p>
+                <p>You are encouraged to:</p>
+                <ul class="list-disc pl-6">
+                  <li>View and study our source code</li>
+                  <li>Share and redistribute our open-source materials</li>
+                  <li>Contribute to the GreenMeans ecosystem</li>
+                </ul>
+                <h3 class="text-2xl text-white font-medium mt-8 mb-4">Disclaimer</h3>
+                <p>
+                  We provide GreenMeans as a community resource and do our best to keep it accurate, secure, and helpful. However, the site and its contents are provided on an "as is" and "as available" basis without any warranties. 
+                </p>
+                <p>
+                  We cannot accept liability for any errors, omissions, or the results obtained from using this information. Our aim is to foster a safe and supportive digital environment, and we kindly ask that you use our resources responsibly.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
 </html>
