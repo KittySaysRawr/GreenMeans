@@ -125,6 +125,7 @@ window.addEventListener('load', () => {
     }
     if (btn) {
       btn.classList.toggle('toggle-active', isEnabled);
+      btn.setAttribute('aria-checked', isEnabled);
     }
   };
 
