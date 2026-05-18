@@ -41,56 +41,79 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "@id": "https://greenmeans.ovh/#organization",
-      "name": "GreenMeans",
-      "url": "https://greenmeans.ovh/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://greenmeans.ovh/favicon.png",
-        "width": "512",
-        "height": "512"
-      },
-      "description": "GreenMeans provides sustainable, accessible, and efficient digital tools that empower individuals and communities."
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "@id": "https://greenmeans.ovh/#website",
-      "url": "https://greenmeans.ovh/",
-      "name": "GreenMeans",
-      "publisher": {
-        "@id": "https://greenmeans.ovh/#organization"
-      }
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "@id": "https://greenmeans.ovh/#webpage",
-      "url": "https://greenmeans.ovh/",
-      "name": "GreenMeans: Home",
-      "description": "GreenMeans provides sustainable, accessible, and efficient digital tools.",
-      "publisher": { "@id": "https://greenmeans.ovh/#organization" },
-      "mainEntity": { "@id": "https://greenmeans.ovh/#webapp" }
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": ["SoftwareApplication", "WebApplication"],
-      "@id": "https://greenmeans.ovh/#webapp",
-      "name": "GreenMeans",
-      "url": "https://greenmeans.ovh/",
-      "applicationCategory": "Utilities",
-      "operatingSystem": "All",
-      "description": "A suite of sustainable tools including green policy guides, NVC toolkits, and composting guides."
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://greenmeans.ovh/#organization",
+          "name": "GreenMeans",
+          "url": "https://greenmeans.ovh/",
+          "logo": {
+            "@type": "ImageObject",
+            "@id": "https://greenmeans.ovh/#logo",
+            "url": "https://greenmeans.ovh/favicon.png",
+            "contentUrl": "https://greenmeans.ovh/favicon.png",
+            "width": "512",
+            "height": "512",
+            "caption": "GreenMeans Logo"
+          },
+          "image": {
+            "@id": "https://greenmeans.ovh/#logo"
+          },
+          "description": "GreenMeans provides sustainable, accessible, and efficient digital tools that empower individuals and communities."
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://greenmeans.ovh/#website",
+          "url": "https://greenmeans.ovh/",
+          "name": "GreenMeans",
+          "description": "Sustainable and efficient digital tools ecosystem.",
+          "publisher": {
+            "@id": "https://greenmeans.ovh/#organization"
+          },
+          "inLanguage": "en-GB"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://greenmeans.ovh/#webpage",
+          "url": "https://greenmeans.ovh/",
+          "name": "GreenMeans: Home",
+          "description": "GreenMeans provides sustainable, accessible, and efficient digital tools.",
+          "isPartOf": {
+            "@id": "https://greenmeans.ovh/#website"
+          },
+          "about": {
+            "@id": "https://greenmeans.ovh/#organization"
+          },
+          "primaryImageOfPage": {
+            "@id": "https://greenmeans.ovh/#logo"
+          },
+          "publisher": {
+            "@id": "https://greenmeans.ovh/#organization"
+          },
+          "inLanguage": "en-GB",
+          "mainEntity": {
+            "@id": "https://greenmeans.ovh/#webapp"
+          }
+        },
+        {
+          "@type": ["SoftwareApplication", "WebApplication"],
+          "@id": "https://greenmeans.ovh/#webapp",
+          "name": "GreenMeans Ecosystem",
+          "url": "https://greenmeans.ovh/",
+          "applicationCategory": "Utilities",
+          "operatingSystem": "All",
+          "description": "A suite of sustainable tools including green policy guides, NVC toolkits, and composting guides.",
+          "publisher": {
+            "@id": "https://greenmeans.ovh/#organization"
+          },
+          "applicationSubCategory": "Sustainability Tools",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "GBP"
+          }
+        }
+      ]
     }
     </script>
   </head>
