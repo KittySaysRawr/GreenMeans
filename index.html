@@ -36,6 +36,45 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Structured Data / Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organisation",
+          "@id": "https://greenmeans.ovh/#organisation",
+          "name": "GreenMeans",
+          "url": "https://greenmeans.ovh/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://greenmeans.ovh/favicon.png",
+            "width": "512",
+            "height": "512"
+          },
+          "description": "GreenMeans provides sustainable, accessible, and efficient digital tools that empower individuals and communities."
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://greenmeans.ovh/#website",
+          "url": "https://greenmeans.ovh/",
+          "name": "GreenMeans",
+          "publisher": {
+            "@id": "https://greenmeans.ovh/#organization"
+          }
+        },
+        {
+          "@type": "WebApplication",
+          "name": "GreenMeans",
+          "url": "https://greenmeans.ovh/",
+          "applicationCategory": "SustainabilityApplication",
+          "operatingSystem": "Any",
+          "description": "A suite of sustainable tools including green policy guides, NVC toolkits, and composting guides."
+        }
+      ]
+    }
+    </script>
   </head>
   <body class="text-white bg-black font-sans antialiased selection:bg-white/20">
     <!-- Loading Screen -->
