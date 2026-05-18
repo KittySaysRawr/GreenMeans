@@ -32,20 +32,98 @@ body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease,
   background-color: #f8fafc !important;
 }
 
+.light-mode .bg-zinc-900,
 .light-mode .bg-zinc-900\/40, 
+.light-mode .bg-zinc-900\/30,
 .light-mode .bg-zinc-900\/20 {
   background-color: #ffffff !important;
   border-color: #e2e8f0 !important;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1) !important;
+}
+
+.light-mode #modal-close-btn {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+.light-mode #modal-close-btn:hover {
+  background-color: #18852c !important;
+  border-color: #18852c !important;
+  color: #ffffff !important;
+}
+
+.light-mode .bg-black\/40 {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+}
+
+.light-mode .text-zinc-100,
+.light-mode .text-zinc-200,
+.light-mode .text-zinc-300 {
+  color: #334155 !important;
+}
+
+.light-mode .prose-invert {
+  color: #334155 !important;
+  --tw-prose-body: #334155;
+  --tw-prose-headings: #0f172a;
+  --tw-prose-lead: #475569;
+  --tw-prose-links: #18852c;
+  --tw-prose-bold: #0f172a;
+  --tw-prose-counters: #64748b;
+  --tw-prose-bullets: #cbd5e1;
+  --tw-prose-hr: #e2e8f0;
+  --tw-prose-quotes: #0f172a;
+  --tw-prose-quote-borders: #e2e8f0;
+  --tw-prose-captions: #64748b;
+  --tw-prose-code: #0f172a;
+  --tw-prose-pre-code: #e2e8f0;
+  --tw-prose-pre-bg: #0f172a;
+  --tw-prose-th-borders: #cbd5e1;
+  --tw-prose-td-borders: #e2e8f0;
+}
+
+.light-mode .prose-invert p,
+.light-mode .prose-invert li {
+  color: #334155 !important;
+}
+
+.light-mode .prose-invert h2,
+.light-mode .prose-invert h3 {
+  color: #0f172a !important;
+}
+
+/* Ensure green headers remain green */
+.light-mode .prose-invert h2.text-\[\#18852c\],
+.light-mode .prose-invert h3.text-\[\#18852c\] {
+  color: #18852c !important;
+}
+
+.light-mode .bg-white\/20 {
+  background-color: #cbd5e1 !important;
+}
+
+.light-mode .bg-white\/10,
+.light-mode .bg-white\/5 {
+  background-color: #f1f5f9 !important;
+}
+
+.light-mode .hover\:bg-white\/5:hover {
+  background-color: #f1f5f9 !important;
 }
 
 .light-mode .text-white\/90,
 .light-mode .text-white\/80,
-.light-mode .text-white\/70 {
-  color: #475569 !important;
+.light-mode .text-white\/70,
+.light-mode .text-white\/60 {
+  color: #1e293b !important;
 }
 
-.light-mode .border-white\/10,
+.light-mode .border-white\/10 {
+  border-color: #cbd5e1 !important;
+}
+
 .light-mode .border-white\/5 {
   border-color: #e2e8f0 !important;
 }
