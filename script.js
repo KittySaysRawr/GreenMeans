@@ -19,14 +19,19 @@ function openModal(id) {
   container.classList.remove('hidden');
   // Force reflow
   void container.offsetWidth;
+  
   container.classList.remove('opacity-0');
   pill.classList.remove('scale-95', 'opacity-0');
   pill.classList.add('scale-100', 'opacity-100');
   
-  // Focus management: focus the close button or the first focusable element
+  // Reset scroll position and focus management
   setTimeout(() => {
+    const scrollArea = container.querySelector('.overflow-y-auto');
+    if (scrollArea) {
+      scrollArea.scrollTop = 0;
+    }
     document.getElementById('modal-close-btn').focus();
-  }, 100);
+  }, 10);
 }
 
 function closeModal() {
