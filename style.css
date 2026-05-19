@@ -143,14 +143,41 @@ body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease,
 }
 
 .logo-container-fluid {
+  display: flex !important;
+  align-items: center !important;
   gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.logo-container-fluid:hover {
+  background-color: rgba(29, 180, 65, 0.08);
+  border-color: rgba(29, 180, 65, 0.3);
+  box-shadow: 0 0 15px rgba(29, 180, 65, 0.15);
+}
+
+.light-mode .logo-container-fluid {
+  background-color: rgba(0, 0, 0, 0.02) !important;
+  border-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.light-mode .logo-container-fluid:hover {
+  background-color: rgba(24, 133, 44, 0.06) !important;
+  border-color: rgba(24, 133, 44, 0.2) !important;
 }
 
 .logo-fluid {
-  width: clamp(1.75rem, 4vw, 2.75rem);
-  height: clamp(1.75rem, 4vw, 2.75rem);
+  width: clamp(1.75rem, 4vw, 2.5rem);
+  height: clamp(1.75rem, 4vw, 2.5rem);
+  max-width: 100%;
+  max-height: 100%;
   flex-shrink: 0;
   aspect-ratio: 1 / 1;
+  object-fit: contain;
 }
 
 .text-fluid {
@@ -163,13 +190,13 @@ body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease,
 }
 
 @media (max-width: 1280px) {
-  .btn-shrink {
+  .btn-shrink:not(.w-11):not(.w-8) {
     padding: 0.35rem 0.65rem !important;
     font-size: 0.6rem !important;
     gap: 0.2rem !important;
   }
   
-  .btn-shrink svg {
+  .btn-shrink:not(.w-11):not(.w-8) svg {
     width: 12px !important;
     height: 12px !important;
   }
@@ -183,7 +210,7 @@ body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease,
 }
 
 @media (max-width: 640px) {
-  .btn-shrink {
+  .btn-shrink:not(.w-11):not(.w-8) {
     padding: 0.2rem 0.4rem !important;
     font-size: 0.55rem !important;
   }
@@ -303,3 +330,22 @@ button[onclick="openSettings()"] svg {
   font-size: 0.75rem;
   transition: opacity 0.5s ease;
 }
+
+/* Cookie Banner Light Mode */
+.light-mode #cookie-banner .bg-zinc-900\/95 {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+.light-mode #cookie-warning-modal .bg-zinc-900 {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+.light-mode #cookie-banner h4,
+.light-mode #cookie-banner p,
+.light-mode #cookie-warning-modal h3,
+.light-mode #cookie-warning-modal p {
+  color: #1e293b !important;
+}
+
