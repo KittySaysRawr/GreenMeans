@@ -6,11 +6,11 @@
     <title>GreenMeans | Sustainable Digital Tools & Ecosystem</title>
     <!-- Favicon Configuration -->
     <link rel="icon" type="image/x-icon" href="https://greenmeans.ovh/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://greenmeans.ovh/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="https://greenmeans.ovh/favicon.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="https://greenmeans.ovh/favicon.png">
     
     <!-- Core SEO -->
-    <meta name="description" content="GreenMeans provides sustainable, accessible, and efficient digital tools that empower individuals and communities." />
+    <meta name="description" content="GreenMeans provides sustainable, accessible, and efficient digital tools that empower individuals and communities. Explore our initiative ecosystem including NVC toolkits and composting guides." />
     <meta name="keywords" content="GreenMeans, green policy, sustainability, nonviolent communication, NVC, composting, accessible politics, environmental impact, digital sustainability" />
     <meta name="author" content="GreenMeans" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -23,7 +23,7 @@
     <meta property="og:title" content="GreenMeans | Sustainable Digital Tools & Initiatives" />
     <meta property="og:site_name" content="GreenMeans" />
     <meta property="og:description" content="GreenMeans provides sustainable, accessible, and efficient digital tools that empower individuals and communities." />
-    <meta property="og:image" content="https://greenmeans.ovh/favicon.png" />
+    <meta property="og:image" content="https://greenmeans.ovh/favicon.svg" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
     <meta property="og:locale" content="en_GB" />
@@ -33,13 +33,13 @@
     <meta property="twitter:url" content="https://greenmeans.ovh/" />
     <meta property="twitter:title" content="GreenMeans | Sustainable Digital Tools" />
     <meta property="twitter:description" content="GreenMeans provides sustainable, accessible, and efficient digital tools that empower individuals and communities." />
-    <meta property="twitter:image" content="https://greenmeans.ovh/favicon.png" />
+    <meta property="twitter:image" content="https://greenmeans.ovh/favicon.svg" />
 
 
     <!-- Tailwind CSS via CDN for streamlined, single-file styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.min.css">
     
     <!-- Structured Data / Schema Markup -->
     <script type="application/ld+json">
@@ -55,8 +55,8 @@
           "logo": {
             "@type": "ImageObject",
             "@id": "https://greenmeans.ovh/#logo",
-            "url": "https://greenmeans.ovh/favicon.png",
-            "contentUrl": "https://greenmeans.ovh/favicon.png",
+            "url": "https://greenmeans.ovh/favicon.svg",
+            "contentUrl": "https://greenmeans.ovh/favicon.svg",
             "width": "512",
             "height": "512",
             "caption": "GreenMeans Logo"
@@ -123,15 +123,12 @@
             "price": "0",
             "priceCurrency": "GBP"
           },
-          "image": "https://greenmeans.ovh/favicon.png",
+          "image": "https://greenmeans.ovh/favicon.svg",
           "featureList": "Green Policy Guide, NVC Toolkit, Composting Guide, Sustainability Insights"
         }
       ]
     }
     </script>
-    <!-- AdSense Testing -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3367930929772110"
-     crossorigin="anonymous"></script>
   </head>
   <body class="text-white bg-black font-sans antialiased selection:bg-white/20">
     <!-- Loading Screen -->
@@ -139,7 +136,7 @@
       <div class="relative flex items-center justify-center w-40 h-40">
         <div class="loader-pulse-ring" aria-hidden="true"></div>
         <div class="loader-ring" aria-hidden="true"></div>
-        <img src="/favicon.png" alt="GreenMeans Logo" class="w-16 h-16 rounded-full relative z-10 shadow-[0_0_20px_rgba(29,180,65,0.4)]">
+        <img src="/favicon.svg" alt="GreenMeans Logo" class="w-16 h-16 rounded-full relative z-10 shadow-[0_0_20px_rgba(29,180,65,0.4)]">
       </div>
       <div id="loading-text" aria-live="polite">Harvesting green energy...</div>
     </div>
@@ -150,7 +147,7 @@
         <nav aria-label="Main Navigation" class="max-w-7xl mx-auto px-2 sm:px-6 py-4 flex items-center justify-between gap-2 sm:gap-4">
           <div class="flex items-center shrink min-w-0">
             <a href="/" class="logo-container-fluid flex items-center focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 rounded-lg group" aria-label="GreenMeans Home">
-              <img src="/favicon.png" alt="GreenMeans Logo" class="logo-fluid rounded-full border border-white/10 shadow-[0_0_15px_rgba(29,180,65,0.5)] logo-animate shrink-0 object-cover">
+              <img src="/favicon.svg" alt="GreenMeans Logo" class="logo-fluid rounded-full border border-white/10 shadow-[0_0_15px_rgba(29,180,65,0.5)] logo-animate shrink-0 object-cover">
               <span class="text-fluid font-light tracking-wide text-white truncate shrink">GreenMeans</span>
             </a>
           </div>
@@ -858,6 +855,49 @@
       </div>
     </div>
 
-    <script src="script.js" defer></script>
+    <script src="script.min.js" defer></script>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[9998] p-4 md:p-6 translate-y-full transition-transform duration-500 ease-out hidden">
+      <div class="max-w-7xl mx-auto">
+        <div class="bg-zinc-900/95 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="flex-grow text-center md:text-left">
+            <h4 class="text-white font-medium mb-1 tracking-tight">Respecting your privacy</h4>
+            <p class="text-white/70 text-sm leading-relaxed max-w-2xl">
+              We use small data files to improve your experience and memory. Read our <a href="https://privacy.greenmeans.ovh/" target="_blank" rel="noopener noreferrer" class="text-[#1db441] hover:underline">Privacy Policy</a> to learn more about how we use your information.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center justify-center gap-3 shrink-0">
+            <button id="decline-cookies" onclick="showCookieWarning()" class="px-8 py-3 text-sm font-medium bg-white/5 text-white/80 hover:text-white hover:bg-white/10 border border-white/10 rounded-full transition-all whitespace-nowrap min-w-[120px]">
+              Decline
+            </button>
+            <button id="accept-cookies" onclick="acceptCookies()" class="px-8 py-3 text-sm font-medium bg-[#18852c] text-white rounded-full hover:bg-[#1db441] transition-all shadow-lg shadow-[#18852c]/20 whitespace-nowrap min-w-[120px]">
+              Accept All
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cookie Warning Modal -->
+    <div id="cookie-warning-modal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 hidden">
+      <div class="bg-zinc-900 border border-white/10 rounded-[2.5rem] p-8 md:p-12 max-w-md mx-4 shadow-2xl text-center scale-95 transition-transform duration-300">
+        <div class="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6 text-red-500">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        </div>
+        <h3 class="text-2xl font-light text-white mb-4 tracking-tight">Are you sure?</h3>
+        <p class="text-white/70 font-light leading-relaxed mb-8">
+          Declining data storage means your preferences (like theme and accessibility settings) will not be saved. Some features may not work as intended during your stay.
+        </p>
+        <div class="flex flex-col gap-3">
+          <button onclick="acceptCookies()" class="w-full py-4 bg-[#18852c] text-white rounded-2xl font-medium hover:bg-[#1db441] transition-colors">
+            Accept and continue
+          </button>
+          <button onclick="declineCookiesFinal()" class="w-full py-4 bg-white/5 text-white/70 rounded-2xl font-medium hover:bg-white/10 hover:text-white transition-all">
+            Decline anyway
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
