@@ -103,6 +103,77 @@ const rotateText = () => {
 const textInterval = setInterval(rotateText, 2500);
 
 window.addEventListener('load', () => {
+  // Cookie Consent Logic
+  const cookieBanner = document.getElementById('cookie-banner');
+  const cookieWarningModal = document.getElementById('cookie-warning-modal');
+  let cookieConsent = localStorage.getItem('gm-cookie-consent');
+
+  const saveToStorage = (key, value) => {
+    if (localStorage.getItem('gm-cookie-consent') === 'accepted') {
+      localStorage.setItem(key, value);
+    }
+  };
+
+  window.showCookieWarning = () => {
+    cookieWarningModal.classList.remove('hidden');
+    void cookieWarningModal.offsetWidth;
+    cookieWarningModal.classList.remove('opacity-0', 'pointer-events-none');
+    cookieWarningModal.firstElementChild.classList.remove('scale-95');
+    cookieWarningModal.firstElementChild.classList.add('scale-100');
+  };
+
+  window.hideCookieWarning = () => {
+    cookieWarningModal.classList.add('opacity-0', 'pointer-events-none');
+    cookieWarningModal.firstElementChild.classList.remove('scale-100');
+    cookieWarningModal.firstElementChild.classList.add('scale-95');
+    setTimeout(() => {
+      cookieWarningModal.classList.add('hidden');
+    }, 300);
+  };
+
+  window.acceptCookies = () => {
+    localStorage.setItem('gm-cookie-consent', 'accepted');
+    cookieConsent = 'accepted';
+    
+    // Save current settings now that we have consent
+    localStorage.setItem('gm-dark', settings.dark);
+    localStorage.setItem('gm-dyslexia', settings.dyslexia);
+    localStorage.setItem('gm-motion', settings.motion);
+    
+    hideBanner();
+    hideCookieWarning();
+  };
+
+  window.declineCookiesFinal = () => {
+    localStorage.setItem('gm-cookie-consent', 'declined');
+    cookieConsent = 'declined';
+    
+    // Clear any partially saved data
+    localStorage.removeItem('gm-dark');
+    localStorage.removeItem('gm-dyslexia');
+    localStorage.removeItem('gm-motion');
+    
+    hideBanner();
+    hideCookieWarning();
+  };
+
+  const showBanner = () => {
+    cookieBanner.classList.remove('hidden');
+    void cookieBanner.offsetWidth;
+    cookieBanner.classList.remove('translate-y-full');
+  };
+
+  const hideBanner = () => {
+    cookieBanner.classList.add('translate-y-full');
+    setTimeout(() => {
+      cookieBanner.classList.add('hidden');
+    }, 500);
+  };
+
+  if (!cookieConsent) {
+    setTimeout(showBanner, 2000);
+  }
+
   // Initialize settings from localStorage
   const settings = {
     dark: localStorage.getItem('gm-dark') !== 'false', // Default true
@@ -160,15 +231,15 @@ window.addEventListener('load', () => {
     if (key === 'dark') {
       settings.dark = !settings.dark;
       document.body.classList.toggle('light-mode', !settings.dark);
-      localStorage.setItem('gm-dark', settings.dark);
+      saveToStorage('gm-dark', settings.dark);
     } else if (key === 'dyslexia') {
       settings.dyslexia = !settings.dyslexia;
       document.body.classList.toggle('dyslexia-font', settings.dyslexia);
-      localStorage.setItem('gm-dyslexia', settings.dyslexia);
+      saveToStorage('gm-dyslexia', settings.dyslexia);
     } else if (key === 'motion') {
       settings.motion = !settings.motion;
       document.body.classList.toggle('reduced-motion', settings.motion);
-      localStorage.setItem('gm-motion', settings.motion);
+      saveToStorage('gm-motion', settings.motion);
     }
     
     // Smoothly update toggle positions and background
