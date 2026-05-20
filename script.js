@@ -256,3 +256,14 @@ window.addEventListener('load', () => {
     }
   }, 1200); // Artificial delay for a smooth feel
 });
+
+// Setup admin email link handler
+document.addEventListener('DOMContentLoaded', () => {
+  const adminEmailLink = document.getElementById('admin-email-link');
+  if (adminEmailLink) {
+    adminEmailLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = 'mailto:admin' + '@' + 'greenmeans.ovh';
+    });
+  }
+});
