@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Security Meta Tags -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:;" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <title>GreenMeans | Sustainable Digital Tools & Ecosystem</title>
     <!-- Favicon Configuration -->
     <link rel="icon" type="image/x-icon" href="https://greenmeans.ovh/favicon.ico">
@@ -68,7 +72,7 @@
           "contactPoint": {
             "@type": "ContactPoint",
             "contactType": "customer support",
-            "email": "hello@greenmeans.ovh",
+            "email": "hello [at] greenmeans.ovh",
             "url": "https://greenmeans.ovh/#contact"
           }
         },
@@ -739,7 +743,7 @@
                     Email Address
                   </h3>
                   <p class="mb-2">For general enquiries, support, or partnership opportunities, please email us directly at:</p>
-                  <a href="mailto:admin@greenmeans.ovh" class="text-[#18852c] hover:underline">admin@greenmeans.ovh</a>
+                  <a href="#" onclick="window.location.href='mailto:admin' + '@' + 'greenmeans.ovh'; return false;" class="text-[#18852c] hover:underline" aria-label="Email Admin">admin<span>@</span>greenmeans.ovh</a>
                 </div>
                 <div class="bg-black/40 p-8 rounded-2xl border border-white/5 mt-8">
                   <h3 class="text-xl text-white font-medium mb-4 flex items-center gap-3">
