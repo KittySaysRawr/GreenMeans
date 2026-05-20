@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Security Meta Tags -->
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:;" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data:; font-src 'self' https: data:; connect-src 'self' https:; object-src 'none'; media-src 'self' https:; manifest-src 'self'; worker-src 'self';" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <title>GreenMeans | Sustainable Digital Tools & Ecosystem</title>
     <!-- Favicon Configuration -->
@@ -40,8 +40,7 @@
     <meta property="twitter:image" content="https://greenmeans.ovh/favicon-round.svg" />
 
 
-    <!-- Tailwind CSS via CDN for streamlined, single-file styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts and Custom Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     
@@ -743,7 +742,7 @@
                     Email Address
                   </h3>
                   <p class="mb-2">For general enquiries, support, or partnership opportunities, please email us directly at:</p>
-                  <a href="#" onclick="window.location.href='mailto:admin' + '@' + 'greenmeans.ovh'; return false;" class="text-[#18852c] hover:underline" aria-label="Email Admin">admin<span>@</span>greenmeans.ovh</a>
+                  <a href="#" id="admin-email-link" class="text-[#18852c] hover:underline" aria-label="Email Admin">admin<span>@</span>greenmeans.ovh</a>
                 </div>
                 <div class="bg-black/40 p-8 rounded-2xl border border-white/5 mt-8">
                   <h3 class="text-xl text-white font-medium mb-4 flex items-center gap-3">
