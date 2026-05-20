@@ -2,4 +2,4 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:;
+  Content-Security-Policy: default-src 'none'; base-uri 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data:; font-src 'self' https: data:; connect-src 'self' https:; object-src 'none'; media-src 'self' https:; manifest-src 'self'; worker-src 'self';
