@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Security Meta Tags -->
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data:; font-src 'self' https: data:; connect-src 'self' https:; object-src 'none'; media-src 'self' https:; manifest-src 'self'; worker-src 'self';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data:; font-src 'self' https: data:; connect-src 'self' https:; object-src 'none'; media-src 'self' https:; manifest-src 'self'; worker-src 'self';" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <title>GreenMeans | Sustainable Digital Tools & Ecosystem</title>
     <!-- Favicon Configuration -->
@@ -40,7 +40,8 @@
     <meta property="twitter:image" content="https://greenmeans.ovh/favicon-round.svg" />
 
 
-    <!-- Fonts and Custom Styles -->
+    <!-- Tailwind CSS via CDN for streamlined, single-file styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     
