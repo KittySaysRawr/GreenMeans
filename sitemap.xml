@@ -21,6 +21,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://plants.greenmeans.ovh/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://search.greenmeans.ovh/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
