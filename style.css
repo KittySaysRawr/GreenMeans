@@ -6,6 +6,11 @@ html, body {
   position: relative;
 }
 
+html.loading-lock, body.loading-lock {
+  overflow: hidden !important;
+  height: 100% !important;
+}
+
 body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
 
 /* Dyslexia Font Support */
@@ -356,4 +361,35 @@ button[onclick="openSettings()"] svg {
 .light-mode #cookie-warning-modal p {
   color: #1e293b !important;
 }
+
+/* Burger Menu & Mobile Toggle Light Mode Navigation */
+.light-mode #mobile-menu {
+  background-color: #ffffff !important;
+  border-top-color: #e2e8f0 !important;
+}
+
+.light-mode #mobile-menu a {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #1e293b !important;
+}
+
+.light-mode #mobile-menu a:hover {
+  background-color: rgba(29, 180, 65, 0.1) !important;
+  border-color: #1db441 !important;
+  color: #18852c !important;
+  box-shadow: 0 0 15px rgba(29, 180, 65, 0.2) !important;
+}
+
+.light-mode #mobile-menu-toggle {
+  color: #1e293b !important;
+  border-color: #cbd5e1 !important;
+}
+
+.light-mode #mobile-menu-toggle:hover {
+  color: #1db441 !important;
+  border-color: rgba(29, 180, 65, 0.3) !important;
+  background-color: rgba(29, 180, 65, 0.05) !important;
+}
+
 
