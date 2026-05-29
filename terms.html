@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en-GB" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms of Service | GreenMeans</title>
+    <meta name="description" content="GreenMeans Terms of Service." />
+    <!-- Security & Config as in others... -->
+    <link rel="icon" type="image/x-icon" href="https://greenmeans.ovh/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="https://greenmeans.ovh/favicon-round.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <script>
+      (function() {
+        const getSetting = (key, def) => {
+          try {
+            return sessionStorage.getItem(key) || localStorage.getItem(key) || def;
+          } catch(e) { return def; }
+        };
+        const darkSetting = getSetting('gm-dark', 'true');
+        const dyslexiaSetting = getSetting('gm-dyslexia', 'false');
+        const motionSetting = getSetting('gm-motion', 'false');
+
+        if (darkSetting === 'false') {
+          document.documentElement.classList.add('light-mode');
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light-mode');
+        }
+        if (dyslexiaSetting === 'true') {
+          document.documentElement.classList.add('dyslexia-font');
+        }
+        if (motionSetting === 'true') {
+          document.documentElement.classList.add('reduced-motion');
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+          if (document.body) {
+            if (darkSetting === 'false') {
+              document.body.classList.add('light-mode');
+            }
+            if (dyslexiaSetting === 'true') {
+              document.body.classList.add('dyslexia-font');
+            }
+            if (motionSetting === 'true') {
+              document.body.classList.add('reduced-motion');
+            }
+          }
+        });
+      })();
+    </script>
+  </head>
+  <body class="text-white bg-black font-sans antialiased selection:bg-white/20">
+    <div class="min-h-screen flex flex-col">
+      <header class="bg-black border-b border-white/5">
+        <nav aria-label="Main Navigation" class="max-w-7xl mx-auto px-2 sm:px-6 py-4 flex items-center justify-between gap-2 sm:gap-4">
+          <div class="flex items-center shrink min-w-0">
+            <a href="/" class="logo-container-fluid flex items-center rounded-lg group" aria-label="GreenMeans Home">
+              <div class="logo-fluid rounded-full border border-white/10 shadow-[0_0_8px_rgba(29,180,65,0.3)] shrink-0 overflow-hidden flex items-center justify-center">
+                <img src="/favicon-square.svg" alt="GreenMeans Logo" class="w-full h-full object-cover">
+              </div>
+              <span class="text-fluid font-light tracking-wide text-white truncate shrink ml-3">GreenMeans</span>
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 py-12 w-full">
+        <div class="mb-6 text-left">
+          <a href="/" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 whitespace-nowrap" aria-label="Go Back to Home">
+            <svg focusable="false" class="w-4 h-4 text-[#1db441]" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Go Back
+          </a>
+        </div>
+
+        <div id="terms-main-card" class="bg-zinc-900/40 p-6 sm:p-10 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl text-left">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 border-b border-white/5 pb-6">
+            <div class="flex items-center gap-4">
+              <div class="p-3 bg-[#18852c]/10 rounded-2xl border border-[#1db441]/20">
+                <svg focusable="false" class="w-8 h-8 text-[#1db441]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+              </div>
+              <div>
+                <span class="text-[#18852c] text-xs font-semibold uppercase tracking-widest">Platform Integrity & Compliance</span>
+                <h1 class="text-3xl md:text-4xl font-light tracking-tight text-white mt-1">Terms of Service</h1>
+              </div>
+            </div>
+            <div class="text-left sm:text-right shrink-0">
+              <p class="text-zinc-400 text-xs uppercase tracking-widest">Effective Date</p>
+              <p class="text-white font-mono text-sm font-semibold mt-0.5">29 May 2026</p>
+            </div>
+          </div>
+
+          <!-- Quick Introduction & Legal Warning -->
+          <div class="mb-10 text-zinc-300 text-sm md:text-base leading-relaxed space-y-4 max-w-3xl">
+            <p>
+              Welcome to <strong>GreenMeans</strong>. These Terms of Service ("Terms") outline the agreement between you and the GreenMeans Team regarding your use of GreenMeans' resources, articles, software code, guides, directories, and toolkits located at <a href="https://greenmeans.ovh" class="text-[#1db441] hover:underline underline-offset-4">greenmeans.ovh</a> and its respective subdomains (collectively, the "Site").
+            </p>
+            <p class="text-zinc-400 text-xs">
+              Important: Please read these terms carefully. By accessing or using the Site or its subdomains, you represent and warrant that you have read, understood, and agree to be bound by all of these Terms of Service. If you do not agree, you are strictly prohibited from accessing our services and must discontinue use immediately.
+            </p>
+          </div>
+
+          <!-- Top Overview Grid: TL;DR & Interactive Table of Contents -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 border-b border-white/5 pb-10">
+            <!-- Left Side: Table of Contents -->
+            <div id="terms-toc-card" class="lg:col-span-5 bg-zinc-950/40 p-6 rounded-2xl border border-white/5">
+              <h3 class="text-sm font-semibold uppercase tracking-wider text-[#1db441] mb-4 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7"/></svg>
+                Table of Contents
+              </h3>
+              <nav aria-label="Terms of Service Sections" class="space-y-2 text-xs md:text-sm">
+                <a href="#agreement" class="block text-zinc-400 hover:text-[#1db441] hover:translate-x-1 transition-all duration-200 py-1 border-b border-white/5">1. Agreement to Terms</a>
+                <a href="#licensing" class="block text-zinc-400 hover:text-[#1db441] hover:translate-x-1 transition-all duration-200 py-1 border-b border-white/5">2. Licensing & Code Availability</a>
+                <a href="#conduct" class="block text-zinc-400 hover:text-[#1db441] hover:translate-x-1 transition-all duration-200 py-1 border-b border-white/5">3. Acceptable Use Policy</a>
+                <a href="#disclaimer" class="block text-zinc-400 hover:text-[#1db441] hover:translate-x-1 transition-all duration-200 py-1 border-b border-white/5">4. Educational Content Disclaimer</a>
+                <a href="#warranties" class="block text-zinc-400 hover:text-[#1db441] hover:translate-x-1 transition-all duration-200 py-1 border-b border-white/5">5. Disclaimer of Warranties</a>
+                <a href="#liability" class="block text-zinc-400 hover:text-[#1db441] hover:translate-x-1 transition-all duration-200 py-1 border-b border-white/5">6. Limitation of Liability</a>
+                <a href="#external" class="block text-zinc-400 hover:text-[#1db441] hover:translate-x-1 transition-all duration-200 py-1 border-b border-white/5">7. Links & Third-Party Assets</a>
+                <a href="#changes" class="block text-zinc-400 hover:text-[#1db441] hover:translate-x-1 transition-all duration-200 py-1 border-b border-white/5">8. Revisions & Updates</a>
+                <a href="#governing" class="block text-zinc-400 hover:text-[#1db441] hover:translate-x-1 transition-all duration-200 py-1 border-b border-white/5">9. Governing Law</a>
+                <a href="#contact-section" class="block text-zinc-400 hover:text-[#1db441] hover:translate-x-1 transition-all duration-200 py-1">10. Contact Information</a>
+              </nav>
+            </div>
+
+            <!-- Right Side: TL;DR Quick Summary -->
+            <div id="terms-tldr-card" class="lg:col-span-7 bg-[#1db441]/5 p-6 rounded-2xl border border-[#1db441]/20">
+              <h3 class="text-sm font-semibold uppercase tracking-wider text-[#1db441] mb-4 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Too Long; Didn't Read (Quick Summary)
+              </h3>
+              <p class="text-zinc-300 text-xs md:text-sm mb-4 leading-relaxed">
+                We believe in human-readable compliance. Here is the absolute essence of what you are agreeing to:
+              </p>
+              <ul class="space-y-3 text-xs md:text-sm text-zinc-400">
+                <li class="flex items-start gap-2.5">
+                  <span class="text-[#1db441] font-bold select-none mt-0.5">&bull;</span>
+                  <span><strong>Our Purpose:</strong> GreenMeans provides educational tools, articles, directories, and resources on sustainable web practices, home composting, NVC, native plants, and eco-friendly searching.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-[#1db441] font-bold select-none mt-0.5">&bull;</span>
+                  <span><strong>Open Source:</strong> Much of our platform frameworks and code repositories is open-source. However, our direct branding, layouts, and textual content remain protected under copyright laws.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-[#1db441] font-bold select-none mt-0.5">&bull;</span>
+                  <span><strong>No Certified Audits:</strong> Our resources, plant guides, political summaries, and search engine overviews are educational tools and are not legal, compliance, or professional safety audits.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-[#1db441] font-bold select-none mt-0.5">&bull;</span>
+                  <span><strong>Responsible Use:</strong> You agree not to spam our communication portal, flood our servers, scrape aggressively, or disrupt site operations.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Section Detailed Blocks -->
+          <div class="space-y-12">
+            
+            <!-- 1. Agreement -->
+            <section id="agreement" class="py-2 border-b border-white/5 scroll-mt-24">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-7 space-y-4">
+                  <h2 class="text-xl md:text-2xl text-white font-medium flex items-center gap-2">
+                    <span class="text-[#1db441] font-mono text-lg font-light">01.</span> Agreement to Terms
+                  </h2>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    These Terms of Service constitute a legally binding contract between you and the GreenMeans Team concerning your access to, browsing of, and interaction with the Site and its subdomains. This includes both static resources, information directories, form submissions, and educational pipelines.
+                  </p>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    You agree that by accessing the Site, you represent that you are at least 18 years of age (or the age of legal majority in your country of residence) or possess absolute parental or legal guardian consent to interact with these systems.
+                  </p>
+                </div>
+                <!-- Plain English Callout -->
+                <div class="lg:col-span-5 bg-[#18852c]/5 border border-[#1db441]/10 p-5 rounded-2xl">
+                  <div class="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-wider text-[#1db441]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    In Plain English
+                  </div>
+                  <p class="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                    By browsing or using the GreenMeans website, you officially agree to the guidelines listed on this page. If you do not agree to follow these rules, you cannot use the site.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 2. Licensing -->
+            <section id="licensing" class="py-2 border-b border-white/5 scroll-mt-24">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-7 space-y-4">
+                  <h2 class="text-xl md:text-2xl text-white font-medium flex items-center gap-2">
+                    <span class="text-[#1db441] font-mono text-lg font-light">02.</span> Licensing & Intellectual Property
+                  </h2>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    GreenMeans supports the open dissemination of code. Our platform design frameworks, resource templates, and subdomain index structures are made available for community inspectability and academic usage.
+                  </p>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    However, all textual copy, written articles, historical layouts, custom SVG indicators, logo trademarks, and proprietary branding components found directly on the Site are protected under international copyright, trademark, and service mark statutes. You may view and cite our articles with proper attribution, but wholesale copying, selling, or redistributing our visual assets for competitive commercial purposes without explicit permission is dryly prohibited.
+                  </p>
+                </div>
+                <!-- Plain English Callout -->
+                <div class="lg:col-span-5 bg-[#18852c]/5 border border-[#1db441]/10 p-5 rounded-2xl">
+                  <div class="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-wider text-[#1db441]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    In Plain English
+                  </div>
+                  <p class="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                    We love open-source and make our code accessible. However, our website text, specific branding, layout designs, and custom logos belong to us. Please credit us when sharing, and don't copy the branding.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 3. Conduct -->
+            <section id="conduct" class="py-2 border-b border-white/5 scroll-mt-24">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-7 space-y-4">
+                  <h2 class="text-xl md:text-2xl text-white font-medium flex items-center gap-2">
+                    <span class="text-[#1db441] font-mono text-lg font-light">03.</span> Acceptable Use Policy
+                  </h2>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    By using GreenMeans, you promise to maintain the computational integrity and security of our services. You agree that you will not:
+                  </p>
+                  <ul class="list-disc pl-6 text-zinc-300 space-y-2 text-sm">
+                    <li>Launch high-frequency HTTP requests, denial-of-service (DDoS) loops, or brute-force commands designed to crash our hosting container.</li>
+                    <li>Employ scraper scripts, web harvesting bots, or bulk diagnostic programs to crawl our site without respecting robots.txt configurations.</li>
+                    <li>Attempt to gain unauthorized admin access to routing systems or tamper with client-side setting states inside local storage cache.</li>
+                    <li>Utilize contact form APIs, mail hooks, or public communication systems to transmit unsolicited advertising (spam) or malware.</li>
+                  </ul>
+                </div>
+                <!-- Plain English Callout -->
+                <div class="lg:col-span-5 bg-[#18852c]/5 border border-[#1db441]/10 p-5 rounded-2xl">
+                  <div class="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-wider text-[#1db441]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    In Plain English
+                  </div>
+                  <p class="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                    Be a good digital citizen. Do not attack our servers, spam contact forms with advertisements, scrape content aggressively, or try to hack the website's infrastructure.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 4. Disclaimer -->
+            <section id="disclaimer" class="py-2 border-b border-white/5 scroll-mt-24">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-7 space-y-4">
+                  <h2 class="text-xl md:text-2xl text-white font-medium flex items-center gap-2">
+                    <span class="text-[#1db441] font-mono text-lg font-light">04.</span> Informational Resources (Not Professional Advice)
+                  </h2>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    GreenMeans hosts a variety of educational directories, lists, comparison models, and general informational toolkits across our main page and subdomains, including policy summaries (policy.greenmeans.ovh), organic composting methods (compost.greenmeans.ovh), communication frameworks (toolkit.greenmeans.ovh), native plant matches (plants.greenmeans.ovh), and search provider comparisons (search.greenmeans.ovh).
+                  </p>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base font-semibold text-[#1db441]">
+                    All lists, guides, directories, assessments, and environmental comparisons are provided strictly for general educational and informational purposes. They do not constitute official professional, legal, political, botanical, agricultural, or commercial consultation, nor are they certified regulatory reports or compliance statements.
+                  </p>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    Before adopting composting workflows, initiating agricultural/planting programs, or basing community policies on our resources, you must carry out independent research and speak with certified specialists.
+                  </p>
+                </div>
+                <!-- Plain English Callout -->
+                <div class="lg:col-span-5 bg-[#18852c]/5 border border-[#1db441]/10 p-5 rounded-2xl">
+                  <div class="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-wider text-[#1db441]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    In Plain English
+                  </div>
+                  <p class="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                    Our plant matching lists, composting workflows, nonviolent communication guidelines, simplified political policy reviews, and search energy comparisons are meant for training and educational purposes only. They are not professional advice or certified commercial audits.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 5. Warranties -->
+            <section id="warranties" class="py-2 border-b border-white/5 scroll-mt-24">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-7 space-y-4">
+                  <h2 class="text-xl md:text-2xl text-white font-medium flex items-center gap-2">
+                    <span class="text-[#1db441] font-mono text-lg font-light">05.</span> Disclaimer of Warranties
+                  </h2>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base uppercase text-xs tracking-wide border-l border-white/20 pl-4">
+                    The site and its contents are provided on an "as is" and "as available" basis without any warranties or representation of any kind, whether express, implied, or statutory. This includes, but is not limited to, the implied warranties of merchantability, fitness for a particular purpose, non-infringement, security, completeness, and accuracy.
+                  </p>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    We make no warranty that the site will meet your operational requirements, be available on an uninterrupted, secure, or bug-free basis, or that any physical hardware calculations will be error-free or updated in perpetuity.
+                  </p>
+                </div>
+                <!-- Plain English Callout -->
+                <div class="lg:col-span-5 bg-[#18852c]/5 border border-[#1db441]/10 p-5 rounded-2xl">
+                  <div class="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-wider text-[#1db441]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    In Plain English
+                  </div>
+                  <p class="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                    We provide this platform "as-is." While we work hard to keep everything 100% accurate, error-free, and up-to-date, we cannot guarantee zero errors or uninterrupted server uptime.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 6. Liability -->
+            <section id="liability" class="py-2 border-b border-white/5 scroll-mt-24">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-7 space-y-4">
+                  <h2 class="text-xl md:text-2xl text-white font-medium flex items-center gap-2">
+                    <span class="text-[#1db441] font-mono text-lg font-light">06.</span> Limitation of Liability
+                  </h2>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base border-l border-white/20 pl-4">
+                    To the maximum extent permitted by applicable law, in no event shall the GreenMeans team, its developers, associates, or partners be liable to you or any third party for any direct, indirect, consequential, exemplary, incidental, special, or punitive damages. This includes lost profit, lost data, regulatory fines, or business disruptions arising from your use of, or inability to use, the Site or its subdomains.
+                  </p>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    Any reliance upon the references, instructions, directories, or guides published within the GreenMeans system is performed entirely at your own operational risk.
+                  </p>
+                </div>
+                <!-- Plain English Callout -->
+                <div class="lg:col-span-5 bg-[#18852c]/5 border border-[#1db441]/10 p-5 rounded-2xl">
+                  <div class="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-wider text-[#1db441]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    In Plain English
+                  </div>
+                  <p class="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                    We are not liable for any issues, commercial losses, or computing troubles that occur as a result of using this free resource. You use the tools and information at your own discretion.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 7. External -->
+            <section id="external" class="py-2 border-b border-white/5 scroll-mt-24">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-7 space-y-4">
+                  <h2 class="text-xl md:text-2xl text-white font-medium flex items-center gap-2">
+                    <span class="text-[#1db441] font-mono text-lg font-light">07.</span> Links & Third-Party Assets
+                  </h2>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    For public convenience, our educational resource and blog articles reference and link to external tools, third-party databases, regional energy grids, and privacy services.
+                  </p>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    We do not monitor, endorse, control, or assume any liability for the privacy policies, terms, cookie management, or factual correctness of these remote Web resources. When navigating away from the Site, please inspect their respective Terms and Policies.
+                  </p>
+                </div>
+                <!-- Plain English Callout -->
+                <div class="lg:col-span-5 bg-[#18852c]/5 border border-[#1db441]/10 p-5 rounded-2xl">
+                  <div class="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-wider text-[#1db441]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    In Plain English
+                  </div>
+                  <p class="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                    We link to other websites (like carbon tracking services or hosting reviews). Since we do not run those platforms, we cannot be responsible for what they post or how they handle your data.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 8. Changes -->
+            <section id="changes" class="py-2 border-b border-white/5 scroll-mt-24">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-7 space-y-4">
+                  <h2 class="text-xl md:text-2xl text-white font-medium flex items-center gap-2">
+                    <span class="text-[#1db441] font-mono text-lg font-light">08.</span> Revisions & Updates to these Terms
+                  </h2>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    We reserve the right to revise or modify these Terms of Service at any time to preserve compatibility with legal frameworks, regional energy directives, or software additions.
+                  </p>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    Any adjustments will be signaled by updating the "Effective Date" at the top of this document. Continued interaction with the Site following the publication of changes constituting instant approval of the adjusted guidelines.
+                  </p>
+                </div>
+                <!-- Plain English Callout -->
+                <div class="lg:col-span-5 bg-[#18852c]/5 border border-[#1db441]/10 p-5 rounded-2xl">
+                  <div class="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-wider text-[#1db441]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    In Plain English
+                  </div>
+                  <p class="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                    Sometimes we may update these terms to include new features or follow new regulations. Check the date at the top to see if things have changed.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 9. Governing Law -->
+            <section id="governing" class="py-2 border-b border-white/5 scroll-mt-24">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-7 space-y-4">
+                  <h2 class="text-xl md:text-2xl text-white font-medium flex items-center gap-2">
+                    <span class="text-[#1db441] font-mono text-lg font-light">09.</span> Governing Law & Resolution of Disputes
+                  </h2>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    These Terms of Service and your relationship with GreenMeans shall be governed by, interpreted, and enforced in accordance with the laws of <strong>England and Wales</strong>, without regard to conflict of law principles.
+                  </p>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    In the minor event of an issue, query, or conflict, you agree to first contact our administration and attempt to resolve the matter in amicable, direct text communications before seeking judicial resolution.
+                  </p>
+                </div>
+                <!-- Plain English Callout -->
+                <div class="lg:col-span-5 bg-[#18852c]/5 border border-[#1db441]/10 p-5 rounded-2xl">
+                  <div class="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-wider text-[#1db441]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    In Plain English
+                  </div>
+                  <p class="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                    These terms are governed by the laws of England and Wales. If there is ever an issue, please contact us first so we can work together friendly to resolve it without legal friction.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 10. Contact -->
+            <section id="contact-section" class="py-2 scroll-mt-24">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-7 space-y-4">
+                  <h2 class="text-xl md:text-2xl text-white font-medium flex items-center gap-2">
+                    <span class="text-[#1db441] font-mono text-lg font-light">10.</span> How to Contact the GreenMeans Team
+                  </h2>
+                  <p class="text-zinc-300 leading-relaxed text-sm md:text-base">
+                    If you require clarification on these Terms of Service, wish to report security issues, suggest algorithmic improvements, or coordinate academic collaboration, you are welcome to reach out to us at our dedicated portal.
+                  </p>
+                  <div class="pt-2">
+                    <a href="/contact.html" class="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-[#1db441] border border-[#1db441]/30 rounded-full hover:bg-[#1db441]/10 hover:text-white hover:border-[#1db441] transition-all duration-300 focus:outline-[#1db441]">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-dasharray="2" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L22 8m-2 11H4a2 2 0 01-2-2V7a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2z"/></svg>
+                      Open Contact Form
+                    </a>
+                  </div>
+                </div>
+                <!-- Plain English Callout -->
+                <div class="lg:col-span-5 bg-[#18852c]/5 border border-[#1db441]/10 p-5 rounded-2xl">
+                  <div class="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-wider text-[#1db441]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    In Plain English
+                  </div>
+                  <p class="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                    Have questions about these terms or looking to collaborate? Just head over to our Contact page and use the form to drop us a note!
+                  </p>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </main>
+
+      <footer class="border-t border-white/5 bg-black mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex flex-col items-center gap-6">
+          <div class="flex flex-wrap justify-center gap-8 text-xs font-medium uppercase tracking-widest text-white/80">
+            <a href="/about.html" class="hover:text-[#18852c] transition-colors rounded-md px-1">About Us</a>
+            <a href="/contact.html" class="hover:text-[#18852c] transition-colors rounded-md px-1">Contact</a>
+            <a href="https://privacy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="hover:text-[#18852c] transition-colors rounded-md px-1">Privacy Policy</a>
+            <a href="/terms.html" class="hover:text-[#18852c] transition-colors rounded-md px-1">Terms of Service</a>
+          </div>
+          <div class="text-white/70 text-xs font-light tracking-widest uppercase text-center mt-4">
+            &copy; <script>document.write(new Date().getFullYear())</script> GreenMeans. All rights reserved.
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="/script.js" defer></script>
+  </body>
+</html>
