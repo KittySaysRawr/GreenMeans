@@ -80,6 +80,30 @@
           <p class="text-lg md:text-xl text-white/80 font-light max-w-2xl mx-auto leading-relaxed">Perspectives on sustainability, energy-efficiency, and reducing our collective digital footprint.</p>
         </div>
 
+        <!-- Sort & Filter Control -->
+        <div class="mb-10 flex flex-col sm:flex-row items-center justify-between gap-4 p-5 border border-white/10 bg-zinc-900/20 backdrop-blur-md rounded-2xl shadow-xl">
+          <div class="text-sm font-light text-zinc-400">
+            Showing <span id="article-count" class="text-white font-medium">15</span> articles
+          </div>
+          <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
+            <span class="text-xs font-semibold uppercase tracking-widest text-[#1db441]">Sort By</span>
+            <div class="relative">
+              <select id="blog-sort" class="appearance-none bg-zinc-950/80 border border-white/10 rounded-xl px-4 py-2.5 pr-10 text-sm font-medium text-white focus:outline-none focus:ring-1 focus:ring-[#1db441] focus:border-[#1db441] transition-all cursor-pointer" aria-label="Sort blog posts">
+                <option value="date-desc">Most Recent</option>
+                <option value="date-asc">Oldest First</option>
+                <option value="title-asc">Title: A to Z</option>
+                <option value="category-asc">Category: A to Z</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-zinc-400">
+                <svg class="h-4 w-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="blog-posts" class="space-y-10">
         <!-- Article 1 -->
         <article class="bg-zinc-900/40 p-8 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl mb-10">
           <header class="mb-8">
@@ -441,6 +465,7 @@
             <p>Furthermore, hosting providers need to offer real-time carbon intensity figures and grid metrics in developer control panels. This raw data lets engineers build carbon-aware apps that match processing loads to real-time solar or wind supply. By treating digital storage and compute as physical resources linked to the health of our biosphere, we can design thin, elegant, and durable digital solutions that support a flourishing Earth.</p>
           </div>
         </article>
+        </div> <!-- End of blog-posts -->
       </main>
 
       <footer class="border-t border-white/5 bg-black mt-auto">
@@ -458,5 +483,80 @@
       </footer>
     </div>
     <script src="/script.js" defer></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('blog-posts');
+        const select = document.getElementById('blog-sort');
+        const countSpan = document.getElementById('article-count');
+        if (!container || !select) return;
+
+        const articles = Array.from(container.querySelectorAll('article'));
+        if (countSpan) {
+          countSpan.textContent = articles.length;
+        }
+
+        const months = {
+          Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11,
+          January: 0, February: 1, March: 2, April: 3, May: 4, June: 5, July: 6, August: 7, September: 8, October: 9, November: 10, December: 11
+        };
+
+        const parsedData = articles.map(article => {
+          const catEl = article.querySelector('header span');
+          const category = catEl ? catEl.textContent.trim() : '';
+
+          const titleEl = article.querySelector('header h2');
+          const title = titleEl ? titleEl.textContent.trim() : '';
+
+          const dateEl = article.querySelector('header p');
+          let dateObj = new Date(0);
+          if (dateEl) {
+            const dateText = dateEl.textContent;
+            const match = dateText.match(/Published\s+(\d+)\s+([A-Za-z]+)\s+(\d+)/);
+            if (match) {
+              const day = parseInt(match[1], 10);
+              const monthName = match[2];
+              const year = parseInt(match[3], 10);
+              const month = months[monthName] !== undefined ? months[monthName] : 0;
+              dateObj = new Date(year, month, day);
+            }
+          }
+
+          return {
+            element: article,
+            category,
+            title,
+            date: dateObj
+          };
+        });
+
+        function sortArticles(criteria) {
+          let sorted;
+          if (criteria === 'date-desc') {
+            sorted = [...parsedData].sort((a, b) => b.date - a.date);
+          } else if (criteria === 'date-asc') {
+            sorted = [...parsedData].sort((a, b) => a.date - b.date);
+          } else if (criteria === 'title-asc') {
+            sorted = [...parsedData].sort((a, b) => a.title.localeCompare(b.title));
+          } else if (criteria === 'category-asc') {
+            sorted = [...parsedData].sort((a, b) => a.category.localeCompare(b.category));
+          }
+
+          if (sorted) {
+            container.innerHTML = '';
+            sorted.forEach(item => {
+              container.appendChild(item.element);
+            });
+          }
+        }
+
+        // Apply default sort (Most Recent)
+        select.value = 'date-desc';
+        sortArticles('date-desc');
+
+        select.addEventListener('change', (e) => {
+          sortArticles(e.target.value);
+        });
+      });
+    </script>
   </body>
 </html>
