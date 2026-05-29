@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en-GB" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data:; font-src 'self' https: data:; connect-src 'self' https:; object-src 'none'; media-src 'self' https:; manifest-src 'self'; worker-src 'self';" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <title>About Us | GreenMeans</title>
+    <link rel="icon" type="image/x-icon" href="https://greenmeans.ovh/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="https://greenmeans.ovh/favicon-round.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://greenmeans.ovh/favicon.png">
+    <meta name="description" content="Learn about GreenMeans' mission to provide sustainable, accessible digital tools." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <script>
+      (function() {
+        const getSetting = (key, def) => {
+          try {
+            return sessionStorage.getItem(key) || localStorage.getItem(key) || def;
+          } catch(e) { return def; }
+        };
+        const darkSetting = getSetting('gm-dark', 'true');
+        const dyslexiaSetting = getSetting('gm-dyslexia', 'false');
+        const motionSetting = getSetting('gm-motion', 'false');
+
+        if (darkSetting === 'false') {
+          document.documentElement.classList.add('light-mode');
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light-mode');
+        }
+        if (dyslexiaSetting === 'true') {
+          document.documentElement.classList.add('dyslexia-font');
+        }
+        if (motionSetting === 'true') {
+          document.documentElement.classList.add('reduced-motion');
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+          if (document.body) {
+            if (darkSetting === 'false') {
+              document.body.classList.add('light-mode');
+            }
+            if (dyslexiaSetting === 'true') {
+              document.body.classList.add('dyslexia-font');
+            }
+            if (motionSetting === 'true') {
+              document.body.classList.add('reduced-motion');
+            }
+          }
+        });
+      })();
+    </script>
+  </head>
+  <body class="text-white bg-black font-sans antialiased selection:bg-white/20">
+    <div class="min-h-screen flex flex-col">
+      <header class="bg-black border-b border-white/5">
+        <nav aria-label="Main Navigation" class="max-w-7xl mx-auto px-2 sm:px-6 py-4 flex items-center justify-between gap-2 sm:gap-4">
+          <div class="flex items-center shrink min-w-0">
+            <a href="/" class="logo-container-fluid flex items-center rounded-lg group" aria-label="GreenMeans Home">
+              <div class="logo-fluid rounded-full border border-white/10 shadow-[0_0_8px_rgba(29,180,65,0.3)] shrink-0 overflow-hidden flex items-center justify-center">
+                <img src="/favicon-square.svg" alt="GreenMeans Logo" class="w-full h-full object-cover">
+              </div>
+              <span class="text-fluid font-light tracking-wide text-white truncate shrink ml-3">GreenMeans</span>
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      <main id="main-content" class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 py-12 w-full">
+        <div class="mb-6 text-left">
+          <a href="/" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 whitespace-nowrap" aria-label="Go Back to Home">
+            <svg focusable="false" class="w-4 h-4 text-[#1db441]" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Go Back
+          </a>
+        </div>
+
+        <div class="bg-zinc-900/40 p-8 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl text-center">
+          <svg focusable="false" class="w-12 h-12 text-[#18852c] mb-8 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" role="img" aria-label="About network"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <h1 class="text-3xl md:text-4xl font-light tracking-tight text-[#18852c] mb-8 uppercase tracking-widest">About Us</h1>
+          <div class="prose prose-invert prose-lg text-zinc-100 mx-auto text-left">
+            <p class="mb-6">
+              At GreenMeans, we believe in the power of sustainable, accessible, and efficiently designed digital tools to bring meaningful change. Our platform exists to bridge the gap between complex issues and their solutions by providing carefully curated and interactive resources.
+            </p>
+            <p class="mb-6">
+              Our mission is to empower individuals and communities with the knowledge they need without leaving an excessive carbon footprint. We design dark-mode first applications that require minimal data processing, actively reducing the environmental impact of web interaction.
+            </p>
+            <p class="mb-6">
+              From making political policies readable and accessible for everyone, to providing resources on nonviolent communication, we tackle today's challenges with accessible digital experiences.
+            </p>
+
+            <h3 class="text-2xl text-white font-medium mb-4 mt-8 flex items-center gap-3">
+              <svg focusable="false" class="w-6 h-6 text-[#18852c]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+              Our Philosophy
+            </h3>
+            <p class="mb-6">
+              The intersection of technology and ecology shouldn't be a battleground, but a place for innovation. The digital realm consumes vast amounts of energy globally, much of it unnecessarily expended on tracking scripts, heavy images, and bloated code. We champion 'Data Minimalism', a philosophy that insists less is truly more. By delivering information in clean, highly functional formats, we prove that digital platforms can be both robust and environmentally conscious.
+            </p>
+
+            <h3 class="text-2xl text-white font-medium mb-4 mt-8 flex items-center gap-3">
+              <svg focusable="false" class="w-6 h-6 text-[#18852c]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              Community & Connection
+            </h3>
+            <p class="mb-6">
+              Information alone is not enough; true progress requires connection. That is why tools like our Nonviolent Communication (NVC) guide sit alongside our environmental resources. Healing the planet goes hand in hand with healing how we speak to one another. Whether it's through understanding green policies to make informed voting decisions or learning how to compost local food waste, we foster resources that build community resilience from the ground up.
+            </p>
+
+            <h3 class="text-2xl text-white font-medium mb-4 mt-8 flex items-center gap-3">
+              <svg focusable="false" class="w-6 h-6 text-[#18852c]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              Our Vision
+            </h3>
+            <p class="mb-6">
+              We envision a digital ecosystem where information flows freely but sustainably, reducing the noise and maximising understanding. We are committed to continued optimisation, ensuring GreenMeans remains a beacon of efficiency and purposeful design in the digital space. We are continually exploring new avenues to present essential civic and ecological data without compromising the performance of our users devices or the health of our planet.
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <footer class="border-t border-white/5 bg-black mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex flex-col items-center gap-6">
+          <div class="flex flex-wrap justify-center gap-8 text-xs font-medium uppercase tracking-widest text-white/80">
+            <a href="/about.html" class="hover:text-[#18852c] transition-colors rounded-md px-1">About Us</a>
+            <a href="/contact.html" class="hover:text-[#18852c] transition-colors rounded-md px-1">Contact</a>
+            <a href="https://privacy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="hover:text-[#18852c] transition-colors rounded-md px-1">Privacy Policy</a>
+            <a href="/terms.html" class="hover:text-[#18852c] transition-colors rounded-md px-1">Terms of Service</a>
+          </div>
+          <div class="text-white/70 text-xs font-light tracking-widest uppercase text-center mt-4">
+            &copy; <script>document.write(new Date().getFullYear())</script> GreenMeans. All rights reserved.
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="/script.js" defer></script>
+  </body>
+</html>
