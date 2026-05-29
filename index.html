@@ -214,7 +214,27 @@
       </div>
       <div id="loading-text" aria-live="polite">Harvesting green energy...</div>
     </div>
+    
+         <!-- Internal Analytics -->
 
+<script src="https://swetrix.org/swetrix.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  swetrix.init('QJF9GQaHCxAv', {
+    apiURL: 'https://analytics.greenmeans.ovh/backend/v1/log',
+  })
+  swetrix.trackViews()
+})
+</script>
+
+<noscript>
+<img
+  src="https://analytics.greenmeans.ovh/backend/log/noscript?pid=QJF9GQaHCxAv"
+  alt=""
+  referrerpolicy="no-referrer-when-downgrade"
+/>
+</noscript>
+    
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#18852c] focus:text-white focus:rounded-md focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#1db441]">Skip to content</a>
     <div class="min-h-screen flex flex-col">
       <header class="bg-black border-b border-white/5">
@@ -227,13 +247,6 @@
               <span class="text-fluid font-light tracking-wide text-white truncate shrink">GreenMeans</span>
             </div>
           </div>
-          <!-- Internal Analytics -->
-<script 
-  async 
-  src="https://greenmeans.ovh" 
-  data-pid="QJF9GQaHCxAv"
-  data-dev_mode="true">
-</script>
 
           <!-- Unified Burger Menu & Settings Header Actions -->
           <div class="flex items-center gap-1 sm:gap-3 shrink-0">
