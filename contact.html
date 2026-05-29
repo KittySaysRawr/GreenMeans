@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en-GB" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | GreenMeans</title>
+    <meta name="description" content="Get in touch with GreenMeans." />
+    <!-- Security & Config as in others... -->
+    <link rel="icon" type="image/x-icon" href="https://greenmeans.ovh/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="https://greenmeans.ovh/favicon-round.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <script>
+      (function() {
+        const getSetting = (key, def) => {
+          try {
+            return sessionStorage.getItem(key) || localStorage.getItem(key) || def;
+          } catch(e) { return def; }
+        };
+        const darkSetting = getSetting('gm-dark', 'true');
+        const dyslexiaSetting = getSetting('gm-dyslexia', 'false');
+        const motionSetting = getSetting('gm-motion', 'false');
+
+        if (darkSetting === 'false') {
+          document.documentElement.classList.add('light-mode');
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light-mode');
+        }
+        if (dyslexiaSetting === 'true') {
+          document.documentElement.classList.add('dyslexia-font');
+        }
+        if (motionSetting === 'true') {
+          document.documentElement.classList.add('reduced-motion');
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+          if (document.body) {
+            if (darkSetting === 'false') {
+              document.body.classList.add('light-mode');
+            }
+            if (dyslexiaSetting === 'true') {
+              document.body.classList.add('dyslexia-font');
+            }
+            if (motionSetting === 'true') {
+              document.body.classList.add('reduced-motion');
+            }
+          }
+        });
+      })();
+    </script>
+  </head>
+  <body class="text-white bg-black font-sans antialiased selection:bg-white/20">
+    <div class="min-h-screen flex flex-col">
+      <header class="bg-black border-b border-white/5">
+        <nav aria-label="Main Navigation" class="max-w-7xl mx-auto px-2 sm:px-6 py-4 flex items-center justify-between gap-2 sm:gap-4">
+          <div class="flex items-center shrink min-w-0">
+            <a href="/" class="logo-container-fluid flex items-center rounded-lg group" aria-label="GreenMeans Home">
+              <div class="logo-fluid rounded-full border border-white/10 shadow-[0_0_8px_rgba(29,180,65,0.3)] shrink-0 overflow-hidden flex items-center justify-center">
+                <img src="/favicon-square.svg" alt="GreenMeans Logo" class="w-full h-full object-cover">
+              </div>
+              <span class="text-fluid font-light tracking-wide text-white truncate shrink ml-3">GreenMeans</span>
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 py-12 w-full">
+        <div class="mb-6 text-left">
+          <a href="/" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 whitespace-nowrap" aria-label="Go Back to Home">
+            <svg focusable="false" class="w-4 h-4 text-[#1db441]" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Go Back
+          </a>
+        </div>
+
+        <div class="bg-zinc-900/40 p-8 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl text-center">
+          <svg focusable="false" class="w-12 h-12 text-[#18852c] mb-8 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <h1 class="text-3xl md:text-4xl font-light tracking-tight text-[#18852c] mb-8 uppercase tracking-widest">Contact Us</h1>
+          <div class="prose prose-invert prose-lg text-zinc-100 mx-auto text-left">
+            <p class="mb-6">
+              We welcome your questions, thoughts, and feedback. As a proudly digital-first entity, we primarily operate online to minimise our environmental footprint and maximise efficiency. Please reach out to us digitally whenever possible, and we will get back to you promptly.
+            </p>
+            <div class="bg-black/40 p-8 rounded-2xl border border-white/5 mt-8">
+              <h3 class="text-xl text-white font-medium mb-4 flex items-center gap-3">
+                <svg focusable="false" class="w-6 h-6 text-[#18852c]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                Email Address
+              </h3>
+              <p class="mb-2">For general enquiries, support, or partnership opportunities, please email us directly at:</p>
+              <a href="mailto:admin@greenmeans.ovh" class="text-[#18852c] hover:underline" aria-label="Email Admin">admin<span>@</span>greenmeans.ovh</a>
+            </div>
+            <div class="bg-black/40 p-8 rounded-2xl border border-white/5 mt-8">
+              <h3 class="text-xl text-white font-medium mb-4 flex items-center gap-3">
+                <svg focusable="false" class="w-6 h-6 text-[#18852c]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Mailing Address
+              </h3>
+              <p class="mb-4 text-sm uppercase tracking-widest text-[#18852c] font-semibold">Digital First</p>
+              <p class="mb-4">In alignment with our digital-first ethos, we strongly encourage all communication to be handled electronically via email. We ask that you refrain from sending physical mail unless it is absolutely necessary. Our physical registered address is provided below strictly for mandatory legal and official correspondence:</p>
+              <p>
+                <strong class="text-[#18852c] font-medium font-semibold tracking-wide">GreenMeans</strong><br />
+                Amberswood Shippon<br />
+                Manchester Road<br />
+                Wigan<br />
+                Greater Manchester<br />
+                WN2 3DR
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="border-t border-white/5 bg-black mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex flex-col items-center gap-6">
+          <div class="flex flex-wrap justify-center gap-8 text-xs font-medium uppercase tracking-widest text-white/80">
+            <a href="/about.html" class="hover:text-[#18852c] transition-colors rounded-md px-1">About Us</a>
+            <a href="/contact.html" class="hover:text-[#18852c] transition-colors rounded-md px-1">Contact</a>
+            <a href="https://privacy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="hover:text-[#18852c] transition-colors rounded-md px-1">Privacy Policy</a>
+            <a href="/terms.html" class="hover:text-[#18852c] transition-colors rounded-md px-1">Terms of Service</a>
+          </div>
+          <div class="text-white/70 text-xs font-light tracking-widest uppercase text-center mt-4">
+            &copy; <script>document.write(new Date().getFullYear())</script> GreenMeans. All rights reserved.
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="/script.js" defer></script>
+  </body>
+</html>
