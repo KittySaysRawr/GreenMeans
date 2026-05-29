@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB" class="dark">
+<html lang="en-GB" class="dark loading-lock">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -133,8 +133,76 @@
       ]
     }
     </script>
+    <script>
+      (function() {
+        const getSetting = (key, def) => {
+          try {
+            return sessionStorage.getItem(key) || localStorage.getItem(key) || def;
+          } catch(e) { return def; }
+        };
+        const darkSetting = getSetting('gm-dark', 'true');
+        const dyslexiaSetting = getSetting('gm-dyslexia', 'false');
+        const motionSetting = getSetting('gm-motion', 'false');
+
+        if (darkSetting === 'false') {
+          document.documentElement.classList.add('light-mode');
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light-mode');
+        }
+        if (dyslexiaSetting === 'true') {
+          document.documentElement.classList.add('dyslexia-font');
+        }
+        if (motionSetting === 'true') {
+          document.documentElement.classList.add('reduced-motion');
+        }
+
+        // Determine if user is coming from an internal page or has already loaded the site in this session
+        let isInternalReferrer = false;
+        try {
+          const ref = document.referrer;
+          if (ref) {
+            const refUrl = new URL(ref);
+            if (refUrl.origin === window.location.origin) {
+              const p = refUrl.pathname;
+              isInternalReferrer = ['blog.html', 'about.html', 'contact.html', 'terms.html'].some(page => p.includes(page));
+            }
+          }
+        } catch(e) {}
+
+        const skipLoader = getSetting('gm-loaded', 'false') === 'true' || isInternalReferrer;
+        if (skipLoader) {
+          window.__skipLoader = true;
+          document.documentElement.classList.remove('loading-lock');
+          // Add inline style to hide loader immediately and prevent flickers
+          try {
+            const style = document.createElement('style');
+            style.innerHTML = '#loading-screen { display: none !important; }';
+            document.head.appendChild(style);
+          } catch(e) {}
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+          if (document.body) {
+            if (darkSetting === 'false') {
+              document.body.classList.add('light-mode');
+            }
+            if (dyslexiaSetting === 'true') {
+              document.body.classList.add('dyslexia-font');
+            }
+            if (motionSetting === 'true') {
+              document.body.classList.add('reduced-motion');
+            }
+            if (skipLoader) {
+              document.body.classList.remove('loading-lock');
+            }
+          }
+        });
+      })();
+    </script>
   </head>
-  <body class="text-white bg-black font-sans antialiased selection:bg-white/20">
+  <body class="text-white bg-black font-sans antialiased selection:bg-white/20 loading-lock">
     <!-- Loading Screen -->
     <div id="loading-screen" role="status" aria-label="Loading GreenMeans Ecosystem">
       <div class="relative flex items-center justify-center w-40 h-40">
@@ -160,39 +228,59 @@
             </div>
           </div>
 
-          <!-- Desktop Navigation & Persistent Actions -->
+          <!-- Unified Burger Menu & Settings Header Actions -->
           <div class="flex items-center gap-1 sm:gap-3 shrink-0">
-            <!-- Desktop Links -->
-            <div class="hidden md:flex items-center gap-1 lg:gap-3 flex-nowrap">
-              <a href="https://policy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="btn-shrink px-5 py-2 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 whitespace-nowrap">Green Policy <span class="sr-only">(opens in a new window)</span></a>
-              <a href="https://toolkit.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="btn-shrink px-5 py-2 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 whitespace-nowrap">Toolkit <span class="sr-only">(opens in a new window)</span></a>
-              <a href="https://compost.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="btn-shrink px-5 py-2 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 whitespace-nowrap">Compost Guide <span class="sr-only">(opens in a new window)</span></a>
-              <a href="https://plants.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="btn-shrink px-5 py-2 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 whitespace-nowrap">Native Plants <span class="sr-only">(opens in a new window)</span></a>
-              <a href="https://search.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="btn-shrink px-5 py-2 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 whitespace-nowrap">Search <span class="sr-only">(opens in a new window)</span></a>
-            </div>
-
             <!-- Settings (Always Visible) -->
             <button onclick="openSettings()" class="btn-shrink flex items-center justify-center md:justify-start gap-2 w-8 h-8 md:w-auto md:h-auto px-0 py-0 md:px-5 md:py-2 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 group shrink-0" aria-label="Open Settings">
               <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 md:w-4 md:h-4 transition-transform duration-400 group-hover:rotate-45 shrink-0"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
               <span class="hidden md:inline">Settings</span>
             </button>
 
-            <!-- Mobile Menu Toggle -->
-            <button id="mobile-menu-toggle" onclick="toggleMobileMenu()" class="md:hidden w-11 h-11 flex items-center justify-center text-white/70 hover:text-[#1db441] transition-colors focus:outline-none" aria-label="Toggle Navigation Menu">
-              <svg aria-hidden="true" id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
-              <svg aria-hidden="true" id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <!-- Burger Menu Toggle -->
+            <button id="mobile-menu-toggle" onclick="toggleMobileMenu()" class="w-11 h-11 flex items-center justify-center text-white/70 hover:text-[#1db441] border border-white/5 rounded-full hover:border-[#1db441]/30 hover:bg-[#1db441]/5 transition-all duration-300 focus:outline-none" aria-label="Toggle Navigation Menu">
+              <svg aria-hidden="true" id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+              <svg aria-hidden="true" id="close-icon" class="hidden w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
           </div>
         </nav>
 
-        <!-- Mobile Navigation Menu -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-black/95 backdrop-blur-md">
-          <div class="px-6 py-8 flex flex-col gap-4">
-            <a href="https://policy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="px-6 py-4 text-sm font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-2xl hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 transition-all duration-300">Green Policy <span class="sr-only">(opens in a new window)</span></a>
-            <a href="https://toolkit.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="px-6 py-4 text-sm font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-2xl hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 transition-all duration-300">Toolkit <span class="sr-only">(opens in a new window)</span></a>
-            <a href="https://compost.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="px-6 py-4 text-sm font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-2xl hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 transition-all duration-300">Compost Guide <span class="sr-only">(opens in a new window)</span></a>
-            <a href="https://plants.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="px-6 py-4 text-sm font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-2xl hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 transition-all duration-300">Native Plants <span class="sr-only">(opens in a new window)</span></a>
-            <a href="https://search.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="px-6 py-4 text-sm font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-2xl hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 transition-all duration-300">Search <span class="sr-only">(opens in a new window)</span></a>
+        <!-- Unified Burger Mega Menu -->
+        <div id="mobile-menu" class="hidden border-t border-white/5 bg-black/95 backdrop-blur-md transition-all duration-300">
+          <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 justify-items-stretch">
+            <!-- Blog Page -->
+            <a href="/blog.html" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Blog</span>
+            </a>
+
+            <!-- Green Policy Link -->
+            <a href="https://policy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Green Policy</span>
+              <svg class="w-3.5 h-3.5 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
+            </a>
+
+            <!-- Toolkit Link -->
+            <a href="https://toolkit.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Toolkit</span>
+              <svg class="w-3.5 h-3.5 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
+            </a>
+
+            <!-- Compost Guide Link -->
+            <a href="https://compost.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Compost Guide</span>
+              <svg class="w-3.5 h-3.5 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
+            </a>
+
+            <!-- Native Plants Link -->
+            <a href="https://plants.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Native Plants</span>
+              <svg class="w-3.5 h-3.5 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
+            </a>
+
+            <!-- Search Link -->
+            <a href="https://search.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Search</span>
+              <svg class="w-3.5 h-3.5 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
+            </a>
           </div>
         </div>
       </header>
@@ -669,10 +757,10 @@
       <footer class="border-t border-white/5 bg-black mt-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex flex-col items-center gap-6">
           <div class="flex flex-wrap justify-center gap-8 text-xs font-medium uppercase tracking-widest text-white/80">
-            <button onclick="openModal('about')" class="uppercase tracking-widest hover:text-[#18852c] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1" aria-label="Learn about GreenMeans">About Us</button>
-            <button onclick="openModal('contact')" class="uppercase tracking-widest hover:text-[#18852c] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1" aria-label="Get in touch with us">Contact</button>
+            <a href="/about.html" class="uppercase tracking-widest hover:text-[#18852c] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1" aria-label="Learn about GreenMeans">About Us</a>
+            <a href="/contact.html" class="uppercase tracking-widest hover:text-[#18852c] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1" aria-label="Get in touch with us">Contact</a>
             <a href="https://privacy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="hover:text-[#18852c] transition-colors focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1">Privacy Policy <span class="sr-only">(opens in a new window)</span></a>
-            <button onclick="openModal('terms')" class="uppercase tracking-widest hover:text-[#18852c] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1" aria-label="Read our terms of service">Terms of Service</button>
+            <a href="/terms.html" class="uppercase tracking-widest hover:text-[#18852c] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1" aria-label="Read our terms of service">Terms of Service</a>
           </div>
           <div class="text-white/70 text-xs font-light tracking-widest uppercase text-center mt-4">
             &copy; <script>document.write(new Date().getFullYear())</script> GreenMeans. All rights reserved.
@@ -698,120 +786,6 @@
         <!-- Scrollable Content Area -->
         <div class="flex-grow overflow-y-auto px-6 md:px-12 lg:px-24 pb-16 relative z-0">
           
-          <!-- About Us Content -->
-          <div id="about-content" class="hidden max-w-4xl mx-auto">
-            <div class="bg-zinc-900/40 p-8 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl text-center">
-              <svg focusable="false" class="w-12 h-12 text-[#18852c] mb-8 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" role="img" aria-label="About network"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              <h2 id="about-title" class="text-3xl md:text-4xl font-light tracking-tight text-[#18852c] mb-8 uppercase tracking-widest">About Us</h2>
-              <div class="prose prose-invert prose-lg text-zinc-100 mx-auto text-left">
-                <p class="mb-6">
-                  At GreenMeans, we believe in the power of sustainable, accessible, and efficiently designed digital tools to bring meaningful change. Our platform exists to bridge the gap between complex issues and their solutions by providing carefully curated and interactive resources.
-                </p>
-                <p class="mb-6">
-                  Our mission is to empower individuals and communities with the knowledge they need without leaving an excessive carbon footprint. We design dark-mode first applications that require minimal data processing, actively reducing the environmental impact of web interaction.
-                </p>
-                <p class="mb-6">
-                  From making political policies readable and accessible for everyone, to providing resources on nonviolent communication, we tackle today's challenges with accessible digital experiences.
-                </p>
-
-                <h3 class="text-2xl text-white font-medium mb-4 mt-8 flex items-center gap-3">
-                  <svg focusable="false" class="w-6 h-6 text-[#18852c]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" role="img" aria-label="Globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                  Our Philosophy
-                </h3>
-                <p class="mb-6">
-                  The intersection of technology and ecology shouldn't be a battleground, but a place for innovation. The digital realm consumes vast amounts of energy globally, much of it unnecessarily expended on tracking scripts, heavy images, and bloated code. We champion 'Data Minimalism', a philosophy that insists less is truly more. By delivering information in clean, highly functional formats, we prove that digital platforms can be both robust and environmentally conscious.
-                </p>
-
-                <h3 class="text-2xl text-white font-medium mb-4 mt-8 flex items-center gap-3">
-                  <svg focusable="false" class="w-6 h-6 text-[#18852c]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" role="img" aria-label="Heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-                  Community & Connection
-                </h3>
-                <p class="mb-6">
-                  Information alone is not enough; true progress requires connection. That is why tools like our Nonviolent Communication (NVC) guide sit alongside our environmental resources. Healing the planet goes hand in hand with healing how we speak to one another. Whether it's through understanding green policies to make informed voting decisions or learning how to compost local food waste, we foster resources that build community resilience from the ground up.
-                </p>
-
-                <h3 class="text-2xl text-white font-medium mb-4 mt-8 flex items-center gap-3">
-                  <svg focusable="false" class="w-6 h-6 text-[#18852c]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" role="img" aria-label="Circle shape"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                  Our Vision
-                </h3>
-                <p class="mb-6">
-                  We envision a digital ecosystem where information flows freely but sustainably, reducing the noise and maximising understanding. We are committed to continued optimisation, ensuring GreenMeans remains a beacon of efficiency and purposeful design in the digital space. We are continually exploring new avenues to present essential civic and ecological data without compromising the performance of our users devices or the health of our planet.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Contact Us Content -->
-          <div id="contact-content" class="hidden max-w-4xl mx-auto">
-            <div class="bg-zinc-900/40 p-8 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl text-center">
-              <svg focusable="false" class="w-12 h-12 text-[#18852c] mb-8 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" role="img" aria-label="Email contact"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              <h2 id="contact-title" class="text-3xl md:text-4xl font-light tracking-tight text-[#18852c] mb-8 uppercase tracking-widest">Contact Us</h2>
-              <div class="prose prose-invert prose-lg text-zinc-100 mx-auto text-left">
-                <p class="mb-6">
-                  We welcome your questions, thoughts, and feedback. As a proudly digital-first entity, we primarily operate online to minimise our environmental footprint and maximise efficiency. Please reach out to us digitally whenever possible, and we will get back to you promptly.
-                </p>
-                <div class="bg-black/40 p-8 rounded-2xl border border-white/5 mt-8">
-                  <h3 class="text-xl text-white font-medium mb-4 flex items-center gap-3">
-                    <svg focusable="false" class="w-6 h-6 text-[#18852c]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" role="img" aria-label="Email contact"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                    Email Address
-                  </h3>
-                  <p class="mb-2">For general enquiries, support, or partnership opportunities, please email us directly at:</p>
-                  <a href="#" id="admin-email-link" class="text-[#18852c] hover:underline" aria-label="Email Admin">admin<span>@</span>greenmeans.ovh</a>
-                </div>
-                <div class="bg-black/40 p-8 rounded-2xl border border-white/5 mt-8">
-                  <h3 class="text-xl text-white font-medium mb-4 flex items-center gap-3">
-                    <svg focusable="false" class="w-6 h-6 text-[#18852c]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" role="img" aria-label="Social media pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                    Mailing Address
-                  </h3>
-                  <p class="mb-4 text-sm uppercase tracking-widest text-[#18852c] font-semibold">Digital First</p>
-                  <p class="mb-4">In alignment with our digital-first ethos, we strongly encourage all communication to be handled electronically via email. We ask that you refrain from sending physical mail unless it is absolutely necessary. Our physical registered address is provided below strictly for mandatory legal and official correspondence:</p>
-                  <p>
-                    <strong class="text-[#18852c] font-medium font-semibold tracking-wide">GreenMeans</strong><br />
-                    Amberswood Shippon<br />
-                    Manchester Road<br />
-                    Wigan<br />
-                    Greater Manchester<br />
-                    WN2 3DR
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Terms of Service Content -->
-          <div id="terms-content" class="hidden max-w-4xl mx-auto">
-            <div class="bg-zinc-900/40 p-8 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl text-center">
-              <svg focusable="false" class="w-12 h-12 text-[#18852c] mb-8 mx-auto" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" role="img" aria-label="Terms document"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
-              <h2 id="terms-title" class="text-3xl md:text-4xl font-light tracking-tight text-[#18852c] mb-8 uppercase tracking-widest">Terms of Service</h2>
-              <div class="prose prose-invert prose-lg text-zinc-100 space-y-6 mx-auto text-left">
-                <p><strong>Effective Date:</strong> May 17, 2026</p>
-                <p>
-                  Welcome to GreenMeans! These terms and conditions outline the rules and regulations for the use of GreenMeans's Website, located at greenmeans.ovh.
-                </p>
-                <p>
-                  By accessing this website we assume you accept these terms and conditions. Do not continue to use GreenMeans if you do not agree to take all of the terms and conditions stated on this page.
-                </p>
-                <h3 class="text-2xl text-white font-medium mt-8 mb-4">Licence</h3>
-                <p>
-                  GreenMeans operates as a mostly free and open-source project. Our code is available for the public to view, use, and contribute to. We believe in open knowledge and digital transparency.
-                </p>
-                <p>You are encouraged to:</p>
-                <ul class="list-disc pl-6">
-                  <li>View and study our source code</li>
-                  <li>Share and redistribute our open-source materials</li>
-                  <li>Contribute to the GreenMeans ecosystem</li>
-                </ul>
-                <h3 class="text-2xl text-white font-medium mt-8 mb-4">Disclaimer</h3>
-                <p>
-                  We provide GreenMeans as a community resource and do our best to keep it accurate, secure, and helpful. However, the site and its contents are provided on an "as is" and "as available" basis without any warranties. 
-                </p>
-                <p>
-                  We cannot accept liability for any errors, omissions, or the results obtained from using this information. Our aim is to foster a safe and supportive digital environment, and we kindly ask that you use our resources responsibly.
-                </p>
-              </div>
-            </div>
-          </div>
-
           <!-- Settings Content -->
           <div id="settings-content" class="hidden max-w-2xl mx-auto">
             <div class="bg-zinc-900/40 p-10 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl">
@@ -876,7 +850,7 @@
       </div>
     </div>
 
-    <script src="script.js" defer></script>
+    <script src="/script.js" defer></script>
 
     <!-- Cookie Banner -->
     <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[9998] p-4 md:p-6 translate-y-full transition-transform duration-500 ease-out hidden">
