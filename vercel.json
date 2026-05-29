@@ -16,6 +16,10 @@
           "value": "strict-origin-when-cross-origin"
         },
         {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
           "key": "Content-Security-Policy",
           "value": "default-src 'none'; base-uri 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data:; font-src 'self' https: data:; connect-src 'self' https:; object-src 'none'; media-src 'self' https:; manifest-src 'self'; worker-src 'self';"
         }
