@@ -1,5 +1,6 @@
 Contact: mailto:admin@greenmeans.ovh
 Expires: 2030-05-19T00:00:00.000Z
-Ack: https://greenmeans.ovh/.well-known/security.txt
+Acknowledgments: https://greenmeans.ovh/.well-known/security.txt
 Preferred-Languages: en
 Canonical: https://greenmeans.ovh/.well-known/security.txt
+Policy: https://policy.greenmeans.ovh/
