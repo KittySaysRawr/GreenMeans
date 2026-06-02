@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script>
+        // Check if the broken URL pattern is present
+        var currentPath = window.location.pathname;
+        var currentSearch = window.location.search;
+
+        if (currentPath.startsWith('/&')) {
+            // Fix the syntax error: change /& into /?
+            var cleanPath = currentPath.replace('/&', '/?');
+            var targetUrl = window.location.origin + cleanPath + currentSearch;
+            
+            // Instantly redirect the user before they notice the 404 page
+            window.location.replace(targetUrl);
+        } else {
+            // Optional: Standard text for actual broken links
+            document.write("<h1>Page Not Found</h1><p>Return to <a href='/'>Home</a></p>");
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
