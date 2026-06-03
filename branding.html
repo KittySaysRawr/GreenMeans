@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en-GB" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brand Guidelines | GreenMeans</title>
+    
+    <!-- Favicon Configuration -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon-round.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+
+    <!-- Analytics -->
+    <script defer src="https://info.greenmeans.ovh/assets_vital_metrics" data-website-id="cb768706-cd17-47ae-8a53-b2f3149132c1"></script>
+    <noscript><img src="https://info.greenmeans.ovh/p/TlcUAmhjv" alt="" role="presentation" aria-hidden="true" width="1" height="1" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;" loading="eager" /></noscript>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="text-white bg-black font-sans antialiased selection:bg-white/20">
+    <div class="min-h-screen flex flex-col justify-between">
+      <header class="bg-black border-b border-white/5">
+        <nav aria-label="Main Navigation" class="max-w-7xl mx-auto px-2 sm:px-6 py-4 flex items-center justify-between gap-2 sm:gap-4">
+          <div class="flex items-center shrink min-w-0">
+            <a href="https://greenmeans.ovh" class="logo-container-fluid flex items-center rounded-lg group" aria-label="GreenMeans Brand">
+              <div class="logo-fluid rounded-full border border-white/10 shadow-[0_0_8px_rgba(29,180,65,0.3)] shrink-0 overflow-hidden flex items-center justify-center" style="width: 2.5rem; height: 2.5rem;">
+                <img src="/favicon-square.svg" alt="GreenMeans Logo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              </div>
+              <span class="text-fluid font-light tracking-wide text-white truncate shrink ml-3 group-hover:text-[#18832b] transition-colors duration-300">GreenMeans</span>
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      <main class="flex-grow w-full max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <header class="mb-16">
+          <h1 class="text-4xl md:text-5xl font-light tracking-tighter mb-4 text-white">Brand & Interface Guidelines</h1>
+          <p class="text-xl text-zinc-400 font-light leading-relaxed max-w-3xl">
+            A comprehensive interface and branding reference for the GreenMeans digital ecosystem. Use these guidelines to maintain a consistent visual identity, structured semantics, and environmental footprint across all subdomains.
+          </p>
+        </header>
+
+        <div class="space-y-24">
+          
+          <!-- Colours Section -->
+          <section>
+            <div class="mb-8 border-b border-white/10 pb-4">
+              <h2 class="text-2xl font-light tracking-tight text-white mb-1">Colour Palette</h2>
+              <p class="text-sm text-zinc-500 font-light">Variables and hex values for our precise brand colours.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <!-- Primary Brand -->
+              <div class="group">
+                <div class="h-32 w-full rounded-2xl bg-[#18832b] mb-4 border border-white/10 shadow-[0_0_15px_rgba(24,131,43,0.15)] flex items-center justify-center text-white/50 group-hover:text-white transition-colors">Primary</div>
+                <h3 class="text-base font-medium text-white">Primary Green</h3>
+                <p class="text-sm text-zinc-400 mt-1">Hex: <code class="font-mono text-xs bg-white/10 px-1 py-0.5 rounded">#18832b</code></p>
+                <p class="text-sm text-zinc-500 mt-1 leading-relaxed">Role: Call to Action (CTA) buttons, prominent highlights, primary borders, and primary active states.</p>
+              </div>
+              <!-- Secondary Brand -->
+              <div class="group">
+                <div class="h-32 w-full rounded-2xl bg-[#3d984e] mb-4 border border-white/10 shadow-[0_0_15px_rgba(61,152,78,0.1)] flex items-center justify-center text-white/50 group-hover:text-white transition-colors">Secondary</div>
+                <h3 class="text-base font-medium text-white">Secondary Green</h3>
+                <p class="text-sm text-zinc-400 mt-1">Hex: <code class="font-mono text-xs bg-white/10 px-1 py-0.5 rounded">#3d984e</code></p>
+                <p class="text-sm text-zinc-500 mt-1 leading-relaxed">Role: Secondary hovers, accent depths, focus rings, gradient origins. Adds dimension to primary.</p>
+              </div>
+              <!-- Application Background -->
+              <div class="group">
+                <div class="h-32 w-full rounded-2xl bg-black mb-4 border border-white/10 relative overflow-hidden flex items-center justify-center text-white/50">
+                  <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  Base Background
+                </div>
+                <h3 class="text-base font-medium text-white">True Black</h3>
+                <p class="text-sm text-zinc-400 mt-1">Hex: <code class="font-mono text-xs bg-white/10 px-1 py-0.5 rounded">#000000</code></p>
+                <p class="text-sm text-zinc-500 mt-1 leading-relaxed">Role: Application background. Essential for OLED efficiency and core sustainability footprint.</p>
+              </div>
+              <!-- Surface -->
+              <div class="group">
+                <div class="h-32 w-full rounded-2xl bg-zinc-900/40 mb-4 border border-white/10 flex items-center justify-center text-white/50">Surfaces</div>
+                <h3 class="text-base font-medium text-white">Surface / Card</h3>
+                <p class="text-sm text-zinc-400 mt-1">Tailwind: <code class="font-mono text-xs bg-white/10 px-1 py-0.5 rounded">zinc-900/40</code></p>
+                <p class="text-sm text-zinc-500 mt-1 leading-relaxed">Role: Highlighting modular content containers against the true black root level.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Core Brand Marks & Header Architecture -->
+          <section>
+            <div class="mb-8 border-b border-white/10 pb-4">
+              <h2 class="text-2xl font-light tracking-tight text-white mb-1">Header & Logo Architecture</h2>
+              <p class="text-sm text-zinc-500 font-light">Guidelines for rendering the primary navigation and official logomarks.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div>
+                <h3 class="text-lg font-light text-white mb-4">Logo Guidelines</h3>
+                <div class="p-8 border border-white/5 rounded-2xl bg-zinc-900/20 mb-4 relative overflow-hidden group">
+                  <div class="flex items-center">
+                    <div class="logo-fluid rounded-full border border-white/10 shadow-[0_0_8px_rgba(24,131,43,0.3)] shrink-0 overflow-hidden flex items-center justify-center bg-black/50" style="width: 3.5rem; height: 3.5rem;">
+                      <img src="/favicon-square.svg" alt="Preview Logo" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-fluid font-light tracking-wide text-white ml-4 text-2xl">GreenMeans</span>
+                  </div>
+                </div>
+                <div class="space-y-4">
+                  <p class="text-sm font-light text-zinc-400 leading-relaxed">
+                    <strong class="text-white font-medium">The Logomark:</strong> The logo is rendered as a fluid, rounded circle (<code class="text-[#18832b] bg-[#18832b]/10 px-1 rounded font-mono text-xs">rounded-full</code>) housing the official SVG (<code class="text-[#18832b] bg-[#18832b]/10 px-1 rounded font-mono text-xs">favicon-square.svg</code>). It requires a subtle structural border (<code class="text-[#18832b] bg-[#18832b]/10 px-1 rounded font-mono text-xs">border-white/10</code>) and a specialized drop shadow combining opacity and our core <code class="font-mono text-xs text-[#18832b]">#18832b</code> glow. Interaction should scale the inner image smoothly, not warp the container.
+                  </p>
+                  <p class="text-sm font-light text-zinc-400 leading-relaxed">
+                    <strong class="text-white font-medium">The Typography:</strong> The wordmark is strictly positioned alongside the logomark using the primary font in a <code class="text-[#18832b] bg-[#18832b]/10 px-1 rounded font-mono text-xs">font-light</code> weight, with <code class="text-[#18832b] bg-[#18832b]/10 px-1 rounded font-mono text-xs">tracking-wide</code> spacing. On hover, the wordmark should smoothly fade to the primary Green.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-lg font-light text-white mb-4">Header Display</h3>
+                <div class="p-6 border border-white/5 rounded-2xl bg-zinc-900/20 mb-4 h-full relative">
+                  <div class="w-full bg-black border border-white/10 rounded-lg p-4 flex items-center justify-between mb-6 shadow-xl">
+                    <div class="flex items-center gap-2">
+                       <div class="w-6 h-6 rounded-full border border-white/10 bg-[#18832b]/20"></div>
+                       <div class="w-20 h-2 bg-white/20 rounded"></div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                       <div class="w-16 h-4 bg-white/10 rounded-full"></div>
+                       <div class="w-6 h-6 rounded border border-white/20"></div>
+                    </div>
+                  </div>
+                  <p class="text-sm font-light text-zinc-400 leading-relaxed space-y-2">
+                    <strong class="text-white font-medium block mb-1">Navbar Anatomy:</strong> The header operates as the structural anchor of the entire ecosystem. 
+                    <br/><br/>
+                    • Must be a solid <code class="text-[#18832b] bg-[#18832b]/10 px-1 rounded font-mono text-xs">bg-black</code> to maintain continuity with the main canvas.<br/>
+                    • Requires a strict base border: <code class="text-[#18832b] bg-[#18832b]/10 px-1 rounded font-mono text-xs">border-b border-white/5</code>.<br/>
+                    • Elements are constrained universally by a <code class="text-[#18832b] bg-[#18832b]/10 px-1 rounded font-mono text-xs">max-w-7xl mx-auto</code> shell.<br/>
+                    • Flexbox is utilised (<code class="text-[#18832b] bg-[#18832b]/10 px-1 rounded font-mono text-xs">justify-between items-center</code>) to isolate the brand quadrant (left) from contextual feature/settings actions (right).
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Settings & Feature Implementation -->
+          <section>
+            <div class="mb-8 border-b border-white/10 pb-4">
+              <h2 class="text-2xl font-light tracking-tight text-white mb-1">Features & The Settings Menu</h2>
+              <p class="text-sm text-zinc-500 font-light">Designing feature modules, the global settings object, and interactive elements.</p>
+            </div>
+            
+            <div class="space-y-10">
+              <p class="text-base text-zinc-400 font-light leading-relaxed max-w-4xl">
+                GreenMeans utilises a unified Settings infrastructure allowing cross-site persistence for preferences like Light/Dark mode, Reduced Motion, and Dyslexia Fonts. Elements operating within the settings module demand particular design structures emphasising legibility, concise typography, and straightforward interactive patterns. The implementation of the Settings menu must use accessible ARIA compliant modal overlays, grouping preferences logically with clear descriptive labels, and ensuring immediate, visually distinct feedback when a toggle or setting is modified.
+              </p>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Settings Button UI -->
+                <div class="border border-white/5 rounded-2xl bg-zinc-900/10 p-6 flex flex-col justify-between">
+                  <div>
+                    <h3 class="text-sm font-medium uppercase tracking-widest text-[#18832b] mb-4">Settings Toggle Object</h3>
+                    <div class="flex items-center mb-6">
+                      <!-- Render reference object -->
+                      <button class="flex items-center justify-center px-5 py-2 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#18832b] hover:bg-[#18832b]/10 hover:shadow-[0_0_15px_rgba(24,131,43,0.3)] transition-all duration-300 backdrop-blur-sm cursor-default">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 mr-2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18..."></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        Settings
+                      </button>
+                    </div>
+                    <p class="text-sm font-light text-zinc-400 leading-relaxed mb-4">
+                      All settings objects (including the main header toggle and the menu items inside the popover) consistently utilize the pill-shaped <strong class="text-white">Rounded Full Architecture</strong>. 
+                    </p>
+                  </div>
+                  <div class="bg-black/50 border border-white/5 p-4 rounded-xl text-xs font-mono text-zinc-500 leading-relaxed">
+                    Classes: <span class="text-white/80">rounded-full uppercase text-xs tracking-widest text-white/70 border border-white/10 hover:border-[#18832b] hover:bg-[#18832b]/10</span>
+                  </div>
+                </div>
+
+                <!-- Feature Blocks -->
+                <div class="border border-white/5 rounded-2xl bg-zinc-900/10 p-6 flex flex-col justify-between">
+                  <div>
+                    <h3 class="text-sm font-medium uppercase tracking-widest text-[#18832b] mb-4">Site Feature Blocks</h3>
+                    <div class="flex items-center gap-4 mb-6">
+                      <div class="p-3 bg-white/5 border border-white/10 rounded-full text-white/80 hover:bg-[#18832b] hover:border-[#18832b] hover:text-white transition-all cursor-default shadow-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M12 3c4.5 0 8 4 8 9s-3.5 9-8 9-8-4-8-9 3.5-9 8-9zm0 5c2 1 3 2.5 3 4M12 12c-2 1-3 2.5-3 4"></path></svg>
+                      </div>
+                      <div>
+                         <span class="block text-white text-sm font-medium pb-1 tracking-wide">Feature Object</span>
+                         <span class="block text-zinc-500 text-xs font-light">Subtle explanatory text.</span>
+                      </div>
+                    </div>
+                    <p class="text-sm font-light text-zinc-400 leading-relaxed mb-4">
+                      When displaying site features or distinct sub-properties, utilise a split layout: A strictly proportioned circular icon anchor bordered with <code class="text-white border border-white/10 rounded px-1">border-white/10</code> coupled with structured typographic groupings. 
+                    </p>
+                  </div>
+                  <div class="bg-black/50 border border-white/5 p-4 rounded-xl text-xs font-mono text-zinc-500 leading-relaxed">
+                    Hover behaviors on these components immediately swap the outline for solid <span class="text-[#18832b]">#18832b</span> backings to enforce interactivity.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Typography Section -->
+          <section>
+            <div class="mb-8 border-b border-white/10 pb-4">
+              <h2 class="text-2xl font-light tracking-tight text-white mb-1">Typography & Contrast</h2>
+              <p class="text-sm text-zinc-500 font-light">Core font parameters to lower visual strain.</p>
+            </div>
+            
+            <div class="space-y-12">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Headings -->
+                <div class="space-y-6">
+                  <h4 class="text-sm font-medium text-zinc-500 uppercase tracking-widest border-b border-white/5 pb-2">Headings</h4>
+                  <div>
+                    <h1 class="text-5xl font-light tracking-tighter text-white">Header 1</h1>
+                    <p class="text-xs text-zinc-500 mt-2 font-mono">text-5xl font-light tracking-tighter</p>
+                  </div>
+                  <div>
+                    <h2 class="text-3xl font-light tracking-tight text-white">Header 2</h2>
+                    <p class="text-xs text-zinc-500 mt-2 font-mono">text-3xl font-light tracking-tight</p>
+                  </div>
+                </div>
+                
+                <!-- Body & UI text -->
+                <div class="space-y-6">
+                  <h4 class="text-sm font-medium text-zinc-500 uppercase tracking-widest border-b border-white/5 pb-2">Body Text Structure</h4>
+                  <div>
+                    <p class="text-lg text-zinc-400 font-light leading-relaxed">
+                      This is the standard body paragraph styling. It uniquely relies heavily on font-light and zinc colouring to soften contrast thresholds. Bold text is mostly prohibited unless utilising strict uppercase headers.
+                    </p>
+                    <p class="text-xs text-zinc-500 mt-2 font-mono">text-lg text-zinc-400 font-light leading-relaxed</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Component Rules -->
+          <section>
+            <div class="mb-8 border-b border-white/10 pb-4">
+              <h2 class="text-2xl font-light tracking-tight text-white mb-1">Interactive Triggers (Buttons & Links)</h2>
+              <p class="text-sm text-zinc-500 font-light">Interactive surface styling parameters.</p>
+            </div>
+            
+            <div class="bg-zinc-900/20 border border-white/5 rounded-2xl p-8 lg:p-12 mb-8 flex flex-col md:flex-row items-center justify-between gap-8">
+              <div class="max-w-md">
+                <h3 class="text-xl font-light text-white mb-4">Primary Action Button</h3>
+                <p class="text-sm font-light text-zinc-400 leading-relaxed">
+                  The principle interactive target for major conversion actions. Always paired closely to `#18832b` properties to ensure immediate recognition. It implements a wide internal spacing setup and an ambient shadow glow.
+                </p>
+              </div>
+              
+              <div class="p-8 border border-white/5 rounded-2xl bg-black shadow-inner flex items-center justify-center shrink-0 w-full md:w-auto">
+                <button class="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-medium uppercase tracking-widest text-white border border-[#18832b] rounded-full bg-[#18832b]/10 hover:bg-[#18832b]/20 shadow-[0_0_15px_rgba(24,131,43,0.2)] hover:shadow-[0_0_25px_rgba(24,131,43,0.4)] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#18832b]/50 cursor-default">
+                  Primary Route
+                  <svg class="w-4 h-4 text-[#18832b]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path></svg>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="mb-8 border-b border-white/10 pb-4">
+              <h2 class="text-2xl font-light tracking-tight text-white mb-1">Accessibility & Compliance</h2>
+              <p class="text-sm text-zinc-500 font-light">Guidelines for WAVE AIM compliance and inclusive design.</p>
+            </div>
+            
+            <ul class="space-y-6 mb-16">
+              <li class="flex items-start gap-4">
+                <div class="w-2 h-2 bg-[#18832b] rounded-full mt-2.5 shadow-[0_0_8px_rgba(24,131,43,0.8)] shrink-0"></div>
+                <div>
+                  <h4 class="text-white font-medium text-lg mb-1">WAVE AIM Compliance</h4>
+                  <p class="text-zinc-400 text-sm font-light leading-relaxed">All GreenMeans applications must strive for comprehensive WAVE (Web Accessibility Evaluation Tool) / AIM compliance. This entails rigorous adherence to semantic HTML structuring, using appropriate ARIA labels for all interactive state elements (such as settings toggles), maintaining a sequential heading structure (from H1 downward without skipping levels), and ensuring all non-text assets feature descriptive alternative text.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <div class="w-2 h-2 bg-[#18832b] rounded-full mt-2.5 shadow-[0_0_8px_rgba(24,131,43,0.8)] shrink-0"></div>
+                <div>
+                  <h4 class="text-white font-medium text-lg mb-1">Keyboard Navigation & Focus Control</h4>
+                  <p class="text-zinc-400 text-sm font-light leading-relaxed">A cornerstone of an inclusive environment is ensuring that every interactive component, particularly within the settings pane and core navigation, can be accessed seamlessly via keyboard traversal. Visible focus outlines using our primary or secondary green highlight must be robustly implemented to signify navigational progression.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <div class="w-2 h-2 bg-[#18832b] rounded-full mt-2.5 shadow-[0_0_8px_rgba(24,131,43,0.8)] shrink-0"></div>
+                <div>
+                  <h4 class="text-white font-medium text-lg mb-1">Contrast Standards</h4>
+                  <p class="text-zinc-400 text-sm font-light leading-relaxed">Contrast ratios between foreground text and underlying backgrounds must constantly meet WCAG AA standards. Our core aesthetic of bright white and light zinc atop true black safely fulfills these guidelines, making prolonged usage comfortably legible.</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="mb-8 border-b border-white/10 pb-4">
+              <h2 class="text-2xl font-light tracking-tight text-white mb-1">Language & Localisation Standards</h2>
+              <p class="text-sm text-zinc-500 font-light">Global editorial and linguistic styling.</p>
+            </div>
+            
+            <ul class="space-y-6 mb-16">
+              <li class="flex items-start gap-4">
+                <div class="w-2 h-2 bg-[#18832b] rounded-full mt-2.5 shadow-[0_0_8px_rgba(24,131,43,0.8)] shrink-0"></div>
+                <div>
+                  <h4 class="text-white font-medium text-lg mb-1">British English Usage</h4>
+                  <p class="text-zinc-400 text-sm font-light leading-relaxed">To ensure consistency and align with our core brand voice, all texts across the GreenMeans digital ecosystem—encompassing copy, documentation, interface messaging, and microcopy—must strictly employ British English spelling and formatting conventions. Thus, terms such as <em>colour</em> over <em>color</em>, <em>utilise</em> over <em>utilize</em>, and <em>centre</em> over <em>center</em> are mandatory.</p>
+                </div>
+              </li>
+            </ul>
+
+          <!-- Layout & Grid Rules -->
+          <section>
+            <div class="mb-8 border-b border-white/10 pb-4">
+              <h2 class="text-2xl font-light tracking-tight text-white mb-1">Responsive Layouts & Grid Behaviours</h2>
+              <p class="text-sm text-zinc-500 font-light">Document width, responsive strategies, containment, and spacing parameters.</p>
+            </div>
+            
+            <ul class="space-y-6">
+              <li class="flex items-start gap-4">
+                <div class="w-2 h-2 bg-[#18832b] rounded-full mt-2.5 shadow-[0_0_8px_rgba(24,131,43,0.8)] shrink-0"></div>
+                <div>
+                  <h4 class="text-white font-medium text-lg mb-1">Container Width & Maximum Bounds</h4>
+                  <p class="text-zinc-400 text-sm font-light leading-relaxed">Default max width is strictly set to <code class="text-[#18832b] bg-[#18832b]/10 px-1.5 py-0.5 rounded font-mono text-xs">max-w-7xl</code> (1280px) for standard structural framing. For environments prioritising dense readability like documentation, drop to <code class="text-[#18832b] bg-[#18832b]/10 px-1.5 py-0.5 rounded font-mono text-xs">max-w-5xl</code>. This ensures consistency and prevents content elements from stretching disjointedly on ultra-wide screens.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <div class="w-2 h-2 bg-[#18832b] rounded-full mt-2.5 shadow-[0_0_8px_rgba(24,131,43,0.8)] shrink-0"></div>
+                <div>
+                  <h4 class="text-white font-medium text-lg mb-1">Mobile-First Fluidity & Margins</h4>
+                  <p class="text-zinc-400 text-sm font-light leading-relaxed">Layout code is formulated mobile-first using Tailwind CSS. By default, content elements are stacked vertically. Breakpoints like <code class="text-[#18832b] bg-[#18832b]/10 px-1.5 py-0.5 rounded font-mono text-xs">sm:</code>, <code class="text-[#18832b] bg-[#18832b]/10 px-1.5 py-0.5 rounded font-mono text-xs">md:</code>, and <code class="text-[#18832b] bg-[#18832b]/10 px-1.5 py-0.5 rounded font-mono text-xs">lg:</code> invoke horizontal grids or column expansions only where necessary. All layout components require a base baseline padding of <code class="text-[#18832b] bg-[#18832b]/10 px-1.5 py-0.5 rounded font-mono text-xs">px-4</code> or <code class="text-[#18832b] bg-[#18832b]/10 px-1.5 py-0.5 rounded font-mono text-xs">px-6</code> to guard text from touching device edges on handheld screens.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <div class="w-2 h-2 bg-[#18832b] rounded-full mt-2.5 shadow-[0_0_8px_rgba(24,131,43,0.8)] shrink-0"></div>
+                <div>
+                  <h4 class="text-white font-medium text-lg mb-1">Responsive Grids</h4>
+                  <p class="text-zinc-400 text-sm font-light leading-relaxed">When arranging multiple feature blocks or dashboard components, employ responsive grid utilities. A typical pattern transitions from <code class="text-[#18832b] bg-[#18832b]/10 px-1.5 py-0.5 rounded font-mono text-xs">grid-cols-1</code> on mobile, to <code class="text-[#18832b] bg-[#18832b]/10 px-1.5 py-0.5 rounded font-mono text-xs">md:grid-cols-2</code> on tablets, expanding to <code class="text-[#18832b] bg-[#18832b]/10 px-1.5 py-0.5 rounded font-mono text-xs">lg:grid-cols-3</code> or more on desktops. This scaling logic ensures readability and touch-target fidelity is preserved on constrained viewports.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <div class="w-2 h-2 bg-[#18832b] rounded-full mt-2.5 shadow-[0_0_8px_rgba(24,131,43,0.8)] shrink-0"></div>
+                <div>
+                  <h4 class="text-white font-medium text-lg mb-1">Negative Space (Breathing Room)</h4>
+                  <p class="text-zinc-400 text-sm font-light leading-relaxed">Generous vertical padding between sections is vital across all screen sizes. Often, an implementation will use a scaled spacer such as <code class="text-[#18832b] bg-[#18832b]/10 px-1.5 py-0.5 rounded font-mono text-xs">py-16 md:py-24</code> to gracefully widen the breathing room natively as screen height allows.</p>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+        </div>
+      </main>
+
+      <footer class="border-t border-white/5 py-8 text-center text-sm font-light text-zinc-500 mt-16">
+        <p>&copy; 2026 GreenMeans. All rights reserved.</p>
+      </footer>
+    </div>
+  </body>
+</html>
