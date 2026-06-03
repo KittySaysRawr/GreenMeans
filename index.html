@@ -170,7 +170,7 @@
             const refUrl = new URL(ref);
             if (refUrl.origin === window.location.origin) {
               const p = refUrl.pathname;
-              isInternalReferrer = ['blog.html', 'about.html', 'contact.html', 'terms.html'].some(page => p.includes(page));
+              isInternalReferrer = ['about.html', 'contact.html', 'terms.html'].some(page => p.includes(page));
             }
           }
         } catch(e) {}
@@ -256,8 +256,9 @@
         <div id="mobile-menu" class="hidden border-t border-white/5 bg-black/95 backdrop-blur-md transition-all duration-300">
           <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 justify-items-stretch">
             <!-- Blog Page -->
-            <a href="/blog.html" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+             <a href="https://blog.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
               <span>Blog</span>
+              <svg class="w-3.5 h-3.5 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
             </a>
 
             <!-- Green Policy Link -->
