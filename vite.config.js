@@ -8,7 +8,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         about: resolve(__dirname, 'about.html'),
         contact: resolve(__dirname, 'contact.html'),
-        blog: resolve(__dirname, 'blog.html'),
+        branding: resolve(__dirname, 'branding.html'),
         terms: resolve(__dirname, 'terms.html')
       }
     }
