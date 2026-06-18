@@ -222,6 +222,11 @@ const injectEverything = () => {
     mobileMenu.className = 'hidden border-t border-white/5 bg-black/95 backdrop-blur-md transition-all duration-300';
     mobileMenu.innerHTML = `
       <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 justify-items-stretch">
+        <!-- Guides Page -->
+        <a href="guides.html" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+          <span>Guides</span>
+        </a>
+
         <!-- Blog Page -->
         <a href="https://blog.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
           <span>Blog</span>
@@ -355,61 +360,6 @@ const injectEverything = () => {
       </div>
     `;
     document.body.appendChild(modalDiv);
-  }
-
-  // Cookie Consent Banner Injection
-  if (!document.getElementById('cookie-banner')) {
-    const bannerDiv = document.createElement('div');
-    bannerDiv.id = 'cookie-banner';
-    bannerDiv.className = 'fixed bottom-0 left-0 right-0 z-[9998] p-4 md:p-6 translate-y-full transition-transform duration-500 ease-out hidden';
-    bannerDiv.innerHTML = `
-      <div class="max-w-7xl mx-auto">
-        <div class="bg-zinc-900/95 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-          <div class="flex-grow text-center md:text-left">
-            <h4 class="text-white font-medium mb-1 tracking-tight">Respecting your privacy</h4>
-            <p class="text-white/70 text-sm leading-relaxed max-w-2xl">
-              We use data files to improve your experience. Read our <a href="https://privacy.greenmeans.ovh/" target="_blank" rel="noopener noreferrer" class="text-[#1db441] hover:underline">Privacy Policy</a> to learn more.
-            </p>
-          </div>
-          <div class="flex flex-wrap items-center justify-center gap-3 shrink-0">
-            <button id="decline-cookies" onclick="showCookieWarning()" class="px-8 py-3 text-sm font-medium bg-white/5 text-white/80 hover:text-white hover:bg-white/10 border border-white/10 rounded-full transition-all whitespace-nowrap min-w-[120px]">
-              Decline
-            </button>
-            <button id="accept-cookies" onclick="acceptCookies()" class="px-8 py-3 text-sm font-medium bg-[#18852c] text-white rounded-full hover:bg-[#1db441] transition-all shadow-lg shadow-[#18852c]/20 whitespace-nowrap min-w-[120px]">
-              Accept All
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(bannerDiv);
-  }
-
-  // Cookie Warning Modal Injection
-  if (!document.getElementById('cookie-warning-modal')) {
-    const warningDiv = document.createElement('div');
-    warningDiv.id = 'cookie-warning-modal';
-    warningDiv.className = 'fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 hidden';
-    warningDiv.innerHTML = `
-      <div class="bg-zinc-900 border border-white/10 rounded-[2.5rem] p-8 md:p-12 max-w-md mx-4 shadow-2xl text-center scale-95 transition-transform duration-300">
-        <div class="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6 text-red-500">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-        </div>
-        <h3 class="text-2xl font-light text-white mb-4 tracking-tight">Are you sure?</h3>
-        <p class="text-white/70 font-light leading-relaxed mb-8">
-          Declining data storage means your preferences (like theme and accessibility settings) will not be saved. Some features may not work as intended during your stay.
-        </p>
-        <div class="flex flex-col gap-3">
-          <button onclick="acceptCookies()" class="w-full py-4 bg-[#18852c] text-white rounded-2xl font-medium hover:bg-[#1db441] transition-colors">
-            Accept and continue
-          </button>
-          <button onclick="declineCookiesFinal()" class="w-full py-4 bg-white/5 text-white/70 rounded-2xl font-medium hover:bg-white/10 hover:text-white transition-all">
-            Decline anyway
-          </button>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(warningDiv);
   }
 };
 
