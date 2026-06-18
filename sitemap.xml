@@ -6,47 +6,12 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://blog.greenmeans.ovh/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url> 
-  <url>
-    <loc>https://privacy.greenmeans.ovh/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url> 
-  <url>
-    <loc>https://policy.greenmeans.ovh/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://toolkit.greenmeans.ovh/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://compost.greenmeans.ovh/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://search.greenmeans.ovh/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://plants.greenmeans.ovh/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://greenmeans.ovh/about.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://greenmeans.ovh/blog.html</loc>
+    <loc>https://greenmeans.ovh/guides.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
