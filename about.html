@@ -67,14 +67,81 @@
       <header class="bg-black border-b border-white/5">
         <nav aria-label="Main Navigation" class="max-w-7xl mx-auto px-2 sm:px-6 py-4 flex items-center justify-between gap-2 sm:gap-4">
           <div class="flex items-center shrink min-w-0">
-            <a href="/" class="logo-container-fluid flex items-center rounded-lg group" aria-label="GreenMeans Home">
-              <div class="logo-fluid rounded-full border border-white/10 shadow-[0_0_8px_rgba(29,180,65,0.3)] shrink-0 overflow-hidden flex items-center justify-center">
+            <div class="logo-container-fluid flex items-center rounded-lg group" aria-label="GreenMeans Brand">
+              <div class="logo-fluid rounded-full border border-white/10 shadow-[0_0_8px_rgba(29,180,65,0.3)] logo-animate shrink-0 overflow-hidden flex items-center justify-center">
                 <img src="/favicon-square.svg" alt="GreenMeans Logo" class="w-full h-full object-cover">
               </div>
-              <span class="text-fluid font-light tracking-wide text-white truncate shrink ml-3">GreenMeans</span>
-            </a>
+              <span class="text-fluid font-light tracking-wide text-white truncate shrink group-hover:text-[#1db441] transition-colors duration-300">GreenMeans</span>
+            </div>
+          </div>
+
+          <!-- Unified Burger Menu & Settings Header Actions -->
+          <div class="flex items-center gap-1 sm:gap-3 shrink-0">
+            <!-- Settings (Always Visible) -->
+            <button onclick="openSettings()" class="btn-shrink flex items-center justify-center md:justify-start gap-2 w-8 h-8 md:w-auto md:h-auto px-0 py-0 md:px-5 md:py-2 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 group shrink-0" aria-label="Open Settings">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 md:w-4 md:h-4 transition-transform duration-400 group-hover:rotate-45 shrink-0"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span class="hidden md:inline">Settings</span>
+            </button>
+
+            <!-- Burger Menu Toggle -->
+            <button id="mobile-menu-toggle" onclick="toggleMobileMenu()" class="w-11 h-11 flex items-center justify-center text-white/70 hover:text-[#1db441] border border-white/5 rounded-full hover:border-[#1db441]/30 hover:bg-[#1db441]/5 transition-all duration-300 focus:outline-none" aria-label="Toggle Navigation Menu">
+              <svg aria-hidden="true" id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+              <svg aria-hidden="true" id="close-icon" class="hidden w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
           </div>
         </nav>
+
+        <!-- Unified Burger Mega Menu -->
+        <div id="mobile-menu" class="hidden border-t border-white/5 bg-black/95 backdrop-blur-md transition-all duration-300">
+          <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 justify-items-stretch">
+            <!-- Guides Page -->
+            <a href="guides.html" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Guides</span>
+            </a>
+
+            <!-- Blog Page -->
+             <a href="https://blog.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Blog</span>
+              <svg class="w-3.5 h-3.5 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
+            </a>
+
+            <!-- Green Policy Link -->
+            <a href="https://policy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Green Policy</span>
+              <svg class="w-3.5 h-3.5 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
+            </a>
+
+            <!-- Office Link -->
+            <a href="https://office.greenmeans.ovh/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Office</span>
+              <svg class="w-3.5 h-3.5 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
+            </a>
+
+            <!-- Toolkit Link -->
+            <a href="https://toolkit.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Toolkit</span>
+              <svg class="w-3.5 h-3.5 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
+            </a>
+
+            <!-- Compost Guide Link -->
+            <a href="https://compost.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Compost Guide</span>
+              <svg class="w-3.5 h-3.5 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
+            </a>
+
+            <!-- Native Plants Link -->
+            <a href="https://plants.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Native Plants</span>
+              <svg class="w-3.5 h-3.5 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
+            </a>
+
+            <!-- Search Link -->
+            <a href="https://search.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-widest text-white/70 border border-white/10 rounded-full hover:text-white hover:border-[#1db441] hover:bg-[#1db441]/10 hover:shadow-[0_0_15px_rgba(29,180,65,0.3)] transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#1db441]/50 w-full text-center">
+              <span>Search</span>
+              <svg class="w-3.5 h-3.5 text-[#1db441] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
+            </a>
+          </div>
+        </div>
       </header>
 
       <main id="main-content" class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 py-12 w-full">
@@ -130,13 +197,14 @@
         </div>
       </main>
 
-      <footer class="border-t border-white/5 bg-black mt-auto">
+      <footer class="border-t border-white/5 bg-black mt-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex flex-col items-center gap-6">
           <div class="flex flex-wrap justify-center gap-8 text-xs font-medium uppercase tracking-widest text-white/80">
-            <a href="/about.html" class="hover:text-[#18852c] transition-colors rounded-md px-1">About Us</a>
-            <a href="/contact.html" class="hover:text-[#18852c] transition-colors rounded-md px-1">Contact</a>
-            <a href="https://privacy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="hover:text-[#18852c] transition-colors rounded-md px-1">Privacy Policy</a>
-            <a href="/terms.html" class="hover:text-[#18852c] transition-colors rounded-md px-1">Terms of Service</a>
+            <a href="/guides.html" class="uppercase tracking-widest hover:text-[#18852c] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1" aria-label="Digital sustainability guides">Guides</a>
+            <a href="/about.html" class="uppercase tracking-widest hover:text-[#18852c] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1" aria-label="Learn about GreenMeans">About Us</a>
+            <a href="/contact.html" class="uppercase tracking-widest hover:text-[#18852c] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1" aria-label="Get in touch with us">Contact</a>
+            <a href="https://privacy.greenmeans.ovh" target="_blank" rel="noopener noreferrer" class="hover:text-[#18852c] transition-colors focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1">Privacy Policy <span class="sr-only">(opens in a new window)</span></a>
+            <a href="/terms.html" class="uppercase tracking-widest hover:text-[#18852c] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 rounded-md px-1" aria-label="Read our terms of service">Terms of Service</a>
           </div>
           <div class="text-white/70 text-xs font-light tracking-widest uppercase text-center mt-4">
             &copy; <script>document.write(new Date().getFullYear())</script> GreenMeans. All rights reserved.
@@ -144,6 +212,88 @@
         </div>
       </footer>
     </div>
+
+    <!-- Full-screen Modals Overlay -->
+    <div id="modal-container" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300" role="dialog" aria-modal="true">
+      <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()" aria-hidden="true"></div>
+      
+      <div class="absolute inset-0 md:inset-6 lg:inset-12 bg-black border border-white/10 shadow-2xl rounded-none md:rounded-[2rem] overflow-hidden flex flex-col transform scale-95 opacity-0 transition-all duration-300 ease-out" id="modal-pill">
+        
+        <!-- Header -->
+        <div class="flex justify-end p-6 md:p-8 shrink-0 relative z-10">
+          <button id="modal-close-btn" onclick="closeModal()" class="p-3 bg-zinc-900 border border-white/10 rounded-full text-white/80 hover:bg-[#18852c] hover:border-[#18852c] hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#18852c]/50 cursor-pointer">
+            <svg focusable="false" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" role="img" aria-label="Close modal"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <span class="sr-only">Close Modal</span>
+          </button>
+        </div>
+
+        <!-- Scrollable Content Area -->
+        <div class="flex-grow overflow-y-auto px-6 md:px-12 lg:px-24 pb-16 relative z-0">
+          
+          <!-- Settings Content -->
+          <div id="settings-content" class="hidden max-w-2xl mx-auto">
+            <div class="bg-zinc-900/40 p-10 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl">
+              <h2 id="settings-title" class="text-3xl font-light tracking-tight text-[#1db441] mb-10 uppercase tracking-widest text-center">Settings</h2>
+              
+              <div class="space-y-8">
+                <div class="flex items-center justify-between p-4 rounded-xl hover:bg-white/5 transition-colors">
+                  <div class="flex items-center gap-4">
+                    <div class="p-2 bg-[#1db441]/10 rounded-lg text-[#1db441]">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                    </div>
+                    <div>
+                      <h3 class="text-white font-medium">Dark Mode</h3>
+                      <p class="text-white/80 text-sm">Switch theme.</p>
+                    </div>
+                  </div>
+                  <button id="toggle-dark-mode" onclick="toggleSetting('dark')" class="relative inline-flex h-6 w-11 items-center rounded-full bg-zinc-700 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1db441]" role="switch" aria-checked="true" aria-label="Toggle dark mode">
+                    <span id="dark-mode-thumb" class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-6"></span>
+                  </button>
+                </div>
+
+                <div class="flex items-center justify-between p-4 rounded-xl hover:bg-white/5 transition-colors">
+                  <div class="flex items-center gap-4">
+                    <div class="p-2 bg-[#1db441]/10 rounded-lg text-[#1db441]">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+                    </div>
+                    <div>
+                      <h3 class="text-white font-medium">Dyslexia Font</h3>
+                      <p class="text-white/80 text-sm">Use Lexend.</p>
+                    </div>
+                  </div>
+                  <button id="toggle-dyslexia" onclick="toggleSetting('dyslexia')" class="relative inline-flex h-6 w-11 items-center rounded-full bg-zinc-700 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1db441]" role="switch" aria-checked="false" aria-label="Toggle dyslexia friendly font">
+                    <span id="dyslexia-thumb" class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1"></span>
+                  </button>
+                </div>
+
+                <div class="flex items-center justify-between p-4 rounded-xl hover:bg-white/5 transition-colors">
+                  <div class="flex items-center gap-4">
+                    <div class="p-2 bg-[#1db441]/10 rounded-lg text-[#1db441]">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 22 20-20"/><path d="M8 8.91a4 4 0 0 0-5.91-5.91"/><path d="M16 15.09a4 4 0 0 0 5.91 5.91"/></svg>
+                    </div>
+                    <div>
+                      <h3 class="text-white font-medium">Reduced Motion</h3>
+                      <p class="text-white/80 text-sm">Turn off effects.</p>
+                    </div>
+                  </div>
+                  <button id="toggle-motion" onclick="toggleSetting('motion')" class="relative inline-flex h-6 w-11 items-center rounded-full bg-zinc-700 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1db441]" role="switch" aria-checked="false" aria-label="Toggle reduced motion">
+                    <span id="motion-thumb" class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1"></span>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="mt-8 text-center">
+                <button onclick="closeModal()" class="px-8 py-3 bg-[#18852c] text-white rounded-full font-medium hover:bg-[#1db441] transition-colors">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
     <script src="/script.js" defer></script>
   </body>
 </html>
